@@ -1,0 +1,12 @@
+[project]
+name = "sid-agent"
+version = "0.1.0"
+description = "SID Agent FastAPI application"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.115,<1.0",
+]
+
+[tool.fastapi]
+entrypoint = "app.main:app"
