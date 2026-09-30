@@ -1,0 +1,12 @@
+{
+  "id": "rome_json_export",
+  "method": "GET",
+  "requested_url": "https://api.francetravail.fr/api-nomenclatureemploi/v1/open-data/json",
+  "checked_at_utc": "2026-09-29T18:47:16.265589+00:00",
+  "retained": false,
+  "http_status": 200,
+  "final_url": "https://api.francetravail.fr/api-nomenclatureemploi/v1/open-data/json",
+  "content_type": "application/zip",
+  "curl_exit_code": 28,
+  "error": "curl: (28) Operation timed out after 40008 milliseconds with 2949056 bytes received"
+}

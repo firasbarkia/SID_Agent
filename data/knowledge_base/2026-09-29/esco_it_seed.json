@@ -1,0 +1,3967 @@
+[
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/3cd569a2-4f88-4c1e-9995-8dce8c5e51a7",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:55.576826+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "JavaScript",
+      "fr": "JavaScript",
+      "ar": "لغة برمجة جافا سكريبت"
+    },
+    "description": {
+      "de": {
+        "literal": "Techniken und Grundsätze der Softwareentwicklung wie Analyse, Algorithmen, Programmierung, Testen und Kompilieren von Programmierparadigmen in JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Teknikker og prinsipper for programvareutvikling, som analyse, algoritmer, koding, testing og sammensetning av programmeringsparadigmer i JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Ohjelmistojen kehittämisen tekniikat ja periaatteet, kuten analyysi, algoritmit, koodaus, testaus ja ohjelmointiparadigmojen laatiminen JavaScriptissa.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "As técnicas e os princípios de desenvolvimento de software, como análise, algoritmos, escrita de código, teste e compilação de paradigmas de programação em JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Техниките и принципите за разработване на софтуер, например анализ, алгоритми, кодиране, тестване и съставяне на модели за програмиране в JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Programinės įrangos kūrimo metodai ir principai, pvz., analizė, algoritmai, kodavimas, testavimas ir programų modelių sudarymas, naudojant „JavaScript“.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Programmatūras izstrādes paņēmieni un principi, piemēram, analīze, algoritmi, kodēšanas, testēšanas un programmēšanas paradigmu apkopošanas metodes programmēšanas valodā “JavaScript”.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Tehnike i načela razvoja softvera, kao što su analiza, algoritmi, kodiranje, ispitivanje i sastavljanje programskih paradigmi u JavaScriptu.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les techniques et les principes du développement de logiciels, tels que l’analyse, les algorithmes, le codage, les tests et la compilation des modèles de programmation en JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A szoftverfejlesztés technikái és alapelvei, úgymint elemzés, algoritmusok, kódolás, tesztelés és a programozási paradigmák összeállítása JavaScriptben.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Techniky a zásady vývoja softvéru, ako sú analýza, algoritmy, kódovanie, testovanie a kompilovanie programových vzorov v JavaScripte.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Tehnike in načela razvoja programske opreme, kot so analiza, algoritmi, kodiranje, preskušanje in zbiranje programskih paradigem v jeziku JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Na teicnící agus na prionsabail forbartha bogearraí, amhail anailís, algartaim, códú, tástáil agus tiomsú de na paraidímí maidir le JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Teknik och principer för utveckling av programvara, såsom analys, algoritmer, kodning, testning och sammanställning av programmeringsparadigm, i JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι τεχνικές και οι αρχές ανάπτυξης λογισμικού, όπως είναι η ανάλυση, οι αλγόριθμοι, η συγγραφή κώδικα, οι δοκιμές και η κατάρτιση μοντέλων προγραμματισμού σε JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "It-tekniki u l-prinċipji tal-iżvilupp tas-softwer, bħal analiżi, algoritmi, ikkowdjar, ittestjar u kumpilazzjoni ta’ mudelli ta’ programmar f’JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Aðferðir og meginreglur um þróun hugbúnaðar, s.s. greiningar, reiknirit, kóðun, prófanir og þýðing á viðmiðum í JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Le tecniche e i principi dello sviluppo di software, quali analisi, algoritmi, codifica, collaudo e compilazione dei paradigmi di programmazione con JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Técnicas y principios de desarrollo de software, como análisis, algoritmos, codificación, pruebas y compilación de paradigmas de programación en JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Tarkvara JavaScriptiga arendamise meetodid ja põhimõtted, näiteks analüüsimine, algoritmid, kodeerimine, katsetamine ja programmeerimisparadigmade koostamine.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Techniky a zásady vývoje softwaru, jako je analýza, algoritmy, kódování, testování a sestavování programovacích paradigmat v jazyce JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "تقنيات ومبادئ تطوير البرمجيات، مثل التحليل، والخوارزميات، والترميز، واختبار وتجميع نماذج البرمجة في جافا سكريبت.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Techniki i zasady opracowywania oprogramowania, takie jak analiza, algorytmy, kodowanie, testowanie i kompilacja paradygmatów programowania w języku JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Tehnicile și principiile dezvoltării de software, cum ar fi analiza, algoritmii, codificarea, testarea și compilarea paradigmelor de programare în JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Teknikker og principper for softwareudvikling, såsom analyse, algoritmer, kodning, test og opstilling af programmeringsparadigmer i JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Technieken en beginselen van softwareontwikkeling, waaronder analyse, algoritmes, coderen, testen en ontwerpen van programmeerparadigma's in JavaScript.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "no": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "de": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "fi": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "en-us": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "pt": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "bg": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "lt": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "hr": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "lv": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "fr": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "hu": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "sk": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "sl": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "ga": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "sv": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "el": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "mt": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "en": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "is": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "it": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "es": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "et": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "cs": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "ar": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "pl": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "ro": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "da": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ],
+      "nl": [
+        "JavaScript 1.7",
+        "JavaScript 1.6",
+        "Escript",
+        "CSJS",
+        "Live Script",
+        "Server-side JavaScript",
+        "Mocha",
+        "Live script",
+        "Client-side JavaScript",
+        "JavaScripts"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_javascript.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/9b9de2a4-d8af-4a7b-933a-a8334ae60067",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:55.576826+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "JavaScript Framework",
+      "fr": "JavaScript Framework",
+      "ar": "إطار JavaScript"
+    },
+    "description": {
+      "no": {
+        "literal": "JavaScript-programvareutviklingsmiljøene som gir bestemte funksjoner og komponenter (for eksempel HTML-genereringsverktløy, støtte for Canvas eller Visual-design) som støtter og veileder utviklingen av nettprogrammer for JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Die Entwicklungsumgebung von JavaScript, die besondere Funktionen und Komponenten (z. B. HTML-Generierungstools, Canvas Support oder Visual Designer) bietet, die die Entwicklung von JavaScript-Webanwendungen unterstützen und begleiten.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "JavaScriptin ohjelmistonkehittämisympäristöt, joissa on erityisiä ominaisuuksia ja komponentteja (kuten HTML-sukupolven työkalut, Canvas-tuki tai visuaalinen suunnittelu) ja jotka tukevat ja ohjaavat JavaScriptin verkkosovellusten kehittämistä.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The JavaScript software development environments which provide specific features and components ( such as HTML generation tools, Canvas support or Visual design) that support and guide JavaScript web applications development.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Os ambientes de desenvolvimento de software JavaScript que fornecem funcionalidades e componentes específicos (tais como ferramentas de criação HTML, Canvas Support ou Visual Design) que apoiam e orientam o desenvolvimnento de aplicações Web JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Софтуерната среда за развитие на JavaScript, която предоставя специфични характеристики и компоненти (например инструменти от поколение HTML, Canvas support или Visual design), които подпомагат и насочват разработването на уеб приложения на JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "„JavaScript“ programinės įrangos kūrimo aplinka, suteikianti konkrečias ypatybes ir komponentus (pavyzdžiui, HTML kūrimo priemones, „Canvas“ pagalbą arba vaizdinio dizaino priemonę), kurie padeda kurti „JavaScript“ interneto prietaikas ir teikia su tuo susijusias gaires.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "JavaScript Framework okruženja za razvoj mikrosoftverskog okvira kojima se omogućuju posebna obilježja i komponente (kao što su alati za generiranje HTML-a, Canvas support ili Visual design) kojima se podupire i usmjerava razvoj mrežnih aplikacija JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "“JavaScript” programmatūras izstrādes vide, kas nodrošina specifiskas iezīmes un sastāvdaļas (piemēram, HTML paaudzes rīkus, “Canvas” atbalstu vai “Visual design”), kuras atbalsta un vada “JavaScript” tīmekļa lietotņu izstrādi.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les environnements de développement de logiciels JavaScript, qui fournissent des fonctionnalités et des composants spécifiques (tels que les outils de génération HTML, Canvas support ou Visual design), qui soutiennent et orientent l’élaboration d’applications web JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A JavaScript szoftverfejlesztési környezetek, amelyek egyedi jellemzőkkel és komponensekkel rendelkeznek (mint például a HTML-készítő eszközök, a Canvas támogatása vagy a vizuális tervezés), amelyek támogatják és irányítják a JavaScript webes alkalmazások fejlesztését.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Prostredie na vývoj softvéru JavaScript, ktoré poskytuje špecifické vlastnosti a komponenty (ako sú nástroje na tvorbu HTML, podpora pre Canvas alebo Visual dizajn), ktoré podporujú a usmerňujú vývoj webových aplikácií JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Okolja za razvoj programske opreme JavaScript, ki zagotavljajo posebne funkcije in komponente (kot so orodja za generiranje HTML, podpora Canvas ali Visual Design), z namenom podpore in usmerjanja razvoja spletnih aplikacij JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Timpeallachtaí forbartha bogearraí JavaScript a sholáthraíonn gnéithe agus comhpháirteanna sonracha (ar nós uirlisí giniúna HTML, tacaíocht Canvas nó dearadh Visual) a thacaíonn agus a threoraíonn forbairt feidhmchlár gréasáin JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Programvaruutvecklingsmiljöer som tillhandahåller specifika funktioner och komponenter (till exempel HTML-genereringsverktyg, Canvasstöd eller visuell design) och som stöder och vägleder i utvecklingen av webbtillämpningar med JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Τα περιβάλλοντα ανάπτυξης του λογισμικού JavaScript που παρέχει ειδικά χαρακτηριστικά και κατασκευαστικά στοιχεία (όπως εργαλεία παραγωγής HTML, υποστήριξη Canvas ή Visual design) που υποστηρίζουν και κατευθύνουν την ανάπτυξη διαδικτυακών εφαρμογών JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-ambjenti tal-iżvilupp tas-softwer JavaScript li jipprovdu karatteristiċi u komponenti speċifiċi (bħal għodod ta’ ġenerazzjoni HTML, appoġġ Canvas jew disinn viżiv) li jappoġġjaw u jiggwidaw l-iżvilupp tal-applikazzjonijiet tal-web ta’ JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The JavaScript software development environments which provide specific features and components ( such as HTML generation tools, Canvas support or Visual design) that support and guide JavaScript web applications development.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Þróunarumhverfi JavaScript hugbúnaðarins sem býður upp á sérstaka eiginleika og íhluti (svo sem HTML genartion tools, Canvas support eða Visual design) sem styðja og leiðbeina þróun JavaScript forrita á vefnum.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli ambienti di sviluppo software JavaScript che mettono a disposizione funzionalità e componenti specifici (come strumenti di generazione HTML, supporto per Canvas o Visual) atti a supportare e guidare lo sviluppo di applicazioni web JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Los entornos de desarrollo de software JavaScript, que proporcionan características y componentes específicos (como herramientas de generación de HTML, apoyo para lienzos o diseño visual) que apoyan y guían el desarrollo de aplicaciones web de JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "JavaScripti tarkvaraarenduskeskkonnad, millel on erifunktsioonid ja komponendid (nt HTMLi genereerimise vahendeid, kanvaatoetust või visuaalset kujundust) JavaScripti veebirakenduste arendamise toetamiseks ja juhtimiseks.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Prostředí pro vývoj JavaScript softwaru, která poskytují specifické prvky a komponenty (jako jsou nástroje na generování HTML, podpora Canvas nebo Visual design), které podporují a usnadňují vývoj webových aplikací pro JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "بيئات تطوير برامج JavaScript التي توفر ميزات ومكونات معينة (مثل أدوات إنشاء HTML أو دعم مساحة الشاشة أو التصميم المرئي) التي تدعم تطوير تطبيقات ويب JavaScript وتوجهها.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Środowisko programistyczne JavaScript, które zapewnia określone cechy i elementy (takie jak narzędzia generowania HTML, wsparcie w ramach Canvas lub projektowanie wizualne), które wspiera i ukierunkowuje rozwój aplikacji internetowych JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "JavaScript-softwareudviklingsmiljøer, som leverer specifikke funktioner og komponenter (såsom HTML-genereringsværktøjer, Canvas-support eller Visual design), der understøtter og er vejledende for udviklingen af JavaScript-webapplikationer.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Mediile JavaScript de dezvoltare de software, care oferă caracteristici și componente specifice (cum ar fi instrumente de generare HTML, asistență Canvas sau design vizual), care sprijină și ghidează dezvoltarea aplicațiilor web JavaScript.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "De software-ontwikkelingsomgeving van JavaScript, die specifieke kenmerken en componenten biedt (zoals HTML generatie-instrumenten, Canvas-support or Visual design) die de ontwikkeling van webtoepassingen ondersteunen en begeleiden.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": null,
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_javascript.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/b4dc6e4f-dc7d-445f-8ce2-d7b9d225e282",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:55.576826+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "AJAX",
+      "fr": "AJAX",
+      "ar": "AJAX"
+    },
+    "description": {
+      "no": {
+        "literal": "Teknikkene og prinsipper for utvikling av programvare, som analyse, algoritmer, koding, prøving og utarbeiding av paradigmer i AJAX.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Techniken und Grundsätze der Softwareentwicklung wie Analyse, Algorithmen, Programmierung, Testen und Kompilieren von Programmierparadigmen in AJAX.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Ohjelmistokehityksen tekniikat ja periaatteet, kuten analyysi, algoritmit, koodaus, testaus ja ohjelmointiparadigmojen laatiminen AJAX-tekniikoilla.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in AJAX.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "As técnicas e os princípios de desenvolvimento de software, tais como a análise, os algoritmos, a codificação, o ensaio e a compilação de paradigmas de programação em AJAX.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Техники и принципи за разработване на софтуер, например анализ, алгоритми, кодиране, изпитване и съставяне на модели за програмиране в AJAX.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Programinės įrangos kūrimo metodai ir principai, pvz., analizė, algoritmai, kodavimas, testavimas ir programų modelių sudarymas, naudojant „AJAX“.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Programmatūras izstrādes paņēmieni un principi, piemēram, analīze, algoritmi, kodēšana, testēšana un programmēšanas paradigmu apkopošana programmēšanas valodā “Ajax”.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Tehnike i načela razvoja softvera, kao što su analiza, algoritmi, programiranje, testiranje i sastavljanje paradigmi programiranja u programu AJAX.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les techniques et les principes du développement de logiciels, tels que l’analyse, les algorithmes, le codage, les essais et la compilation des paradigmes de programmation au sein d’AJAX.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Szoftverfejlesztési technikák és elvek, például elemzés, algoritmusok, kódolás, programozási paradigmák tesztelése és összeállítása AJAX-ban.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Techniky a zásady vývoja softvéru, ako sú analýza, algoritmy, kódovanie, testovanie a kompilovanie programových vzorov v AJAXe.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Tehnike in načela razvoja programske opreme, kot so analiza, algoritmi, kodiranje, preskušanje in priprava programskih paradigem v razvojni tehniki AJAX.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Teicnící agus prionsabail na forbartha bogearraí, amhail anailís, algartaim, códú, tástáil agus tiomsú paraidímí ríomhchláraithe in AJAX.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Teknik och principer för utveckling av programvara, som t.ex. analys, algoritmer, kodning, testning och sammanställning av programparadigmer i AJAX.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι τεχνικές και οι αρχές ανάπτυξης λογισμικού, όπως η ανάλυση, οι αλγόριθμοι, η κωδικοποίηση, οι δοκιμές και η καταγραφή υποδειγμάτων προγραμματισμού, σε AJAX.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "It-tekniki u l-prinċipji tal-iżvilupp tas-softwer, bħall-analiżi, l-algoritmi, l-ikkowdjar, l-ittestjar u l-kumpilazzjoni ta’ mudelli ta’ programmazzjoni f’AJAX.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in AJAX.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Aðferðir og meginreglur við þróun um hugbúnaðar, s.s. greiningar, reiknirit, kóðun, prófanir og samantekt á forritunaráætlunum í AJAX.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Le tecniche e i principi dello sviluppo di software, quali analisi, algoritmi, codifica, collaudo e compilazione dei paradigmi di programmazione con AJAX.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Las técnicas y principios de desarrollo de software, como análisis, algoritmos, codificación, pruebas y compilación de paradigmas de programación en AJAX.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Tarkvara arendamise tehnikad ja põhimõtted, näiteks analüüsimine, algoritmid, kodeerimine, katsetamine ja programmeerimisparadigmade koostamine seoses AJAXiga.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Techniky a zásady vývoje softwaru, jako je analýza, algoritmy, kódování, testování a sestavování programovacích paradigmat prostřednictvím technologie vývoje interaktivních webových aplikací AJAX.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "تقنيات ومبادئ تطوير البرمجيات، مثل التحليل والخوارزميات والترميز واختبار وتجميع نماذج البرمجة في \"AJAX\".",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Techniki i zasady programowania, takie jak analiza, algorytmy, kodowanie, testowanie i kompilacja paradygmatów programowania w AJAX.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Tehnicile și principiile dezvoltării de software, cum ar fi analiza, algoritmii, codificarea, testarea și compilarea de paradigme de programare în AJAX.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Teknikker og principper for softwareudvikling, såsom analyse, algoritmer, kodning, test og opstilling af programmeringsparadigmer i AJAX.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "De technieken en beginselen van softwareontwikkeling zoals analyse, algoritmen, coderen, testen en samenstellen van programmeerparadigma’s in AJAX.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Asynchronous Javascript and XML"
+      ],
+      "no": [
+        "Asynchronous Javascript and XML"
+      ],
+      "en-us": [
+        "Asynchronous Javascript and XML"
+      ],
+      "fi": [
+        "Asynchronous Javascript and XML"
+      ],
+      "pt": [
+        "Asynchronous Javascript and XML"
+      ],
+      "bg": [
+        "Asynchronous Javascript and XML"
+      ],
+      "lt": [
+        "Asynchronous Javascript and XML"
+      ],
+      "hr": [
+        "Asynchronous Javascript and XML"
+      ],
+      "lv": [
+        "Asynchronous Javascript and XML"
+      ],
+      "fr": [
+        "Asynchronous Javascript and XML"
+      ],
+      "hu": [
+        "Asynchronous Javascript and XML"
+      ],
+      "sk": [
+        "Asynchronous Javascript and XML"
+      ],
+      "sl": [
+        "Asynchronous Javascript and XML"
+      ],
+      "ga": [
+        "Asynchronous Javascript and XML"
+      ],
+      "sv": [
+        "Asynchronous Javascript and XML"
+      ],
+      "el": [
+        "Asynchronous Javascript and XML"
+      ],
+      "mt": [
+        "Asynchronous Javascript and XML"
+      ],
+      "en": [
+        "Asynchronous Javascript and XML"
+      ],
+      "is": [
+        "Asynchronous Javascript and XML"
+      ],
+      "it": [
+        "Asynchronous Javascript and XML"
+      ],
+      "es": [
+        "Asynchronous Javascript and XML"
+      ],
+      "et": [
+        "Asynchronous Javascript and XML"
+      ],
+      "cs": [
+        "Asynchronous Javascript and XML"
+      ],
+      "ar": [
+        "Asynchronous Javascript and XML"
+      ],
+      "pl": [
+        "Asynchronous Javascript and XML"
+      ],
+      "ro": [
+        "Asynchronous Javascript and XML"
+      ],
+      "da": [
+        "Asynchronous Javascript and XML"
+      ],
+      "nl": [
+        "Asynchronous Javascript and XML"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_javascript.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/69bbd53f-fbb0-4476-b4b2-ef7844464e28",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:55.576826+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "web programming",
+      "fr": "programmation web",
+      "ar": "برمجة الويب"
+    },
+    "description": {
+      "no": {
+        "literal": "Programmeringsparadigmet som er basert på kombinasjonen av koding (som legger til kontekst og struktur i teksten) og annen nettprogrammeringskode, f.eks. AJAX, javascript og PHP for å kunne gjennomføre hensiktsmessige tiltak og visualisere innholdet.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Das Programmplanungsparadigma, das sich auf die Kombination von Markup (wobei Text um Kontext und Struktur ergänzt wird) und anderer Webprogrammierungscodes wie AJAX, JavaScript und PHP stützt, um geeignete Maßnahmen durchzuführen und den Inhalt zu visualisieren.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Ohjelmamalli, joka perustuu koodituksen (joka lisää kontekstin ja rakenteen tekstiin) ja muun verkko-ohjelmointikoodin, kuten AJAXin, Javascriptin ja PHP:n, yhdistämiseen, asianmukaisten toimien toteuttamiseksi ja sisällön visualisoimiseksi.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The programming paradigm that is based on combining markup (which adds context and structure to text) and other web programming code, such as AJAX, javascript and PHP, in order to carry out appropriate actions and visualize the content.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "O paradigma de programação baseado na combinação de marcadores (que adiciona contexto e estrutura ao texto) e outro código de programação Web, como AJAX, javascript e PHP, para levar a cabo ações adequadas e visualizar o conteúdo.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Модел на програмиране, който се основава на комбиниране на маркиране (което добавя контекст и структура към текста) и друг код за уеб програмиране, като AJAX, JavaScript и PHP, с цел да се извършат подходящи действия и да се визуализира съдържанието.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Programavimo paradigma, kurios pagrindas – ženklinimo (kuriuo tekstui suteikiama konteksto ir struktūros) ir kito saityno programavimo kodo, pvz., AJAX, „JavaScript“ ir PHP, derinimas, skirta tinkamiems veiksmams atlikti ir turiniui vizualizuoti.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Programmēšanas paradigma, kuras pamatā ir marķēšanas kombinēšana (papildinot tekstu ar kontekstu un struktūru) ar citu tīmekļa programmēšanas kodeksu, piemēram, “AJAX”, “JavaScript” un “PHP”, lai veiktu atbilstošas darbības un vizualizētu saturu.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Paradigma programiranja koja se temelji na kombinaciji oznake (kojom se tekstu dodaju kontekst i struktura) i drugog koda za web programiranje, kao što je AJAX, JavaScript i PHP, kako bi se poduzele odgovarajuće radnje i vizualiziralo sadržaj.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Le modèle de la programmation repose sur la combinaison de balisage (qui ajoute du contexte et de la structure au texte) et d’autres codes de programmation web, tels qu’AJAX, javascript et PHP, afin de mener des actions appropriées et de visualiser le contenu.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Olyan programozási paradigma, amely a (szöveghez kontextust és struktúrát hozzárendelő) jelölőkódot és egyéb webprogramozási kódokat, mint például az AJAX-ot, javaScriptet és PHP-t egyesíti a megfelelő tevékenységek végrehajtásához és a tartalmak megjelenítéséhez.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Model programovania, ktorý je založený na kombinácii značiek (ktoré pridávajú textu kontext a štruktúru) a iného kódu webového programovania, ako napríklad AJAX, JavaScript a PHP, s cieľom vykonať vhodné akcie a zobraziť obsah.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Model programiranja, ki temelji na združevanju označevanja (ki dodaja kontekst in strukturo besedila) in druge kode spletnega programiranja, kot so AJAX, javascript in PHP, za izvedbo ustreznih dejanj in vizualizacijo vsebine.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "An pharaidím chláraithe atá bunaithe ar chomhcheangal (a chuireann comhthéacs agus struchtúr le téacs) agus le cód clárúcháin gréasáin eile, amhail AJAX, javascript agus PHP, chun gníomhartha cuí a dhéanamh agus bhfuil ann a shamhlú.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Programmeringsparadigm som bygger på en kombination av kodning (som lägger till sammanhang och struktur till text) och annan webbprogrammering, såsom Ajax, javascript och PHP, för att genomföra lämpliga åtgärder och visualisera innehållet.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Το πρότυπο προγραμματισμού που βασίζεται στον συνδυασμό της σήμανσης (το οποίο προσθέτει συνάφεια και δομή στο κείμενο) και άλλων κωδικών διαδικτυακού προγραμματισμού, όπως AJAX, javascript και PHP, προκειμένου να εκτελούνται οι ενδεδειγμένες ενέργειες και να απεικονίζεται το περιεχόμενο.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Il-mudell ta’ programmazzjoni li huwa bbażat fuq il-kombinazzjoni ta’ markup (li jżid il-kuntest u l-istruttura għat-test) u kodiċi ieħor ta’ pprogrammar tal-web, bħal AJAX, javascript u PHP, sabiex jitwettqu azzjonijiet xierqa u jiġi viżwalizzat il-kontenut.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The programming paradigm that is based on combining markup (which adds context and structure to text) and other web programming code, such as AJAX, javascript and PHP, in order to carry out appropriate actions and visualise the content.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Forritunarhugmynd sem byggir á því að sameina álagningu (sem bætir samhengi og uppbyggingu við texta) og annan netforritunarkóða, svo sem AJAX, javascript og PHP, í því skyni að framkvæma viðeigandi aðgerðir og sjá innihaldið sjónrænt fyrir sér.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Il paradigma di programmazione basato sulla combinazione di marcatura (che aggiunge contesto e struttura al testo) e un altro codice di programmazione web, come AJAX, javascript e PHP, al fine di realizzare azioni appropriate e visualizzare i contenuti.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "El paradigma de la programación, que se basa en la combinación de marcado (que añade contexto y estructura al texto) y otro código de programación en línea, como el código AJAX, javascript y PHP, a fin de llevar a cabo las acciones adecuadas y visualizar el contenido.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Programmeerimisparadigma, mis põhineb märgistuskeele (millega lisatakse tekstile kontekst ja struktuur) ning teiste veebiprogrammeerimise koodide (nt AJAX, Javascript ja PHP) kombineerimisel asjakohaste toimingute tegemiseks ja sisu visualiseerimiseks.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Programovací model, který je založen na kombinaci značek (což přidává kontext a strukturu do textu) a jiných kódů pro tvorbu webových stránek, jako je AJAX, javascript a PHP, za účelem provedení vhodných akcí a vizualizace obsahu.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "نموذج البرمجة الذي يعتمد على الجمع بين الترميز (الذي يضيف السياق والبنية إلى النص) ورمز برامج الويب الأخرى مثل AJAX وjavascript وPHP من أجل تنفيذ الإجراءات المناسبة وتصور المحتوى.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Paradygmat programowania oparty na łączeniu znaczników (co dodaje kontekst i strukturę do tekstu) oraz na innym kodzie programowania sieciowego, takim jak AJAX, Javascript i PHP, w celu przeprowadzenia odpowiednich działań i wizualizacji treści.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Det programmeringsparadigme, der er baseret på at kombinere formateringssprog (som tilfører sammenhæng og struktur til tekst) og anden webprogrammeringskode, såsom AJAX, javascript og PHP, med henblik på at gennemføre passende tiltag og visualisere indholdet.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Paradigma de programare care se bazează pe combinarea marcării (care adaugă context și structură textului) și a altui cod de programare web, cum ar fi AJAX, javascript și PHP, pentru a efectua acțiuni adecvate și a vizualiza conținutul.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Het programmeringsmodel dat is gebaseerd op een combinatie van markup (toevoeging van de context en de structuur van de tekst) en andere internetprogrammeercodes, zoals AJAX, javascript en PHP, ten behoeve van passende acties en visualisering van de inhoud.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Web-Programmierung",
+        "Markup-Programmierung",
+        "Netzprogrammierung",
+        "Webentwicklung",
+        "Internetprogrammierung"
+      ],
+      "fi": [
+        "merkintäkieliohjelmointi",
+        "ohjelmointikoodin käyttö",
+        "merkintäkielillä ohjelmointi",
+        "merkintäkielellä ohjelmointi",
+        "web-ohjelmointi"
+      ],
+      "sv": [
+        "programmering för webb",
+        "kodning av webbaserat innehåll",
+        "webbaserad programmering",
+        "webbaserad kodning"
+      ],
+      "pt": [
+        "programação de marcação",
+        "programação",
+        "programação informática",
+        "programação na web"
+      ],
+      "bg": [
+        "уеб програмирането",
+        "Уеб програмиране",
+        "програмиране",
+        "програмиране с форматиращи символи",
+        "програмиране с AJAX",
+        "програмиране с PHP",
+        "програмиране с  AJAX"
+      ],
+      "mt": [
+        "0.0",
+        "żvilupp tal-web",
+        "web programming"
+      ],
+      "el": [
+        "ανάπτυξη ιστού",
+        "προγραμματισμός γλώσσας σήμανσης",
+        "σχεδιασμός ιστού",
+        "προγραμματισμός σήμανσης",
+        "δόμηση ιστού"
+      ],
+      "lt": [
+        "interneto programavimas",
+        "interneto svetainių kūrimas",
+        "interneto svetainių programavimas"
+      ],
+      "en": [
+        "markup programming"
+      ],
+      "is": [
+        "forritun á vefnum",
+        "forritun á netinu",
+        "vefforritunin",
+        "vefforritunar"
+      ],
+      "hr": [
+        "programiranje temeljeno na webu",
+        "mrežno programiranje",
+        "programiranje na webu"
+      ],
+      "lv": [
+        "tīmekļa vietnes programmēšana",
+        "programmēšana tīmekļa vajadzībām",
+        "tīmekļa vietnes programmēšanas darbi",
+        "tīmekļa satura programmēšana"
+      ],
+      "it": [
+        "programmazione di markup",
+        "programmazione Web",
+        "programmazione di applicazioni per il web",
+        "web programming"
+      ],
+      "fr": [
+        "langage de programmation web",
+        "programmation web côté serveur",
+        "XML",
+        "langages de balisage",
+        "XHTML",
+        "HTML",
+        "programmation web côté client"
+      ],
+      "hu": [
+        "weboldal programozás",
+        "HTML programozás",
+        "webfejlesztés",
+        "weboldalak programozása",
+        "jelölő nyelvek"
+      ],
+      "es": [
+        "programación con lenguaje de marcado",
+        "desarrollo web",
+        "desarrollo en web",
+        "programación en web",
+        "programación con lenguaje de marcas"
+      ],
+      "et": [
+        "märgistuskeele kasutamine",
+        "veebidisainimine",
+        "veebi programmeerimine",
+        "veebilehtede programmeerimine",
+        "veeb-programmeerimine"
+      ],
+      "cs": [
+        "programování pomocí značkovacího jazyka",
+        "webová programování",
+        "internetové programování"
+      ],
+      "sk": [
+        "programovanie v značkovacích jazykoch",
+        "programovanie v HTML",
+        "programovanie v hypertextovom jazyku",
+        "kódovanie v značkových jazykoch",
+        "programovanie webu",
+        "programovanie webových aplikácií"
+      ],
+      "sl": [
+        "programiranje na spletu",
+        "programiranje spletne vsebine",
+        "programiranje spleta",
+        "označevalno programiranje",
+        "programiranje spletnih strani"
+      ],
+      "pl": [
+        "wzorzec programowania webowego",
+        "programowanie z użyciem języka znacznikowego",
+        "paradygmat programowania webowego",
+        "programowanie www"
+      ],
+      "da": [
+        "webkodning",
+        "hjemmesideprogrammering",
+        "programmering af websider",
+        "markup-programmering",
+        "web-programmering"
+      ],
+      "ro": [
+        "programarea website-urilor",
+        "programarea paginilor web",
+        "utilizarea limbajelor de marcare și de programare a paginilor web"
+      ],
+      "nl": [
+        "webontwikkeling",
+        "PHP-programmering",
+        "opmaak programmeren",
+        "web development",
+        "in javascript programmeren",
+        "websites maken"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_javascript.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/ccd0a1d9-afda-43d9-b901-96344886e14d",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:53.193686+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "Python (computer programming)",
+      "fr": "Python (programmation informatique)",
+      "ar": "Python"
+    },
+    "description": {
+      "de": {
+        "literal": "Techniken und Grundsätze der Softwareentwicklung wie Analyse, Algorithmen, Programmierung, Testen und Kompilieren von Programmierparadigmen in Python.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Teknikkene og prinsippene for utvikling av programvare, f.eks. analyse, algoritmer, koding, testing og utarbeiding av programmeringsparadigmer i Python.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Ohjelmistojen kehittämisen tekniikat ja periaatteet, kuten analyysi, algoritmit, koodaus, testaus ja ohjelmaparadigmojen laatiminen Python-ohjelmointikielellä.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Python.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "As técnicas e os princípios de desenvolvimento de software, tais como a análise, os algoritmos, a codificação, o ensaio e a compilação de paradigmas de programação em Python.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Техниките и принципите за разработване на софтуер, като анализи, алгоритми, кодиране, изпитване и съставяне на модели за програмиране в Python.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Programinės įrangos kūrimo metodai ir principai, pvz., analizė, algoritmai, kodavimas, testavimas ir programų modelių sudarymas, naudojant „Python“.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Programmatūras izstrādes paņēmieni un principi, piemēram, analīze, algoritmi, kodēšana, testēšana un programmēšanas paradigmu apkopošana programmēšanas valodā “Python”.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Tehnike i načela razvoja softvera, kao što su analiza, algoritmi, programiranje, testiranje i sastavljanje programskih paradigmi na programskom jeziku Python.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les techniques et les principes du développement de logiciels, tels que l’analyse, les algorithmes, le codage, les essais et la compilation des paradigmes de programmation dans Python.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Szoftverfejlesztési technikák és elvek, például elemzés, algoritmusok, kódolás, programozási paradigmák tesztelése és összeállítása Pythonban.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Techniky a zásady vývoja softvéru, ako sú analýza, algoritmy, kódovanie, testovanie a kompilovanie programových vzorov v Pythone.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Tehnike in načela razvoja programske opreme, kot so analiza, algoritmi, kodiranje, preskušanje in združevanje programskih paradigem v jeziku Python.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Teicnící agus prionsabail na forbartha bogearraí, amhail anailís, algartaim, códú, tástáil agus tiomsú paraidímí ríomhchláraithe in Python.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Teknik och principer för utveckling av programvara, som t.ex. analys, algoritmer, kodning, testning och sammanställning av programparadigmer i Python.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι τεχνικές και οι αρχές ανάπτυξης λογισμικού, όπως η ανάλυση, οι αλγόριθμοι, η κωδικοποίηση, οι δοκιμές και η καταγραφή υποδειγμάτων προγραμματισμού, σε Python.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "It-tekniki u l-prinċipji tal-iżvilupp tas-softwer, bħall-analiżi, l-algoritmi, l-ikkowdjar, l-ittestjar u l-kumpilazzjoni ta’ mudelli ta’ programmazzjoni f’Python.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Python.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Aðferðir og meginreglur um þróun hugbúnaðar, s.s. greiningar, reiknirit, kóðun, prófanir og samantekt áætlana sem miða að því að setja fram áætlanagerð í Pyhton.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Le tecniche e i principi dello sviluppo di software, quali analisi, algoritmi, codifica, collaudo e compilazione dei paradigmi di programmazione con Python.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Las técnicas y principios de desarrollo de software, como análisis, algoritmos, codificación, pruebas y compilación de paradigmas de programación en Python.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Tarkvara arendamise tehnikad ja põhimõtted, näiteks analüüsimine, algoritmid, kodeerimine, katsetamine ja programmeerimisparadigmade koostamine seoses Pythoniga.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Techniky a zásady vývoje softwaru, jako je analýza, algoritmy, kódování, testování a sestavování programovacích paradigmat, v programovacím jazyce Python.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "تقنيات ومبادئ تطوير البرمجيات، مثل التحليل والخوارزميات والترميز واختبار وجمع نماذج البرمجة في \"Python\".",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Techniki i zasady programowania, takie jak analiza, algorytmy, kodowanie, testowanie i kompilacja paradygmatów programowania w Pythonie.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Teknikker og principper for softwareudvikling, såsom analyse, algoritmer, kodning, test og opstilling af programparadigmer i Python.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Tehnicile și principiile dezvoltării de software, cum ar fi analiza, algoritmii, codificarea, testarea și compilarea de paradigme de programare în Python.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "De technieken en beginselen van softwareontwikkeling zoals analyse, algoritmen, codering, testen en samenstellen van programmeringsmodellen in Python.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "no": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "en-us": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "fi": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "pt": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "bg": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "lt": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "hr": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "lv": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "fr": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "hu": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "sk": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "sl": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "ga": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "sv": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "el": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "mt": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "en": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "is": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "it": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "es": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "et": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "cs": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "ar": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "pl": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "ro": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "da": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ],
+      "nl": [
+        "Python3000",
+        "Python prog",
+        "Python2",
+        "Python 3k",
+        "Py3K",
+        "Python3",
+        "Pyston"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_python.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/5ef0c719-5bcb-49f8-b8eb-824388225333",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:53.193686+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "use scripting programming",
+      "fr": "utiliser la programmation de scripts",
+      "ar": "استخدام برامج البرمجة النصية"
+    },
+    "description": {
+      "no": {
+        "literal": "Bruke spesialiserte IKT-verktøy for å lage datakode som tolkes av tilsvarende løpetidsmiljøer for å utvide apper og automatisere vanlige datamaskinoperasjoner. Bruke programmeringsspråk som støtter denne metoden, for eksempel Unix Shell-skript, JavaScript, Python og Ruby.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Nutzung spezieller IKT-Werkzeuge zur Generierung von Computercode, der von der entsprechenden Laufzeitumgebung interpretiert wird, um Anwendungen zu erweitern und gängige Computeroperationen zu automatisieren. Verwenden von Programmiersprachen, die diese Methode unterstützen, z. B. Unix Shell-Skripte, JavaScript, Python und Ruby.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Hyödyntää tieto- ja viestintätekniikan erikoisvälineitä, jotta voidaan luoda tietokonekoodeja, joita käytetään vastaavassa ajonaikaisessa ympäristössä sovellusten laajentamista ja yhteisten tietokonetoimintojen automatisointia varten. Käyttää tätä menetelmää tukevia ohjelmointikieliä, kuten Unix Shell, JavaScript, Python ja Ruby.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "utilize specialized ICT tools to create computer code that is interpreted by the corresponding run-time environments in order to extend applications and automate common computer operations. Use programming languages which support this method such as Unix Shell scripts, JavaScript, Python and Ruby.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Utilizar ferramentas informáticas especializadas para criar um código informático que possa ser interpretado pelos ambientes de execução correspondentes, a fim de alargar o âmbito das aplicações e automatizar operações informáticas comuns. Utilizar linguagens de programação compatíveis com este método, nomeadamente Unix Shell, JavaScript, Python e Ruby.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Използва специализирани ИКТ инструменти за създаване на компютърен код, който се интерпретира от съответната оперативна среда с цел разширяване на приложенията и автоматизиране на обикновените компютърни операции. Използва езици за програмиране, които подкрепят този метод, например скриптовете Unix Shell, JavaScript, Python и Ruby.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Naudoti specializuotas IRT priemones, siekiant sukurti kompiuterinį kodą, kurį galėtų skaityti atitinkama vykdymo laiko aplinka, kad būtų galima išplėsti programinę įrangą ir automatizuoti bendras kompiuterių operacijas. Naudoti programavimo kalbas, kuriomis palaikomas šis metodas, pvz., „Unix Shell“ scenarijus, „JavaScript“, „Python“ ir „Ruby“.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Izmantot specializētus IKT instrumentus, lai izveidotu datorkodu, ko interpretē, izmantojot atbilstošu izpildlaika vidi, lai paplašinātu lietotņu funkcionalitāti un automatizētu vispārējas datorizētas darbības. Izmantot programmēšanas valodas, kas atbalsta šo metodi, piemēram, “Unix Shell scripts”, “JavaScript”, “Python” un “Ruby”.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Upotrebljavati specijalizirane IKT alate za stvaranje računalnog koda koji se tumači u odgovarajućim okruženjima tijekom izvođenja radi proširenja aplikacija i automatizacije zajedničkih računalnih operacija. Koristiti se programskim jezicima koji podržavaju ovu metodu, kao što su Unix Shell skripte, JavaScript, Python i Ruby.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Utiliser des outils TIC spécialisés pour créer un code informatique interprété par les environnements d’exécution correspondants afin d’étendre les applications et d’automatiser les opérations informatiques courantes. Utiliser des langages de programmation compatibles avec cette méthode, tels qu’Unix Shell scripts, JavaScript, Python et Ruby.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Speciális IKT-eszközöket használ olyan számítógépes kód létrehozásához, amelyet a megfelelő futásidejű környezetek értelmeznek az alkalmazások bővítése és a közös számítógépes műveletek automatizálása céljából. Olyan programozási nyelveket használ, amelyek támogatják ezt a módszert, például Unix Shell szkripteket, JavaScriptet, Pythont és Rubyt.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Využitie špecializovaných nástrojov IKT na vytvorenie počítačového kódu, ktorý je interpretovaný zodpovedajúcimi prostrediami runtime, s cieľom rozšírenia aplikácií a automatizácie bežných počítačových operácií. Používanie programovacích jazykov, ktoré podporujú túto metódu, ako sú skripty Shell Unix, JavaScript, Python a Ruby.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Uporabljati specializirana orodja IKT za ustvarjanje računalniške kode, ki jo interpretirajo ustrezna izvajalna okolja, da se razširijo aplikacije in avtomatizirajo skupne računalniške operacije. Uporabljati programske jezike, ki podpirajo to metodo, kot so skripte Unix Shell, JavaScript, Python in Ruby.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Leas a bhaint as uirlisí speisialaithe TFC chun cód ríomhaireachta a chruthú, ar cód é a léirítear leis na timpeallachta ama rite chun feidhmchláir a leathnú agus chun oibríochtaí ríomhaireachta coitianta a uathoibriú. Úsáid a bhaint as teangacha ríomhclárúcháin a thacaíonn leis an modh seo, amhail scripteanna Unix Shell, JavaScript, Python agus Ruby.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Använda specialiserade IKT-verktyg för att skapa en datakod som tolkas med hjälp av motsvarande körtidsmiljöer för att utvidga program och automatisera vanligt förekommande datoroperationer. Använda programmeringsspråk som stödjer denna metod såsom Unix Shells-skript, JavaScript, Python och Ruby.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Χρήση εξειδικευμένων εργαλείων ΤΠΕ για τη δημιουργία κωδικού υπολογιστή που ερμηνεύεται από τα αντίστοιχα περιβάλλοντα χρόνου εκτέλεσης, προκειμένου να επεκταθούν οι εφαρμογές και να αυτοματοποιηθούν οι κοινές λειτουργίες στον υπολογιστή. Χρήση γλωσσών προγραμματισμού που υποστηρίζουν τη μέθοδο αυτή, όπως σενάρια Unix Shell, JavaScript, Python και Ruby.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Użu ta’ għodod speċjalizzati tal-ICT sabiex jinħoloq kodiċi tal-kompjuter li jiġi interpretat minn ambjenti run-time korrispondenti sabiex jiġu estiżi l-applikazzjonijiet u jiġu awtomatizzati l-operazzjonijiet komuni tal-kompjuter. Użu ta’ lingwi tal-ipprogrammar li jappoġġaw dan il-metodu bħall-iskripts Unix Shell, JavaScript, Python u Ruby.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "Utilise specialised ICT tools to create computer code that is interpreted by the corresponding run-time environments in order to extend applications and automate common computer operations. Use programming languages which support this method such as Unix Shell scripts, JavaScript, Python and Ruby.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Nota sérhæfðan upplýsingatæknibúnað til að búa til tölvukóða sem er túlkaður úr frá samsvarandi keyrslutímaumhverfi til að lengja forrit og búa sjálfvirkan tölvurekstur. Nota forritunarmál sem styðja þessa aðferð, s.s. Unix Shell scripts, JavaScript, Python og Ruby.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Utilizzare strumenti TIC speciali per creare un codice informatico che viene interpretato dagli ambienti di turno in questione al fine di estendere le applicazioni e automatizzare le operazioni informatiche comuni. Utilizzare linguaggi di programmazione che supportano questo metodo, quali Unix Shell Script, JavaScript, Python e Ruby.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Utilizar herramientas especializadas de TIC para crear código informático que sea interpretado por los entornos de tiempo de ejecución correspondientes para ampliar las aplicaciones y automatizar las operaciones informáticas comunes.  Utilizar lenguajes de programación compatibles con este método, como los scripts de Unix Shell, JavaScript, Python y Ruby.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Spetsiaalsete IKT-vahendite kasutamine, et luua arvutikood, mida tõlgendatakse vastavas käitusaegses keskkonnas, et laiendada rakendusi ja automatiseerida ühiseid arvutioperatsioone. Seda meetodit toetavate programmeerimiskeelte kasutamine, näiteks Unix Shell skriptid, JavaScript, Python ja Ruby.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Používat specializované nástroje ICT k vytvoření počítačového kódu, který je interpretován odpovídajícími run-time prostředími za účelem rozšíření aplikací a automatizace běžných počítačových operací. Používat programovací jazyky, které podporují tuto metodu, jako jsou skripta Unix Shell, JavaScript, Python a Ruby.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "استخدام أدوات تكنولوجيا المعلومات والاتصالات المتخصصة لإنشاء رمز الحاسب الذي يتم تفسيره بمحيط الزمن التشغيلي الملائم من أجل تمديد التطبيقات وتشغيل عمليات الحاسب الشائعة آليًّا. استخدام لغات البرمجة التي تدعم هذه الطريقة مثل Unix وShell scripts وJavascript وPython وRuby.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Korzystać ze specjalistycznych narzędzi ICT, aby tworzyć kod komputerowy interpretowany w odpowiednich środowiskach uruchomieniowych, w celu rozwijania aplikacji i automatyzacji typowych operacji komputerowych. Używać języków programowania obsługujących tę metodę, np. skryptów Unix Shell, JavaScript, Python i Ruby.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Utilizează instrumente TIC specializate pentru a crea un cod de calculator care este interpretat de mediile de rulare corespunzătoare pentru a extinde aplicații și a automatiza operațiuni informatice obișnuite. Utilizează limbaje de programare care sprijină această metodă, cum ar fi scripturile Unix Shell, JavaScript, Python și Ruby.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Anvende specialiserede IKT-værktøjer til at skabe computer-kode, der fortolkes af de tilsvarende run-time miljøer med henblik på at udvide applikationer og automatisere almindelige computeroperationer. Bruge programmeringssprog, der understøtter denne metode, såsom Unix Shells scripts, JavaScript, Python og Ruby.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Gespecialiseerde ICT-instrumenten gebruiken om een computercode te creëren die door de overeenkomstige run-time-omgevingen wordt geïnterpreteerd om de toepassingen te verlengen en gemeenschappelijke computeractiviteiten te automatiseren. Gebruik programmeertalen die deze methode ondersteunen, zoals Unix Shell scripts, JavaScript, Python en Ruby.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "cs": [
+        "používat skriptovací jazyk",
+        "používat skripty",
+        "využít skriptování"
+      ],
+      "mt": [
+        "tuża programmar bl-iskripts",
+        "tuża lingwaġġ ta' programmar bl-iskript",
+        "tuża programmar bil-kodiċi",
+        "tuża l-iprogrammar bi skript"
+      ],
+      "el": [
+        "εκτέλεση προγραμματισμού σεναρίων",
+        "χειρισμός εξειδικευμένων εργαλείων ΤΠΕ για τη δημιουργία κώδικα υπολογιστή",
+        "εφαρμογή γλώσσα προγραμματισμού",
+        "χρήση γλώσσας προγραμματισμού",
+        "χρήση γλώσσας σεναρίων για τον προγραμματισμό",
+        "χρήση γλώσσας προγραμματισμού σεναρίων"
+      ],
+      "nl": [
+        "programmeren in scripttaal gebruiken",
+        "script-programmeren",
+        "scripten programmeren",
+        "programmeren",
+        "programmeren via scripten",
+        "scripten gebruiken"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_python.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/598de5b0-5b58-4ea7-8058-a4bc4d18c742",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.649897+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "SQL",
+      "fr": "SQL",
+      "ar": "الإخماد"
+    },
+    "description": {
+      "no": {
+        "literal": "Dataspråket SQL er et spørrespråk for gjenfinning av opplysninger fra en database, og for dokumenter som inneholder nødvendige opplysninger. Det er utviklet av American National Standards Institute og Den internasjonale standardiseringsorganisasjon.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Die Computersprache SQL ist eine Abfragesprache für den Abruf von Informationen aus einer Datenbank und aus Dokumenten. Sie wird vom American National Standards Institute und der Internationalen Organisation für Normung entwickelt.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The computer language SQL is a query language for retrieval of information from a database and of documents containing the needed information. It is developed by the American National Standards Institute and the International Organization for Standardization.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Tietokonekieli SQL on hakukieli, jota käytetään tiedonhaussa tietokannasta ja tarvittavat tiedot sisältävistä asiakirjoista. Sen on kehittänyt American National Standards Institute ja Kansainvälinen standardisoimisjärjestö.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "A linguagem informática SQL é uma linguagem de pesquisa para obter informações de uma base de dados e de documentos que contêm as informações necessárias. É desenvolvida pelo American National Standards Institute (Instituto Nacional Americano de Normas) e pela International Organization for Standardization (Organização Internacional de Normalização).",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Компютърната програма SQL е език за търсене за извличане на информация от база данни и документи, съдържащи необходимата информация. Разработена е от Американския национален институт за стандарти и Международната организация по стандартизация.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "„SQL“ kompiuterio kalba yra užklausų kalba, skirta informacijai ir dokumentams, kuriuose yra reikiamos informacijos, iš duomenų bazės gauti. Ją sukūrė Amerikos nacionalinis standartų institutas ir Tarptautinė standartizacijos organizacija.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Programski jezik SQL je jezik upita za dohvaćanje informacija iz baze podataka i dokumenata koji sadržavaju potrebne informacije. Razvijaju ga Američki institut za nacionalne standarde i Međunarodna organizacija za normizaciju.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Datora valoda “SQL” ir vaicājumvaloda informācijas iegūšanai no kādas datubāzes un dokumentiem, kuros glabājas nepieciešamā informācija. To izstrādā Amerikas Nacionālais standartu institūts un Starptautiskā standartizācijas organizācija.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Le langage informatique SQL est un langage d’interrogation pour la récupération d’informations provenant d’une base de données et de documents contenant les informations nécessaires. Il est développé par l’American National Standards Institute (ANSI) et l’Organisation internationale de normalisation (ISO).",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Az SQL számítógépes nyelv olyan lekérdezési nyelv, amely lehetővé teszi az információk kinyerését adatbázisokból, illetve a szükséges információkat tartalmazó dokumentumok lekérdezését. Az SQL az Amerikai Nemzeti Szabványügyi Intézet és a Nemzetközi Szabványügyi Szervezet fejlesztése.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Počítačový jazyk SQL je dotazovací jazyk na získavanie informácií z databázy a dokumentov obsahujúcich potrebné informácie. Vyvíja ho Americký národný normalizačný ústav a Medzinárodná organizácia pre normalizáciu.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Računalniški jezik SQL je poizvedovalni jezik za iskanje informacij iz zbirke podatkov in dokumentov, ki vsebujejo potrebne informacije. Razvila sta ga Ameriški nacionalni institut za standarde (American National Standards Institute) in Mednarodna organizacija za standardizacijo (International Organisation for Standardisation).",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Is éard atá i dteanga SQL ná teanga cuardaigh chun faisnéis a aisghabháil i mbunachar sonraí agus i ndoiciméid ina bhfuil an fhaisnéis a theastaíonn. Tá sé forbartha ag an Institiúid um Chaighdeáin Náisiúnta Mheiriceánach agus an Eagraíocht Idirnáisiúnta um Chaighdeánú.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Datorspråket SQL är ett sökspråk som används för att hämta information från en databas och från handlingar som innehåller den eftersökta informationen. Språket är utvecklat av American National Standards Institute (ANSI) och Internationella standardiseringsorganisationen (ISO).",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Il-lingwa tal-kompjuter SQL hija lingwa għal queries għall-irkupru ta’ informazzjoni minn database u ta’ dokumenti li jkun fihom l-informazzjoni meħtieġa. Din hija żviluppata mill-Istitut Amerikan tal-Istandards Nazzjonali u mill-Organizzazzjoni Internazzjonali għall-Istandardizzazzjoni.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Η γλώσσα ηλεκτρονικού υπολογιστή SQL είναι μια γλώσσα που επιτρέπει την ανάκτηση πληροφοριών από μια βάση δεδομένων και εγγράφων που περιέχουν τις απαιτούμενες πληροφορίες. Αναπτύσσεται από το Αμερικανικό Ινστιτούτο Εθνικών Προτύπων και τον Διεθνή Οργανισμό Τυποποίησης.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The computer language SQL is a query language for retrieval of information from a database and of documents containing the needed information. It is developed by the American National Standards Institute and the International Organization for Standardization.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "SQL forritunarmálið, er fyrirspurnarmál til að sækja upplýsingar úr gagnagrunni og skjölum sem innihalda nauðsynlegar upplýsingar. Það er þróað af American National Standards Institute og International Organization for Standardization.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Il linguaggio informatico SQL è una lingua di ricerca per il recupero delle informazioni da una banca dati e di documenti contenenti le informazioni necessarie. È sviluppato dall’American National Standards Institute e dall’Organizzazione internazionale per la standardizzazione.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "El lenguaje informático SQL es un lenguaje de consulta para la extracción de información de una base de datos y de documentos que contienen la información necesaria. Lo desarrolla el Instituto Nacional Estadounidense de Estándares y la Organización Internacional de Normalización.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Arvuti keel SQL on otsingukeel andmebaasist teabe ja vajalikku teavet sisaldavate dokumentide hankimiseks. Seda arendab American National Standards Institute ja International Organization for Standardization.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Počítačový jazyk SQL je dotazovací jazyk pro vyhledávání informací z databáze a dokumentů obsahujících potřebné informace. Byl vyvinut Americkým národním standardizačním institutem a Mezinárodní organizací pro normalizaci.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "الإخماد هي لغة كمبيوتر الاستعلام لاسترجاع المعلومات من قاعدة البيانات والوثائق التي تحتوي على المعلومات المطلوبة. تم تطويرها من قبل المعهد الوطني الأمريكي للمعايير والمنظمة الدولية للتوحيد القياسي.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Język informatyczny SQL jest językiem wyszukiwania w celu wyszukiwania informacji z bazy danych i dokumentów zawierających potrzebne informacje. Jest on opracowywany przez Amerykański Krajowy Instytut Standaryzacji oraz Międzynarodową Organizację Normalizacyjną.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Datasproget SQL er et søgesprog til hentning af oplysninger fra en database og hentning af dokumenter, der indeholder de nødvendige oplysninger. Det er udviklet af American National Standards Institute og International Organization for Standardization.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Limbajul informatic SQL este un limbaj de interogare pentru extragerea de informații dintr-o bază de date și a documentele care conțin informațiile necesare. Acesta este elaborat de Institutul Național American de Standardizare și de Organizația Internațională pentru Standardizare.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "SQL is een computer-zoektaal voor het opvragen van informatie uit een databank en van documenten die de vereiste informatie bevatten. De taal is ontwikkeld door het American National Standards Institute en de Internationale Organisatie voor Normalisatie.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "no": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "de": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "en-us": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "fi": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "pt": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "bg": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "lt": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "hr": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "lv": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "fr": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "hu": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "sk": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "sl": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "ga": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "sv": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "mt": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "el": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "en": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "is": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "it": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "es": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "et": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "cs": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "ar": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "pl": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "ro": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "da": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ],
+      "nl": [
+        "Informix 4GL/SQL",
+        "SEQUEL",
+        "Subquery"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_sql.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/c062bab3-3ea0-4291-9220-a2d8fef4bead",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.649897+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "SQL Server",
+      "fr": "SQL Server",
+      "ar": "SQL Server"
+    },
+    "description": {
+      "de": {
+        "literal": "Computerprogramm zur Erstellung, Aktualisierung und Verwaltung von Datenbanken, das vom Softwareunternehmen Microsoft entwickelt wurde.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Dataprogrammet SQL Server er et verktøy for å opprette, oppdatere og administrere databaser, som er utviklet av programvareselskapet Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The computer program SQL Server is a tool for creating, updating and managing databases, developed by the software company Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "SQL Server on Microsoftin kehittämä työkalu, jolla voidaan luoda, päivittää ja hallinnoida tietokantoja.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "O programa de computador SQL Server é uma ferramenta de criação, atualização e gestão de bases de dados, desenvolvido pela empresa de software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Компютърната програма SQL Server е инструмент за създаване, актуализиране и управление на бази данни, разработен от софтуерната компания Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Kompiuterinė programa „SQL server“ yra bendrovės „Microsoft“ parengta duomenų bazių kūrimo, atnaujinimo ir valdymo priemonė.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Računalni program SQL Server je alat za stvaranje, ažuriranje baza podataka i njihovo upravljanje, a razvila ga je softverska tvrtka Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Datorprogramma “SQL Server” ir rīks, ar ko izveido, atjaunina un pārvalda datubāzes un ko izstrādājis programmatūras izstrādes uzņēmums “Microsoft”.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Le logiciel SQL Server est un outil de création, de mise à jour et de gestion des bases de données développé par la société logiciel Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Az SQL Server számítógépes program a Microsoft szoftvervállalat által kifejlesztett, adatbázisok létrehozására, frissítésére és kezelésére szolgáló eszköz.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Počítačový program SQL Server je nástroj na vytváranie, aktualizáciu a správu databáz, ktorý vyvíja softvérová spoločnosť Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Računalniški program SQL Server je orodje za ustvarjanje, posodabljanje in upravljanje podatkovnih zbirk, ki jih razvija podjetje za razvoj programske opreme Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Is uirlis é an ríomhchlár SQL Server chun bunachair shonraí a chruthú, a nuashonrú agus a bhainistiú, arna forbairt ag an gcuideachta bogearraí Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Datorprogrammet SQL Server är ett verktyg som används för att skapa, uppdatera och hantera databaser som utvecklats av programvaruföretaget Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Il-programm tal-kompjuter SQL Server huwa għodda għall-ħolqien, l-aġġornament u l-ġestjoni tal-bażijiet tad-dejta, żviluppat mill-kumpanija tas-softwer Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Το λογισμικό SQL Server είναι ένα εργαλείο για τη δημιουργία, την επικαιροποίηση και τη διαχείριση βάσεων δεδομένων που αναπτύχθηκε από την εταιρεία λογισμικού Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The computer program SQL Server is a tool for creating, updating and managing databases, developed by the software company Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Tölvuforritið SQL Server er tæki til að búa til, uppfæra og stjórna gagnasöfnum, þróuð af hugbúnaðarfyrirtækinu og Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Il programma informatico SQL Server è uno strumento per la creazione, l’aggiornamento e la gestione di banche dati, sviluppato dall’azienda produttrice di software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "El programa informático SQL Server es una herramienta para crear, actualizar y gestionar bases de datos, desarrolladas por la empresa de software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Arvutiprogramm SQL Server on vahend, millega luuakse, ajakohastatakse ja hallatakse andmebaase ning mida arendab tarkvaraettevõte Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Počítačový program SQL Server je nástroj pro vytváření, aktualizaci a správu databází vyvinutý softwarovou společností Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "برنامج الكمبيوتر \"SQL Server\" هو أداةٌ طورتها شركة البرمجيات \"Microsoft\" لإنشاء قواعد البيانات وتحديثها وإدارتها.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Program komputerowy SQL Server jest narzędziem do tworzenia i aktualizacji baz danych i zarządzania nimi, opracowanym przez firmę programistyczną Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Programul informatic SQL Server este un instrument de creare, actualizare și gestionare a bazelor de date dezvoltat de societatea de software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Computerprogrammet SQL Server er et værktøj til at oprette, opdatere og forvalte databaser udviklet af softwareleverandøren Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Het computerprogramma SQL Server is een hulpmiddel voor het opzetten, updaten en beheren van databases, ontwikkeld door het softwarebedrijf Microsoft.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "en": [
+        "SQL Server Enterprise Edition",
+        "Microsoft SQL Server Compact",
+        "Microsoft SQL Server",
+        "SQL Server Workgroup Edition",
+        "SQL Server 2005",
+        "SQL Server 2014",
+        "SQL Server Standard Edition",
+        "SQL Server 2012",
+        "SQL Server Web Edition",
+        "Azure SQL Database",
+        "SQL Server 2008",
+        "SQL Server Express Edition",
+        "SQL Server Developer Edition",
+        "MS SQL Server"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_sql.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/ab1e97ed-2319-4293-a8b7-072d2648822f",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.649897+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "database management systems",
+      "fr": "systèmes de gestion de base de données",
+      "ar": "أنظمة إدارة قواعد البيانات"
+    },
+    "description": {
+      "de": {
+        "literal": "Die Tools für die Erstellung, Aktualisierung und Verwaltung von Datenbanken wie Oracle, MySQL und Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Verktøy for å opprette, oppdatere og administrere databaser, f.eks. Oracle, MySQL og Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The tools for creating, updating and managing databases, such as Oracle, MySQL and Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Tietokantojen luomiseen, päivittämiseen ja hallintaan liittyvät välineet, kuten Oracle, MySQL ja Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "As ferramentas para a criação, atualização e gestão de bases de dados, como a Oracle, a MySQL e o Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Инструменти за създаване, актуализиране и управление на бази данни, като Oracle, MySQL и Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Duomenų bazių, pavyzdžiui, „Oracle“, „MySQL“ ir „Microsoft SQL Server“, kūrimo, atnaujinimo ir valdymo priemonės.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Alati za izradu, ažuriranje i upravljanje bazama podataka, kao što su Oracle, MySQL i Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Instrumenti datubāzu izveidei, atjaunināšanai un pārvaldībai, piemēram, “Oracle”, “MySQL” un “Microsoft SQL Server”.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les outils de création, de mise à jour et de gestion de bases de données, tels qu’Oracle, MySQL et Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Az adatbázisok, például az Oracle, a MySQL és a Microsoft SQL szerverek létrehozásához, frissítéséhez és kezeléséhez szükséges eszközök.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Nástroje na vytváranie, aktualizáciu a správu databáz, ako sú Oracle, MySQL a Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Orodja za ustvarjanje, posodabljanje in upravljanje podatkovnih zbirk, kot so Oracle, MySQL in Microsoft SQL.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Na huirlisí chun bunachair shonraí a chruthú, a thabhairt cothrom le dáta agus a bhainistiú, amhail Oracle, MySQL agus Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Verktyg för att skapa, uppdatera och hantera databaser, såsom Oracle, MySQL och Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Τα εργαλεία δημιουργίας, επικαιροποίησης και διαχείρισης βάσεων δεδομένων, όπως Oracle, MySQL και Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-għodod għall-ħolqien, l-aġġornament u l-immaniġġjar tal-bażijiet tad-dejta, bħal Oracle, MySQL u Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The tools for creating, updating and managing databases, such as Oracle, MySQL and Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Tæki til að búa til, uppfæra og stjórna gagnasöfnum, s.s. Oracle, MySQL and Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli strumenti per la creazione, l’aggiornamento e la gestione di database, quali Oracle, MySQL e Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Las herramientas para crear, actualizar y gestionar bases de datos, como Oracle, MySQL y Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Andmebaaside koostamise, uuendamise ja haldamise vahendid, näiteks Oracle, MySQL ja Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Nástroje pro vytváření, aktualizaci a správu databází, jako jsou Oracle, MySQL a Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "أدوات إنشاء قواعد البيانات وتحديثها وإدارتها، مثل Oracle وMySQL وMicrosoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Narzędzia do tworzenia, aktualizacji i zarządzania bazami danych, takie jak Oracle, MySQL i Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Værktøjer til oprettelse, ajourføring og styring af databaser som Oracle, MySQL og Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Instrumentele de creare, actualizare și gestionare a bazelor de date, cum ar fi Oracle, MySQL și Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "De instrumenten voor het opzetten, actualiseren en beheren van databanken zoals Oracle, MySQL en Microsoft SQL Server.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "DB-Managementsysteme",
+        "Datenbankmanagementsystem",
+        "DBS",
+        "Systeme für das Datenbankmanagement",
+        "Datenbanksysteme",
+        "Datenbank-Managementsysteme",
+        "DBMS",
+        "Datenbankverwaltungssysteme",
+        "SQL"
+      ],
+      "sv": [
+        "konstruktion för databashantering",
+        "system för databashantering",
+        "metod för hantering av databas",
+        "system för hantering av databas",
+        "databashanteringsstruktur"
+      ],
+      "fi": [
+        "db-moottorit",
+        "tietokannan järjestelmät",
+        "tietokannan hallinnan järjestelmät",
+        "tietokantajärjestelmät",
+        "dbms",
+        "DBMS",
+        "DB-moottorit",
+        "SQL",
+        "sql"
+      ],
+      "pt": [
+        "sistemas de administração de bases de dados",
+        "SGBD",
+        "motores de bases de dados",
+        "sistemas para gestão de bases de dados",
+        "sistemas de gestão de base de dados",
+        "sistemas de bases de dados"
+      ],
+      "bg": [
+        "DB енджинс",
+        "система за управление на база данни",
+        "системи за база данни",
+        "системите за управление на база данни",
+        "DBMS",
+        "SQL"
+      ],
+      "mt": [
+        "sistemi ta' ġestjoni tal-bażi tad-dejta",
+        "sistemi għat-tmexxija tal-bażi tad-dejta",
+        "sistemi għall-ġestjoni tal-bażi tad-data",
+        "sistemi għall-amministrazzjoni tal-bażi tad-dejta",
+        "proċeduri għall-ġestjoni tal-bażi tad-dejta"
+      ],
+      "el": [
+        "μηχανές διαχείρισης βάσης δεδομένων",
+        "εργαλεία διαχείρισης βάσης δεδομένων",
+        "συστήματα διαχείρισης βάσης δεδομένων"
+      ],
+      "lt": [
+        "duomenų bazių valdymo sistema",
+        "DMVS",
+        "DB valdymo sistemos",
+        "duomenų bazių varikliai",
+        "duomenų bazių sistemos",
+        "SQL"
+      ],
+      "en": [
+        "DBMS",
+        "DB engines",
+        "SQL",
+        "database systems"
+      ],
+      "hr": [
+        "sustavi upravljanja bazom podataka",
+        "sustavi za upravljanje bazom podataka",
+        "sustavi baza podataka"
+      ],
+      "lv": [
+        "sistēmas datu bāzes vadībai",
+        "datubāzes vadības sistēmas",
+        "sistēmas datu bāzu pārvaldībai",
+        "sistēmas datubāzes vadībai",
+        "datu bāzes vadības sistēmas",
+        "sistēmas datubāzu pārvaldībai",
+        "datu bāzes pārvaldības sistēmas"
+      ],
+      "is": [
+        "umsjónarkerfa gagnagrunna",
+        "umsjónarkerfi fyrir gagnagrunna",
+        "umsjónarkerfi með gagnagrunnum",
+        "umsjónarkerfum gagnagrunna"
+      ],
+      "it": [
+        "sistemi di gestione dei database",
+        "sistema di gestione del database",
+        "software per la gestione di database",
+        "programmi specifici per la gestione di database",
+        "strumenti per la gestione di database"
+      ],
+      "fr": [
+        "SGBD",
+        "moteurs de base de données",
+        "logiciels de gestion de base de données",
+        "systèmes de base de données",
+        "Microsoft SQL Server",
+        "MySQL",
+        "Oracle"
+      ],
+      "hu": [
+        "adatbázisrendszerek",
+        "adatbázis-kezelő rendszer",
+        "DBMS",
+        "adatbázisrendszer",
+        "adatbázisokat kezelő rendszerek",
+        "SQL"
+      ],
+      "es": [
+        "sistemas para administrar bases de datos",
+        "sistemas para la gestión de bases de datos",
+        "sistemas de administración de bases de datos",
+        "sistemas para la administración de bases de datos",
+        "sistemas para gestionar bases de datos"
+      ],
+      "et": [
+        "andmehaldussüsteemid",
+        "andmebaaside haldussüsteemid",
+        "andmebaasisüsteemid",
+        "andmebaaside haldamise süsteemid",
+        "andmete haldamise süsteemid",
+        "andmehalduse süsteemid",
+        "andmebaasi haldussüsteemid"
+      ],
+      "cs": [
+        "systém řízení databáze",
+        "systémy správy databází",
+        "databázové stroje",
+        "databázové systémy",
+        "systém řízení databází",
+        "SQL"
+      ],
+      "sk": [
+        "systém riadenia databázy",
+        "systémy na riadenie databáz",
+        "systém manažovania databázy",
+        "štruktúrovaný dopytovací jazyk",
+        "databázové systémy",
+        "databázové riadiace systémy",
+        "SQL"
+      ],
+      "sl": [
+        "sistem upravljanja podatkovne baze",
+        "sistemi upravljanja zbirk podatkov",
+        "sistemi podatkovnih baz",
+        "sistemi upravljanja baz podatkov",
+        "sistemi za upravljanje s podatkovnimi bazami",
+        "sistemi upravljanja podatkovnih zbirk",
+        "SQL",
+        "sistem DBMS"
+      ],
+      "pl": [
+        "silnik bazy danych",
+        "narzędzia zarządzania bazą danych",
+        "systemy baz danych",
+        "SZBD",
+        "SQL"
+      ],
+      "ro": [
+        "instrumente de administrare a bazelor de date",
+        "instrumente de creare a bazelor de date",
+        "sisteme de gestionare baze de date",
+        "sistem gestionare bază de date",
+        "motoare de baze de date",
+        "sisteme de administrare a bazelor de date",
+        "sisteme de baze de date",
+        "SQL"
+      ],
+      "da": [
+        "databaseadministrationssystem",
+        "databasesystemer",
+        "DBMS",
+        "SQL",
+        "styringssystemer til database",
+        "DB-komponenter"
+      ],
+      "nl": [
+        "databasesystemen",
+        "managementsystemen voor databases",
+        "databanken beheren",
+        "databanksysteem",
+        "beheersystemen voor databanken",
+        "database-engines",
+        "SQL"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_sql.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/6f7512ab-d46d-402a-8c30-a8878d7c1f88",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.649897+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "SQL Server Integration Services",
+      "fr": "SQL Server Integration Services",
+      "ar": "خدمات تكامل خادم SQL"
+    },
+    "description": {
+      "de": {
+        "literal": "Das Computerprogramm „SQL Server Integration Services“ ist ein Tool zur Integration von Informationen aus mehreren Anwendungen, die von Organisationen erstellt und gepflegt werden, in eine konsistente und transparente Datenstruktur, die von Microsoft entwickelt wurde.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Dataprogrammet SQL Integration Services er et verktøy for integrasjon av informasjon fra flere programmer, opprettet og vedlikeholdt av organisasjoner, til en ensartet og åpen datastruktur, som er utviklet av programvareselskapet Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Tietokoneohjelma SQL Server Integration Services on työkalu organisaatioiden luomien ja ylläpitämien useiden sovellusten tietojen yhdistämiseksi yhteen johdonmukaiseen ja avoimeen datarakenteeseen, jonka on kehittänyt ohjelmistoyhtiö Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The computer program SQL Server Integration Services is a tool for integration of information from multiple applications, created and maintained by organizations, into one consistent and transparent data structure, developed by the software company Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "O programa informático SQL Server Integration Services constitui um instrumento para a integração de informações provenientes de múltiplas aplicações, criadas e mantidas por organizações, numa estrutura de dados coerente e transparente, desenvolvida pela empresa de software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Компютърната програма SQL Server Integration Services е средство за интегриране на информация от множество приложения, създадени и поддържани от организации в една съгласувана и прозрачна структура на данните, разработена от софтуерната компания Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Kompiuterinė programa „SQL Server Integration Services“ – tai priemonė, skirta informacijai iš kelių taikomųjų programų, kurias sukūrė ir tvarko organizacijos, integruoti į vieną nuoseklią ir skaidrią duomenų struktūrą, kurią sukūrė programinės įrangos bendrovė „Microsoft“.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Datorprogramma “SQL Server Integration Services” ir rīks, ar kura palīdzību vienā konsekventā un pārredzamā datu struktūrā, ko izstrādājis programmatūras izstrādes uzņēmums “Microsoft”, var integrēt informāciju no vairākām lietotnēm, ko izveidojušas un uztur dažādas organizācijas.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Računalni program SQL Server Integration Services alat je za integraciju informacija iz višestrukih aplikacija, koje su izradile i održavaju organizacije, u jedinstvenu dosljednu i transparentnu strukturu podataka; razvila ga je softverska tvrtka Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Le programme informatique de services d’intégration du serveur SQL est un outil d’intégration des informations provenant de multiples applications, créées et entretenues par des organisations, en une structure de données cohérente et transparente, développée par l’éditeur de logiciels Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A Microsoft szoftvervállalat által kifejlesztett SQL Server Integration Services számítógépes program egy olyan eszköz, amely a több alkalmazásból származó – szervezetek által létrehozott és karbantartott – információkat egy következetes és átlátható adatszerkezetbe integrálja.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Počítačový program SQL Server Integration Services je nástroj na integráciu informácií z viacerých aplikácií vytvorených a zachovaných organizáciami, do jednej celistvej a transparentnej štruktúry údajov, ktorú vyvinula softvérová spoločnosť Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Računalniški program SQL Server Integration Services je orodje za vključevanje informacij iz več aplikacij, ki jih ustvarijo in vzdržujejo organizacije, v eno dosledno in pregledno strukturo podatkov, ki jo razvija družba za programsko opremo Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Is uirlis é an clár ríomhaireachta SQL Seirbhísí Chomhtháthú Friothálaí, do faisnéise ó iarratais iolracha, cruthaithe agus cothabháilte ag eagraíochtaí, go struchtúr sonraí atá comhsheasmhach agus trédhearcach amháin, a d’fhorbair an gnólacht bogearraí Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Datorprogrammet SQL Server Integration Services är ett verktyg som utvecklats av programvaruföretaget Microsoft för integrering av information från flera tillämpningar – som skapats och underhålls av organisationerna – till en enhetlig och transparent datastruktur.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Το πρόγραμμα ηλεκτρονικού υπολογιστή SQL Server Server Services είναι ένα εργαλείο για την ενσωμάτωση πληροφοριών από πολλαπλές εφαρμογές, που δημιουργήθηκε και διατηρήθηκε από οργανισμούς σε μια συνεκτική και διαφανή δομή δεδομένων την οποία ανέπτυξε η εταιρεία λογισμικού Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Il-programm tal-kompjuter SQL Server Integration Services huwa għodda għall-integrazzjoni ta’ informazzjoni minn diversi applikazzjonijiet, maħluqa u miżmuma minn organizzazzjonijiet, fi struttura tad-dejta waħda li hija konsistenti u trasparenti, żviluppata mill-kumpanija tas-softwer Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The computer program SQL Server Integration Services is a tool for integration of information from multiple applications, created and maintained by organisations, into one consistent and transparent data structure, developed by the software company Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Tölvuforritinu, SQL Server Integration Services er tæki til þess að samþætta upplýsingar úr mörgum notkunarforritum, sem fyrirtæki mynda og viðhalda, í eitt samræmt og gagnsætt gagnaskipulag sem er þróað af hugbúnaðarfyrirtækinu Micosoft.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Il programma SQL Server Integration Services è uno strumento sviluppato dalla società di software Microsoft per l’integrazione di informazioni provenienti da molteplici applicazioni, create e mantenute da organizzazioni, in una struttura dati coerente e trasparente.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "El programa informático SQL Server Integration Services es una herramienta desarrollada por la empresa de software Microsoft para la integración, en una estructura de datos coherente y transparente, de la información procedente de varias aplicaciones creadas y mantenidas por organizaciones.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Tarkvaraettevõtte Microsoft arendatud arvutiprogramm SQL Server Integration Services on vahend, mis võimaldab integreerida organisatsioonide loodud ja säilitatava eri rakendustest pärit teabe ühte sidusasse ja läbipaistvasse andmestruktuuri.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Počítačový program SQL Server Integration Services je nástrojem pro integraci informací z několika aplikací, vytvořených a udržovaných organizacemi, do jedné konzistentní a transparentní datové struktury vyvinuté softwarovou společností Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "خدمات تكامل خادم SQL للكمبيوتر هي أداة لتكامل المعلومات الواردة من تطبيقات متعددة، التي يتم إنشاؤها وصيانتها بواسطة المؤسسات، في هيكل بيانات واحد متسق وشفاف، تطوّره شركة مايكروسوفت.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Program komputerowy SQL Server Integration Services jest narzędziem integracji informacji z wielu aplikacji, utworzonych i utrzymywanych przez różne organizacje, w jedną spójną i przejrzystą strukturę danych, opracowaną przez Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Programul informatic SQL Server Integration Services este un instrument de integrare a informațiilor din mai multe aplicații, create și întreținute de organizații, într-o structură de date coerentă și transparentă, dezvoltată de compania de software Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "IT-programmet SQL Server Integration er et redskab til integration af oplysninger fra flere applikationer, der oprettes og vedligeholdes af virksomheder, til en ensartet og gennemsigtig datastruktur, der er udviklet af softwarevirksomheden Microsoft.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Het computerprogramma SQL Server Integration Services is een instrument voor de integratie van informatie uit meerdere toepassingen, gecreëerd en onderhouden door organisaties, tot één consistente en transparante gegevensstructuur, ontwikkeld door het softwarebedrijf Microsoft.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "en": [
+        "Microsoft SQL Server Integration Services",
+        "Microsoft SSIS",
+        "SSIS"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_sql.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/skill/76ef6ed3-1658-4a1a-9593-204d799c6d0c",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.649897+00:00",
+    "type": "Skill",
+    "labels": {
+      "en": "NoSQL",
+      "fr": "NoSQL",
+      "ar": "قاعدة بيانات NoSQL"
+    },
+    "description": {
+      "no": {
+        "literal": "Not Only SQL ikke-relasjonsdatabase som brukes til å opprette, oppdatere og administrere store mengder ustrukturerte data som er lagret i skyer.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Nicht nicht-relationale Datenbank „Not Only SQL“ zur Erstellung, Aktualisierung und Verwaltung großer Mengen unstrukturierter Daten in der Cloud.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Not Only SQL on ei-relationaalinen tietokanta, jota käytetään laadittaessa, päivitettäessä ja hallinnoitaessa pilvipalveluihin tallennettavia suuria määriä jäsentelemättömiä tietoja.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "The Not Only SQL non-relational database used for creating, updating and managing large amounts of unstructured data stored in the cloud.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "A base de dados Not Only SQL não relacional utilizada para criar, atualizar e gerir grandes quantidades de dados não estruturados armazenados na nuvem.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Нерелационната база данни NoSQL, която се използва за създаване, актуализиране и управление на големи количества неструктурирани данни, съхранявани в „облак“ пространството.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "„Not Only SQL“ – nesusijusių duomenų bazė, naudojama kuriant, atnaujinant ir tvarkant didelius debesijoje saugomų nestruktūruotų duomenų kiekius.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Ārpusattiecību datubāze “Not only SQL” , ko izmanto, lai veidotu, atjauninātu un pārvaldītu mākonī glabātus nestrukturētus lielapjoma datus.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Nerelacijska baza podataka Not Only SQL koja se primjenjuje za stvaranje, ažuriranje i upravljanje velikim količinama nestrukturiranih podataka pohranjenih u oblaku.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "La base de données non relationnelle Not Only SQL utilisée pour créer, mettre à jour et gérer de grandes quantités de données non structurées stockées dans le nuage.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A Not Only SQL egy nem relációs adatbázis, amelyet felhőben tárolt, strukturálatlan adatok létrehozására, frissítésére és kezelésére használnak.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Nerelačná databáza Not Only SQL používaná na vytváranie, aktualizáciu a správu veľkých množstiev neštruktúrovaných údajov uložených v cloude.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Nerelacijska zbirka podatkov Not Only SQL, ki se uporablja za ustvarjanje, posodabljanje in upravljanje velikih količin nestrukturiranih podatkov, shranjenih v oblaku.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "An Ní Amháin SQL bunachar sonraí neamh-choibhneasta a úsáidtear chun suimeanna móra sonraí neamhstruchtúrtha atá stóráilte sa scamall a nuashonrú agus a chruthú agus a bhainistiú.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Not Only SQL:s icke-relationsdatabas som används för att skapa, uppdatera och hantera stora mängder ostrukturerade data som lagras i molnet.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "Il-bażi tad-dejta mhux relazzjonali Not Only SQL użata għall-ħolqien, l-aġġornament u l-ġestjoni ta’ ammonti kbar ta’ dejta mhux strutturata maħżuna fil-cloud.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Η μη σχεσιακή βάση δεδομένων Not Only SQL που χρησιμοποιείται για τη δημιουργία, την επικαιροποίηση και τη διαχείριση μεγάλων όγκων μη δομημένων δεδομένων που είναι αποθηκευμένα στο υπολογιστικό νέφος.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "The Not Only SQL non-relational database used for creating, updating and managing large amounts of unstructured data stored in the cloud.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Not Only SQL gagnagrunnurinn er notaður til að búa til, uppfæra og hafa umsjón með miklu magni ómótaðra gagna sem geymd eru í skýinu.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Il database non relazionale Not Only SQL, utilizzato per creare, aggiornare e gestire grandi quantità di dati non strutturati archiviati nel cloud.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Base de datos no relacional de Not Only SQL [no solo SQL], utilizada para crear, actualizar y gestionar grandes cantidades de datos no estructurados almacenados en la nube.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "(Not Only SQL, „mitte ainult SQL“). Mitterelatsiooniline andmebaas, millega luuakse, uuendatakse ja hallatakse pilves talletatavaid struktureerimata suuri andmekoguseid.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Nevztahová databáze Not Only SQL pro vytváření, aktualizaci a správu velkého množství nestrukturovaných dat uložených v cloudu.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "قاعدة بيانات SQL غير العلائقية المستخدمة فقط لإنشاء وتحديث كميات كبيرة من البيانات غير المهيكلة المخزنة في السحابة وإدارتها.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Nierelacyjna baza danych Not Only SQL, wykorzystywana do tworzenia, aktualizacji i zarządzania dużymi ilościami nieuporządkowanych danych przechowywanych w chmurze.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Baza de date nerelațională Not Only SQL utilizată pentru crearea, actualizarea și gestionarea unor volume mari de date nestructurate stocate în cloud.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Not Only SQL-ikke-relationsdatabasen, der anvendes til at oprette, ajourføre og forvalte store mængder ustrukturerede data, der er lagret i skyen.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "De Not Only SQL niet-relationele database voor het aanmaken, actualiseren en beheren van grote hoeveelheden ongestructureerde gegevens die in de cloud zijn opgeslagen.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": null,
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_sql.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/occupation/c40a2919-48a9-40ea-b506-1f34f693496d",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.984108+00:00",
+    "type": "Occupation",
+    "labels": {
+      "en": "web developer",
+      "fr": "développeur web/développeuse web",
+      "ar": "مطور ويب / مطورة ويب"
+    },
+    "description": {
+      "de": {
+        "literal": "Web-Designer entwickeln, implementieren und dokumentieren internetgestützte Software auf der Grundlage von Designvorgaben. Sie gestalten die Internetpräsenz des Kunden in Anlehnung an deren Geschäftsstrategie, lösen Softwareprobleme und suchen nach Möglichkeiten zur Verbesserung der Anwendung.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "Webutviklere utvikler, implementerer og dokumenterer webtilgjengelig programvare, basert på angitte design. De tilpasser kundens webnærvær med forretningsstrategien, feilsøker programvareproblemer og ser etter måter å forbedre programmet på.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "Web developers develop, implement and document web-accessible software based on the designs provided. They align the client's web presence with its business strategy, troubleshoot software problems and issues and look for ways to improve the application.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Verkkokehittäjät kehittävät, toteuttavat ja dokumentoivat tarjolla oleviin malleihin perustuvia verkkopohjaisia ohjelmistoja. He sovittavat asiakkaan verkkonäkyvyyden liiketoimintastrategiaan, tunnistavat ohjelmisto-ongelmia ja etsivät sovelluksen parannuskeinoja.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Os programadores Web desenvolvem, implementam e documentam software acessível via Web com base nos desenhos fornecidos. Alinham a presença na Web do cliente com a sua estratégia empresarial, solucionam problemas de software e procuram formas de melhorar a aplicação.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Уеб разработчиците разработват, прилагат и документират софтуер, достъпен онлайн, на базата на предоставените проекти. Те синхронизират присъствието в мрежата на клиента с неговата бизнес стратегия, отстраняват софтуерни проблеми и въпроси и търсят начини за подобряване на приложението.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Saityno kūrėjai rengia, diegia ir dokumentuoja internete prieinamą programinę įrangą, remdamiesi pateikta struktūra. Jie suderina kliento veiklą internete su jo verslo strategija, šalina programinės įrangos gedimus ir ieško būdų, kaip patobulinti taikomąją programą.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Mrežni razvojni programeri izrađuju, implementiraju i dokumentiraju računalne programe dostupne na internetu na temelju predviđenih dizajna. Usklađuju internetsku prisutnost klijenta s poslovnom strategijom, rješavaju probleme sa softverom i traže načine za poboljšanje njegove primjene.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Tīmekļa izstrādātāji izstrādā, īsteno un dokumentē tīmeklī piekļūstamu programmatūru, balstoties uz sniegto dizainu. Viņi saskaņo klienta klātbūtni tīmeklī un tā uzņēmējdarbības stratēģiju, novērš programmatūras problēmas un trūkumus, kā arī meklē veidus, kā uzlabot tās lietojumu.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les développeurs de sites web développent, mettent en œuvre et documentent le logiciel accessible en ligne sur la base des dessins ou modèles fournis. Ils alignent la présence de l’internet du client sur sa stratégie commerciale, sur les problèmes et problèmes liés aux logiciels et cherchent des moyens d’améliorer l’application.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A webfejlesztők a rendelkezésre bocsátott terveken alapuló, interneten hozzáférhető szoftvereket fejlesztenek, valósítanak meg és dokumentálnak. Összehangolják az ügyfél internetes jelenlétét annak üzleti stratégiájával, a szoftverek kapcsolatos problémákat és kérdéseket kezelik, és keresik az applikáció javításának módjait.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Weboví dizajnéri vyvíjajú, implementujú a dokumentujú webový softvér na základe poskytnutých návrhov. Prispôsobujú prítomnosť klienta na webe jeho obchodnej stratégii, riešia softvérové a iné problémy a hľadajú spôsoby, ako zlepšiť aplikáciu.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Spletni razvijalci na podlagi predloženih načrtov razvijajo, izvajajo in dokumentirajo programsko opremo, dostopno na spletu. Spletno prisotnost stranke usklajujejo z njeno poslovno strategijo, rešujejo težave s programsko opremo ter iščejo načine za izboljšanje uporabe.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Déanann forbróirí gréasáin bogearraí gréasáin inrochtana a fhorbairt, a chur chun feidhme agus a dhoiciméadú bunaithe ar na dearaí a sholáthraítear. Déanann siad láithreacht ghréasáin an chliaint a ailíniú lena straitéis ghnó, déanann siad fabhtcheartú ar fhadhbanna a bhaineann le bogearraí agus ar shaincheisteanna, agus féachann sé le teacht ar bhealaí chun an fheidhmchlár a fheabhsú.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Webbutvecklare utarbetar, implementerar och dokumenterar programvara som finns tillgänglig på nätet utifrån angivna designlösningar. De anpassar kundens närvaro på nätet till företagets affärsstrategi, utför felsökning i programvara samt söker efter nya sätt att förbättra programmet.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-iżviluppaturi tal-web jiżviluppaw, jimplimentaw u jiddokumentaw softwer aċċessibbli fuq l-internet ibbażat fuq id-disinji pprovduti. Huma jallinjaw il-preżenza tal-klijent fuq il-web mal-istrateġija tan-negozju tiegħu, jindividwaw soluzzjonijiet ta’ problemi u kwistjonijiet ta’ softwer u jfittxu modi biex itejbu l-applikazzjoni.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι υπεύθυνοι ανάπτυξης εφαρμογών διαδικτύου αναπτύσσουν, εφαρμόζουν και τεκμηριώνουν λογισμικό προσβάσιμο από τον ιστό με βάση τα παρεχόμενα σχέδια. Ευθυγραμμίζουν τη διαδικτυακή παρουσία του πελάτη με την επιχειρηματική του στρατηγική, εντοπίζουν και διορθώνουν προβλήματα και ζητήματα του λογισμικού και αναζητούν τρόπους για τη βελτίωση της εφαρμογής.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "Web developers develop, implement and document web-accessible software based on the designs provided. They align the client's web presence with its business strategy, troubleshoot software problems and issues and look for ways to improve the application.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Vefhönnuðir þróa, innleiða og skjalfesta hugbúnað sem er aðgengilegur á vefnum, og byggja á þeirri hönnun sem í boði er. Þeir samstilla nærveru viðskiptavinarins á vefnum og stefnur fyrirtækisins, framkvæma bilanaleit við vandamál og málefni hugbúnaðar og leita leiða til þess að bæta hugbúnaðinn.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli sviluppatori web sviluppano, attuano e documentano un software accessibile on-line sulla base dei progetti forniti. Allineano la presenza web del cliente con la sua strategia commerciale, eliminano i problemi e i malfunzionamenti del software e cercano modi per migliorare la domanda.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Los desarrolladores web desarrollan, aplican y documentan programas informáticos accesibles en Internet sobre la base de los diseños suministrados. Armonizan la presencia de la web del cliente con su estrategia empresarial, diagnostican los problemas y las cuestiones de los software y buscan maneras de mejorar la aplicación.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Veebirakenduste arendajad arendavad, rakendavad ja dokumenteerivad veebijuurdepääsuga tarkvara etteantud kavandite põhjal. Nad viivad kliendi veebikohalolu vastavusse tema äristrateegiaga, otsivad ja kõrvaldavad tarkvaratõrgete põhjusi ning otsivad rakenduse täiustamise võimalusi.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Vývojáři internetových stránek vypracovávají, zavádějí a dokumentují software přístupný na internetu, a to na základě předložených průmyslových vzorů. Synchronizují internetovou přítomnost klienta s jeho obchodní strategií, řeší problémy se softwarem a hledají způsoby vylepšení.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "يقوم مطورو الويب بتطوير البرامج التي يمكن الوصول إليها عبر الإنترنت وتنفيذها وتوثيقها بناءً على التصميمات المقدمة. إذ يقومون بمواءمة الحضور على الويب الخاص بالعميل مع إستراتيجية الأعمال الخاصة به، واستكشاف مشكلات البرامج والبحث عن طرق لتحسين التطبيق.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Twórcy stron internetowych tworzą, wdrażają i piszą dokumentację oprogramowania dostępnego przez internet na podstawie przekazanych projektów. Dostosowują obecność klienta w sieci do jego strategii biznesowej, wykrywają i usuwają usterki i problemy związane z oprogramowaniem oraz szukają sposobów udoskonalenia aplikacji.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Dezvoltatorii web elaborează, implementează și documentează programe informatice accesibile pe internet, pe baza modelelor furnizate. Aliniază prezența pe internet a clientului în cadrul strategiei sale de afaceri, depanează problemele și erorile de software și caută modalități de îmbunătățire a aplicației.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Webudviklere udvikler, gennemfører og dokumenterer webtilgængelig software baseret på de leverede design. De bringer kundens tilstedeværelse på internettet på linje med dets forretningsstrategi, fejlfinder softwareproblemer og søger efter måder, hvorpå applikationen kan forbedres.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Web developers ontwikkelen, implementeren en documenteren webtoegankelijke software op basis van de geleverde ontwerpen. Zij stemmen de aanwezigheid van de klant op het web af op zijn bedrijfsstrategie, lossen softwareproblemen op en zoeken naar manieren om de toepassing te verbeteren.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Website-Programmiererin",
+        "Webdesignerin",
+        "Web-Developer",
+        "Web-Designerin",
+        "Websitegestalter",
+        "Webdesigner",
+        "Websitegestalterin",
+        "Web-Designer",
+        "Website-Programmierer"
+      ],
+      "fi": [
+        "verkko-ohjelmoija",
+        "verkkosovellusten kehittäjä   WWW-kehittäjä",
+        "verkko-ohjelmoijat",
+        "verkkosovellusten kehittäjät",
+        "web-ohjelmoijat",
+        "web-ohjelmoija",
+        "verkkokehittäjät"
+      ],
+      "sv": [
+        "webbprogrammerare",
+        "webbapplikationsutvecklare"
+      ],
+      "pt": [
+        "Programador web",
+        "Programador de aplicações web",
+        "Programadora web",
+        "Programadora de aplicações web"
+      ],
+      "bg": [
+        "уеб програмист",
+        "уеб разработчици",
+        "разработчик на уеб приложения",
+        "уеб програмистка"
+      ],
+      "mt": [
+        "żviluppatur tal-applikazzjonijiet fuq l-Internet",
+        "żviluppatur ta' softwer għal fuq l-Internet",
+        "web developer"
+      ],
+      "el": [
+        "υπεύθυνος ανάπτυξης εφαρμογών στο διαδίκτυο",
+        "υπεύθυνη ανάπτυξης εφαρμογών διαδικτύου",
+        "web developer",
+        "υπεύθυνη ανάπτυξης διαδικτυακών εφαρμογών",
+        "υπεύθυνος ανάπτυξης εφαρμογών διαδικτύου"
+      ],
+      "lt": [
+        "žiniatinklio kūrėjas",
+        "žiniatinklio programuotojas",
+        "tinklalapių plėtros specialistas",
+        "saityno kūrėja"
+      ],
+      "en": [
+        "web programmer",
+        "web application developer",
+        "web engineer",
+        "web developers",
+        "web specialist"
+      ],
+      "lv": [
+        "tīmekļa risinājumu izstrādātājs",
+        "tīmekļa programmētāja",
+        "tīmekļa risinājumu izstrādātāja",
+        "tīmekļa lietojumprogrammu izstrādātāja",
+        "tīmekļa lietojumprogrammu izstrādātājs",
+        "tīmekļa programmētājs"
+      ],
+      "is": [
+        "vefhönnuð",
+        "vefhugbúnaðarhönnuður",
+        "vefhönnuðar",
+        "vefhönnuði",
+        "vefforritari"
+      ],
+      "hr": [
+        "mrežna razvojna programerka",
+        "web razvojni programer",
+        "razvojna programerka mreže",
+        "razvojni programer mreže",
+        "web razvojna programerka",
+        "mrežni razvojni programe"
+      ],
+      "it": [
+        "sviluppatore di siti web",
+        "sviluppatrice web",
+        "sviluppatrice di siti web",
+        "configuratore Web",
+        "sviluppatore web"
+      ],
+      "fr": [
+        "conceptrice web",
+        "créatrice de contenus web",
+        "développeur web",
+        "développeuse web",
+        "développeuse Internet",
+        "créateur de contenus web",
+        "développeur Internet",
+        "concepteur web"
+      ],
+      "hu": [
+        "webes alkalmazásfejlesztő",
+        "webprogramozó",
+        "webfejlesztők",
+        "webprogramozók"
+      ],
+      "es": [
+        "desarrollador web",
+        "programador web",
+        "desarrolladora web",
+        "desarrolladores web",
+        "desarrollador de aplicaciones web",
+        "programadora web",
+        "desarrolladora de aplicaciones web"
+      ],
+      "et": [
+        "veebirakenduste programmeerija",
+        "veebirakenduste programmeerijad",
+        "veebirakenduste arendajad"
+      ],
+      "cs": [
+        "webový programátor",
+        "webový vývojář",
+        "webová programátorka",
+        "webová vývojářka",
+        "vývojářka webových aplikací",
+        "vývojář webových systémů",
+        "vývojář webových aplikací",
+        "vývojářka webových systémů"
+      ],
+      "sk": [
+        "webový dizajnér",
+        "webová vývojárka",
+        "vývojár webových aplikácií",
+        "webová dizajnérka",
+        "vývojárka webových aplikácií",
+        "webový vývojár"
+      ],
+      "sl": [
+        "razvijalec za splet",
+        "spletna programerka",
+        "razvijalka za splet",
+        "razvijalka spletnih aplikacij",
+        "spletni programer",
+        "spletni razvijalec",
+        "spletna razvijalka",
+        "razvijalec spletnih aplikacij"
+      ],
+      "pl": [
+        "twórca internetowych stron",
+        "twórca stron www",
+        "twórcy stron internetowych",
+        "projektant stron internetowych",
+        "twórca witryn internetowych"
+      ],
+      "da": [
+        "IT-udvikler af internetsider",
+        "udvikler af webapplikationer",
+        "IT-udvikler af websteder",
+        "webprogrammør",
+        "IT-udvikler af websider"
+      ],
+      "ro": [
+        "programator web",
+        "programatoare de aplicații web",
+        "dezvoltator web",
+        "dezvoltatoare web",
+        "dezvoltator de aplicații web",
+        "programator de aplicații web",
+        "programatoare web",
+        "dezvoltatoare de aplicații web"
+      ],
+      "nl": [
+        "web application developper",
+        "webontwikkelaar",
+        "web programmer",
+        "front-end web developer",
+        "back-end developper",
+        "PHP developer"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_web_developer.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/occupation/866c7813-2c03-47d7-9bdc-192cfbace57c",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.984108+00:00",
+    "type": "Occupation",
+    "labels": {
+      "en": "user interface developer",
+      "fr": "développeur d’interface utilisateur/développeuse d’interface utilisatrice",
+      "ar": "مطور واجهة المستخدم / مطورة واجهة المستخدم"
+    },
+    "description": {
+      "no": {
+        "literal": "Brukergrensesnittutviklere implementerer, koder, dokumenterer og vedlikeholder grensesnittet til et programvaresystem ved hjelp av teknologi for utvikling av grensesnitt.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Entwickler von Benutzeroberflächen gestalten die Benutzeroberfläche eines Softwaresystems durch den Einsatz von Entwicklungstechnologien für das Frontend. Sie programmieren, dokumentieren und pflegen die Benutzerschnittstelle eines Softwaresystems.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Käyttöliittymäkehittäjät toteuttavat, koodaavat, dokumentoivat ja ylläpitävät ohjelmistojärjestelmän rajapintaa käyttämällä front-end-kehitysteknologiaa.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "User interface developers implement, code, document and maintain the interface of a software system by using front-end development technologies.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Os programadores de interfaces do utilizador implementam, codificam, documentam e mantêm a interface de um sistema de software utilizando tecnologias de desenvolvimento de interfaces («front-end»).",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Разработчиците на потребителски интерфейс прилагат, кодират, документират и поддържат интерфейса на дадена софтуерна система чрез използване на технологии за разработване на интерфейс за връзка.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Naudotojo sąsajos kūrėjai įgyvendina, koduoja, dokumentuoja ir prižiūri programinės įrangos sistemos sąsają, naudodami sąsajos kūrimo technologijas.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Programeri korisničkog sučelja postavljaju, kodiraju, dokumentiraju i održavaju sučelje softverskog sustava primjenom tehnologija za razvoj prednjeg dijela sučelja.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Lietotāja saskarnes izstrādātāji ievieš, kodē, dokumentē un uztur programmatūras sistēmas saskarni, izmantojot priekšgalsistēmas izstrādes tehnoloģijas.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les développeurs d’interfaces utilisateurs mettent en œuvre, code, documentent et maintiennent l’interface d’un système logiciel en utilisant des technologies de développement de l’amont.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A felhasználóifelület-fejlesztők végrehajtják, kódolják, dokumentálják és karbantartják a szoftverrendszer interfészét a front-end fejlesztési technológiák segítségével.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Vývojári používateľského rozhrania implementujú, programujú, dokumentujú a udržiavajú rozhranie softvérového systému pomocou vývojových technológií front-end.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Razvijalci uporabniških vmesnikov uvajajo, programirajo, dokumentirajo in vzdržujejo vmesnik sistema programske opreme z uporabo čelnih razvojnih tehnologij.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Cuireann forbróirí comhéadan úsáideora an comhéadan atá ag córas bogearraí chun feidhme, a chódú, a dhoiciméadú agus a chothabháil agus úsáid á baint as teicneolaíochtaí forbartha tosaigh.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Gränssnittsutvecklare implementerar, kodar, dokumenterar och utför underhåll på gränssnitt av programvarusystem med hjälp av frontutvecklad teknik.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-iżviluppaturi tal-interfaċċa tal-utenti jimplimentaw, jikkodifikaw, jiddokumentaw u jżommu l-interfaċċa ta’ sistema ta’ softwer fi stat tajjeb bl-użu ta’ teknoloġiji tal-iżvilupp front-end.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι υπεύθυνοι ανάπτυξης διεπαφής χρήστη εφαρμόζουν, συντάσσουν τον κώδικα, τεκμηριώνουν και συντηρούν τη διεπαφή ενός συστήματος λογισμικού χρησιμοποιώντας τεχνολογίες ανάπτυξης περιβάλλοντος χρήστη.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "User interface developers implement, code, document and maintain the interface of a software system by using front-end development technologies.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Hönnuðir notendaviðmóts innleiða, forrita, skjalfesta og viðhalda viðmóti hugbúnaðarkerfis með því að nota tækniþróun notendaviðmóts.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli sviluppatori di interfacce utente attuano, codificano, documentano e mantengono l’interfaccia di un sistema software utilizzando le tecnologie di sviluppo front-end.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Los desarrolladores de interfaces de usuario deben aplicar, codificar, documentar y mantener la interfaz de un sistema informático utilizando tecnologías de desarrollo de aplicaciones para el usuario.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Kasutajaliideste arendajad rakendavad, kodeerivad, dokumenteerivad ja hooldavad tarkvarasüsteemi liidest, kasutades ees-arendustehnoloogiat.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Vývojáři uživatelského rozhraní provádějí, kódují, dokumentují a udržují rozhraní softwaru pomocí technologií pro tvorbu cyklu.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "يقوم مطورو واجهة المستخدم بتنفيذ وبرمجة وتوثيق وصيانة واجهة نظام البرامج من خلال استخدام تقنيات التطوير الأمامية.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Twórcy interfejsu użytkownika wdrażają, piszą kod, dokumentują i utrzymują interfejs systemu, korzystając z technologii front-end.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Udviklere af brugergrænseflader implementerer, koder, dokumenterer og vedligeholder et softwaresystems grænseflade ved hjælp af udviklingsteknologier.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Dezvoltatorii de interfețe pentru utilizatori implementează, codează, documentează și întrețin interfața unui sistem informatic prin utilizarea tehnologiilor de dezvoltare de tip front-end.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "User interface developers implementeren, coderen, documenteren en onderhouden de interface van een softwaresysteem met behulp van frontend ontwikkelingstechnologieën.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Entwickler von Benutzeroberflächen",
+        "Entwicklerin von Benutzeroberflächen",
+        "User-Interface-Developer"
+      ],
+      "fi": [
+        "front end -kehittäjä",
+        "käyttöliittymien kehittäjä",
+        "frontend-kehittäjät",
+        "käyttöliittymien kehittäjät",
+        "UI-kehittäjä",
+        "front end -kehittäjät",
+        "frontend-kehittäjä",
+        "käyttöliittymäkehittäjät",
+        "UI-kehittäjät"
+      ],
+      "sv": [
+        "utvecklare av klientdel",
+        "UI-utvecklare",
+        "designer av klientdel",
+        "gränssnittsdesigner",
+        "UI-designer"
+      ],
+      "pt": [
+        "Programador de IU",
+        "Programadora de IU",
+        "Programador de interfaces do utilizador",
+        "Programadora de interfaces do utilizador",
+        "Programador de UI",
+        "Programadora de UI"
+      ],
+      "bg": [
+        "фронт енд разработчик",
+        "разработчици на потребителски интерфейс",
+        "разработчик на ПИ"
+      ],
+      "mt": [
+        "żviluppatur tal-interfaċċa għall-utent",
+        "żviluppatur tal-front-end",
+        "żviluppatur tal-interfaċċja għall-utenti",
+        "programmatur tal-interfaċċa għall-utenti"
+      ],
+      "el": [
+        "υπεύθυνος διεπαφής χρηστών",
+        "υπεύθυνη ανάπτυξης διεπαφής χρήστη",
+        "υπεύθυνος ανάπτυξης διεπαφής χρήστη",
+        "υπεύθυνη διεπαφής χρηστών",
+        "υπεύθυνος ανάπτυξης διεπαφών",
+        "υπεύθυνη ανάπτυξης διεπαφών"
+      ],
+      "lt": [
+        "naudotojo sąsajos kūrėja",
+        "naudotojo sąsajos kūrėjas",
+        "naudotojų sąsajos programuotojas"
+      ],
+      "en": [
+        "front end developer",
+        "UI programmer",
+        "user interface developers",
+        "UI developers",
+        "UI developer",
+        "user interface engineer"
+      ],
+      "lv": [
+        "lietotāja saskarņu izstrādātājs",
+        "saskarņu izstrādātājs",
+        "lietotāja saskarnes izstrādātājs",
+        "lietotāja saskarnes izstrādātāja"
+      ],
+      "hr": [
+        "programer sučelja korisnika",
+        "programerka korisničkog sučelja",
+        "programer korisničkog sučelja",
+        "developerka korisničkog sučelja",
+        "developer korisničkog sučelja",
+        "programerka sučelja korisnika"
+      ],
+      "is": [
+        "UI hönnuður",
+        "hönnuð notendaviðmóts",
+        "hönnuðar notendaviðmóts",
+        "verkfræðingur á sviði notendaviðmóts",
+        "framlínuhönnuður",
+        "hönnuði notendaviðmóts"
+      ],
+      "it": [
+        "designer esperto di accessibilità",
+        "ingegnere delle GUI",
+        "sviluppatore di interfacce utente",
+        "sviluppatrice di interfacce utente",
+        "designer esperta di accessibilità"
+      ],
+      "fr": [
+        "développeuse d'interface utilisatrices",
+        "conceptrice d'interface",
+        "concepteur d'interfaces utilisateurs",
+        "développeur IU",
+        "designer d'interface",
+        "développeuse IU",
+        "développeuse d'interface utilisatrice",
+        "développeur d'interface",
+        "conceptrice d'interface utilisatrices",
+        "développeuse d'interface",
+        "conceptrice d'interfaces utilisatrices",
+        "concepteur d'interface",
+        "développeur d'interface utilisateurs",
+        "concepteur d'interface utilisateurs",
+        "développeur d'interface utilisateur"
+      ],
+      "hu": [
+        "front end fejlesztők",
+        "front end fejlesztő",
+        "felhasználói felület fejlesztők",
+        "UI fejlesztő"
+      ],
+      "es": [
+        "desarrolladora de IU",
+        "desarrolladora de interfaces de usuario",
+        "desarrollador de IU",
+        "desarrolladora de frontales",
+        "desarrollador de frontales",
+        "desarrolladora de interfaces",
+        "desarrollador de interfaces",
+        "desarrollador de interfaces de usuario"
+      ],
+      "et": [
+        "kasutajaliideste projekteerija",
+        "kasutajaliideste väljatöötaja",
+        "kasutajaliideste projekteerijad",
+        "kasutajaliideste väljatöötajad",
+        "kasutajaliideste arendajad"
+      ],
+      "cs": [
+        "vývojářka uživatelského rozhraní",
+        "tvůrkyně uživatelského rozhraní",
+        "vývojář uživatelského rozhraní",
+        "tvůrce uživatelského rozhraní"
+      ],
+      "sk": [
+        "vývojár UI",
+        "vývojárka používateľského rozhrania",
+        "vývojár systému popredia",
+        "vývojár používateľského rozhrania",
+        "vývojárka UI",
+        "vývojárka systému popredia"
+      ],
+      "sl": [
+        "razvijalka UI",
+        "razvijalka uporabniških vmesnikov",
+        "razvijalka uporabniškega vmesnika",
+        "razvijalec uporabniških vmesnikov",
+        "razvijalec UI",
+        "razvijalec uporabniškega vmesnika"
+      ],
+      "pl": [
+        "deweloper interfejsów użytkownika",
+        "twórcy interfejsu użytkownika",
+        "projektant interfejsów użytkownika",
+        "twórca UI",
+        "twórca interfejsów użytkownika"
+      ],
+      "da": [
+        "front-end-udvikler",
+        "IT-udvikler af brugergrænseflader",
+        "udviklere af brugergrænseflader",
+        "UI-udvikler"
+      ],
+      "ro": [
+        "dezvoltatoare de interfețe",
+        "dezvoltatoare interfață utilizator",
+        "programator de interfețe",
+        "dezvoltator interfață utilizator",
+        "dezvoltator de interfețe",
+        "programatoare de interfețe",
+        "dezvoltator de interfețe utilizatorul",
+        "dezvoltatoare de interfețe utilizatorul"
+      ],
+      "nl": [
+        "front end developer",
+        "usability engineer",
+        "user interface designer",
+        "UI designer",
+        "interaction designer",
+        "interface designer"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_web_developer.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/occupation/a7c1d23d-aeca-4bee-9a08-5993ed98b135",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.984108+00:00",
+    "type": "Occupation",
+    "labels": {
+      "en": "ICT system developer",
+      "fr": "développeur de systèmes informatiques/développeuse de systèmes informatiques",
+      "ar": "مطور تكنولوجيا المعلومات والاتصالات / مطورة تكنولوجيا المعلومات والاتصالات"
+    },
+    "description": {
+      "de": {
+        "literal": "IT-Systementwickler warten, prüfen und verbessern Systeme, die das Unternehmen unterstützen. Sie nutzen bestehende oder neue Technologien, um besonderen Anforderungen gerecht zu werden. Sie testen Hardware- und Softwarekomponenten, diagnostizieren Fehlerursachen und beheben Systemfehler.",
+        "mimetype": "plain/text"
+      },
+      "no": {
+        "literal": "IKT-systemutviklere opprettholder, reviderer og forbedrer organisatoriske støttesystemer. De bruker eksisterende eller nye teknologier til å dekke særlige behov. De tester systemkomponenter både for maskinvare og programvare, diagnostiserer og løser systemfeil.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "ICT system developers maintain, audit and improve organizational support systems. They use existing or new technologies to meet particular needs. They test both hardware and software system components, diagnose and resolve system faults.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "ICT-järjestelmäkehittäjät pitävät yllä, auditoivat ja parantavat organisaation tukijärjestelmiä. He hyödyntävät olemassa olevia tai uusia teknologioita erityistarpeiden täyttämiseksi. He testaavat sekä laitteisto- että ohjelmistokomponentteja, diagnosoivat ja ratkaisevat järjestelmävikoja.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Os programadores de sistemas informáticos executam funções de manutenção, verificação e melhoria de sistemas de apoio à organização. Utilizam tecnologias existentes ou novas para satisfazer necessidades específicas. Testam componentes de sistemas de hardware e de software e diagnosticam e resolvem falhas do sistema.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Разработчиците на ИКТ системи поддържат, ревизират и подобряват спомагателните системи на организацията. Те използват съществуващи или нови технологии, за да отговорят на конкретни нужди. Изпитват компоненти както на хардуерни, така и на софтуерни системи, диагностицират и отстраняват дефекти в системите.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Informacinių ir ryšių technologijų sistemų kūrėjai atlieka organizacijos palaikymo sistemų priežiūrą, atlieka jų auditą ir jas tobulina. Kad patenkintų konkrečius poreikius, jie naudoja esamas ar naujas technologijas. Jie atlieka aparatinės ir programinės įrangos sistemos komponentų bandymus, diagnozuoja ir šalina sistemos gedimus.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "IKT sistēmu izstrādātāji uztur, revidē un uzlabo organizatoriskās atbalsta sistēmas. Viņi izmanto esošas vai jaunas tehnoloģijas, lai apmierinātu īpašas vajadzības. Viņi testē gan aparatūras, gan programmatūras sistēmas komponentus, diagnosticē un novērš sistēmas kļūmes.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Razvojni programeri IKT sustava održavaju, revidiraju i poboljšavaju organizacijske sustave potpore. Koriste se postojećim ili novim tehnologijama za zadovoljavanje određenih potreba. Ispituju komponente hardverskog i softverskog sustava, dijagnosticiraju i uklanjaju pogreške sustava.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les développeurs de systèmes TIC maintiennent, contrôlent et améliorent les systèmes de soutien organisationnel. Ils utilisent les technologies existantes ou nouvelles pour répondre à des besoins particuliers. Ils testent à la fois les composants du système matériel et logiciel, le diagnostic et la résolution des défaillances du système.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "Az IKT-rendszerfejlesztők fenntartják, ellenőrzik és javítják a szervezeti támogatási rendszereket. A meglévő vagy új technológiákat a sajátos igények kielégítésére használják fel. Hardver- és szoftverrendszer-összetevőket egyaránt vizsgálnak, diagnosztizálnak és feloldják a rendszerhibákat.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Vývojári systémov IT zabezpečujú údržbu, audit a zlepšenie organizačných podporných systémov. Využívajú existujúce alebo nové technológie na uspokojenie osobitných potrieb. Testujú systémové komponenty hardvéru, ako aj softvéru, diagnostikujú a riešia systémové chyby.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Razvijalci sistemov IKT vzdržujejo, pregledujejo in izboljšujejo organizacijske podporne sisteme. Za izpolnjevanje posebnih potreb uporabljajo obstoječe ali nove tehnologije. Preskušajo sestavne dele strojne in programske opreme, diagnosticirajo in razrešujejo sistemske napake.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Déanann forbróirí córas TFC na córais tacaíochta eagraíochtúla a choinneáil, a iniúchadh agus a fheabhsú. Úsáideann siad teicneolaíochtaí reatha nó nua chun freastal ar riachtanais ar leith. Tástálann siad comhpháirteanna an chórais crua-earraí agus bogearraí araon, chun lochtanna an chórais a dhiagnóisiú agus a réiteach.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "IKT-systemutvecklare upprätthåller, granskar och förbättrar systemen för organisatoriskt stöd. De använder befintlig eller ny teknik för att tillgodose särskilda behov. De testar komponenter av både maskinvaru- och programvarusystem samt diagnostiserar och åtgärdar systemfel.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-iżviluppaturi tas-sistemi tal-ICT iżommu, jawditjaw u jtejbu s-sistemi ta’ appoġġ organizzazzjonali. Huma jużaw teknoloġiji eżistenti jew ġodda biex jissodisfaw ħtiġijiet partikolari. Huma jittestjaw kemm komponenti tas-sistema tal-ħardwer kif ukoll tas-softwer, jiddijanjostikaw u jsolvu ħsarat fis-sistema.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι υπεύθυνοι ανάπτυξης συστημάτων ΤΠΕ συντηρούν, ελέγχουν και βελτιώνουν τα συστήματα οργανωτικής υποστήριξης. Χρησιμοποιούν υφιστάμενες ή νέες τεχνολογίες για την κάλυψη συγκεκριμένων αναγκών. Ελέγχουν τα στοιχεία του συστήματος υλισμικού και λογισμικού, κάνουν διάγνωση και επιλύουν σφάλματα του συστήματος.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "ICT system developers maintain, audit and improve organisational support systems. They use existing or new technologies to meet particular needs. They test both hardware and software system components, diagnose and resolve system faults.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Hönnuðir tölvukerfis á sviði upplýsinga- og fjarskiptatækni viðhalda, endurskoða og bæta skipulagsleg stuðningskerfi. Þeir nýta fyrirliggjandi eða nýja tækni til að uppfylla sérstakar þarfir. Þeir prufukeyra bæði hluta vélbúnaðar- og hugbúnaðarkerfa og greina og leysa villur í kerfunum.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli sviluppatori di sistemi TIC mantengono, verificano e migliorano il supporto organizzativo. Utilizzano tecnologie esistenti o nuove per soddisfare particolari esigenze. Verificano i componenti dei sistemi hardware e software, diagnosticano e risolvono i guasti dei sistemi.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Los desarrolladores de sistemas de TIC mantienen, auditan y mejoran los sistemas de apoyo organizativo. Utilizan tecnologías existentes o nuevas para satisfacer necesidades específicas. Comprueban los componentes del hardware y del software, diagnostican y resuelven los fallos del sistema.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "IKT-süsteemide arendajad haldavad, auditeerivad ja täiustavad organisatsiooni tugisüsteeme. Nad täidavad konkreetseid vajadusi olemasolevate või uute tehnoloogiatega. Nad katsetavad riistvara- ja tarkvarasüsteemi komponente ning diagnoosivad ja lahendavad süsteemirikkeid.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Vývojáři systémů ICT udržují, auditují a zlepšují organizační podpůrné systémy. K uspokojení konkrétních potřeb využívají stávající nebo nové technologie. Testují součásti hardwarových i softwarových systémů a diagnostikují a řeší závady systému.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "يتولى مطورو تكنولوجيا المعلومات والاتصالات الحفاظ على أنظمة الدعم التنظيمي وتدقيقها وتحسينها. ويستخدمون التقنيات الحالية أو الجديدة لتلبية الاحتياجات الخاصة. ويختبرون مكونات نظام الأجهزة والبرامج ويعملون على تشخيص أعطال النظام وحلها.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Twórcy systemów informacyjno-telekomunikacyjnych utrzymują, kontrolują i udoskonalają organizacyjne systemy wsparcia. W celu zaspokojenia szczególnych potrzeb korzystają z istniejących lub nowych technologii. Sprawdzają zarówno elementy sprzętu komputerowego, jak i oprogramowania, diagnozują i usuwają usterki systemu.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Dezvoltatorii de sisteme în domeniul TIC mențin, auditează și îmbunătățesc sistemele de sprijin organizațional. Utilizează tehnologii existente sau noi pentru a răspunde unor nevoi speciale. Testează atât componentele de hardware, cât și componentele de software, diagnostichează și soluționează erorile sistemului.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Udviklere af IKT-systemer vedligeholder, reviderer og forbedrer de organisatoriske støttesystemer. De anvender eksisterende eller nye teknologier til at opfylde særlige behov. De afprøver både hardware- og softwaresystemkomponenter, diagnosticerer og løser systemfejl.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Systeemontwikkelaars onderhouden, controleren en verbeteren systemen voor organisatorische ondersteuning. Zij maken gebruik van bestaande of nieuwe technologieën om aan bijzondere behoeften te voldoen. Zij testen componenten van hardware- en softwaresystemen, gaan na wat de oorzaken van systeemfouten zijn en lossen die op.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "IT-Systementwicklerin",
+        "IT-System-Developer",
+        "IT-Systementwickler"
+      ],
+      "fi": [
+        "järjestelmänkehittäjät",
+        "IT-järjestelmänkehittäjät",
+        "komponenttikehittäjät",
+        "ICT-järjestelmänkehittäjät",
+        "järjestelmänkehittäjä",
+        "automaatioinsinöörit",
+        "komponenttikehittäjä",
+        "automaatioinsinööri",
+        "IT-järjestelmänkehittäjä"
+      ],
+      "pt": [
+        "Programador de sistemas",
+        "Engenheira de automação",
+        "Engenheiro de automação",
+        "Programador de componentes",
+        "Programadora de sistemas",
+        "Programadora de componentes",
+        "Programador de sistemas informáticos",
+        "Programadora de sistemas informáticos"
+      ],
+      "bg": [
+        "разработчик на ИТ системи",
+        "системен програмист",
+        "системна програмистка",
+        "инженерка по автоматизации",
+        "разработчик на системи",
+        "инженер по автоматизации",
+        "разработчици на ИКТ системи"
+      ],
+      "lt": [
+        "informacinių sistemų kūrėjas",
+        "informacinių sistemų programuotojas",
+        "informacinių ir ryšių technologijų sistemų kūrėjas",
+        "IRT sistemų kūrėjas",
+        "informacinių ir ryšių technologijų sistemų kūrėja",
+        "informacinių technologijų sistemų kūrėjas",
+        "informacinių technologijų sistemų programuotojas"
+      ],
+      "lv": [
+        "sistēmu programmētājs",
+        "sistēmu izstrādātājs",
+        "sistēmu programmatūras izstrādātājs",
+        "komponentu izstrādātāja",
+        "sistēmu izstrādātāja",
+        "IT sistēmu izstrādātāja",
+        "IKT sistēmu izstrādātājs",
+        "komponentu izstrādātājs",
+        "sistēmu programmatūras izstrādātāja",
+        "automatizācijas inženiere",
+        "sistēmu programmētāja",
+        "IKT sistēmu izstrādātāja",
+        "automatizācijas inženieris",
+        "IT sistēmu izstrādātājs"
+      ],
+      "hr": [
+        "razvojna programerka za IKT sustave",
+        "razvojna programerka IKT sustava",
+        "razvojni programer za IKT sustave",
+        "programer IKT sustava",
+        "razvojni programer IKT sustava",
+        "programerka IKT sustava"
+      ],
+      "fr": [
+        "développeuse système TIC",
+        "développeuse de systèmes informatiques",
+        "développeur système",
+        "développeuse système",
+        "développeur de systèmes informatiques",
+        "développeur système TIC",
+        "développeuse de systèmes de technologies de l'information et de la communication",
+        "développeur de systèmes de technologies de l'information et de la communication"
+      ],
+      "hu": [
+        "automatizálási mérnök",
+        "IKT rendszerfejlesztők",
+        "rendszerfejlesztő",
+        "IT rendszerfejlesztő"
+      ],
+      "sk": [
+        "vývojárka systémového softvéru",
+        "vývojár systémov IKT",
+        "systémová vývojárka",
+        "vývojárka systémov IKT",
+        "inžinier automatizovaných procesov",
+        "inžinierka automatizovaných procesov",
+        "vývojárka komponentov",
+        "vývojár systémov IT",
+        "systémový vývojár",
+        "vývojárka systémov IT",
+        "vývojár systémového softvéru",
+        "vývojár komponentov"
+      ],
+      "sl": [
+        "razvijalka sistemov ICT",
+        "razvijalka IT-sistemov",
+        "razvijalec sistemov",
+        "razvijalec sistemov IKT",
+        "razvijalka sistemov",
+        "razvijalec IT-sistemov",
+        "razvijalec IKT-sistemov",
+        "razvijalka IKT-sistemov",
+        "razvijalka sistemov IKT",
+        "razvijalec sistemov ICT"
+      ],
+      "ga": [
+        "forbróir córas ITC"
+      ],
+      "sv": [
+        "IT-systemutvecklare",
+        "systemprogramutvecklare",
+        "systemutvecklare",
+        "automatiseringsingenjör",
+        "komponentutvecklare",
+        "systemprogrammerare"
+      ],
+      "mt": [
+        "żviluppatur tas-sistemi tal-ICT",
+        "żviluppatur ta' sistemi tal-ICT",
+        "programmatur tas-sistema tal-ICT"
+      ],
+      "el": [
+        "υπεύθυνη ανάπτυξης συστήματος ΤΠΕ",
+        "υπεύθυνη ανάπτυξης συστημάτων τεχνολογίας πληροφοριών και επικοινωνιών",
+        "υπεύθυνος ανάπτυξης συστημάτων τεχνολογιών της πληροφορίας και της επικοινωνίας",
+        "υπεύθυνος ανάπτυξης συστημάτων ΤΠΕ",
+        "υπεύθυνη ανάπτυξης συστημάτων τεχνολογιών της πληροφορίας και της επικοινωνίας",
+        "τεχνικός ανάπτυξης πληροφοριακών συστημάτων και δικτύων",
+        "υπεύθυνη ανάπτυξης συστημάτων ΤΠΕ",
+        "υπεύθυνος ανάπτυξης συστημάτων τεχνολογίας πληροφοριών και επικοινωνιών",
+        "υπεύθυνος ανάπτυξης συστήματος ΤΠΕ"
+      ],
+      "en": [
+        "ICT system developers",
+        "ICT systems developer",
+        "systems programmer",
+        "system developer",
+        "component developer",
+        "system software developer",
+        "chief ICT system developer",
+        "ICT systems developers",
+        "IT system developer",
+        "systems developer"
+      ],
+      "is": [
+        "sjálfvirkniverkfræðingur",
+        "ICT tölvukerfishönnuð",
+        "ICT tölvukerfishönnuðar",
+        "ICT tölvukerfishönnuði",
+        "kerfishugbúnaðarhönnuður",
+        "íhlutahönnuður",
+        "kerfisforritari",
+        "kerfishönnuður",
+        "UT kerfishönnuður"
+      ],
+      "it": [
+        "sviluppatrice di sistemi TIC",
+        "progettista di sistemi",
+        "configuratore di sistemi informatici",
+        "sviluppatore di sistemi TIC"
+      ],
+      "es": [
+        "desarrolladora de sistemas informáticos",
+        "programadora de sistemas",
+        "desarrolladora de sistemas",
+        "programador de sistemas",
+        "desarrolladora de sistemas de TICs",
+        "desarrollador de sistemas de TIC",
+        "desarrollador de sistemas informáticos",
+        "desarrollador de sistemas",
+        "desarrollador de sistemas de TICs",
+        "desarrolladora de sistemas de TIC"
+      ],
+      "et": [
+        "IKT-süsteemide projekteerijad",
+        "IKT-süsteemide väljatöötaja",
+        "IKT-süsteemide arendajad",
+        "IKT-süsteemide projekteerija",
+        "IKT-süsteemide väljatöötajad"
+      ],
+      "cs": [
+        "vývojář informačních systémů",
+        "vývojář IT systémů",
+        "vývojářka systémů ICT",
+        "vývojářka informačních systémů",
+        "vývojář systémů ICT",
+        "vývojářka informačních a komunikačních technologií",
+        "vývojářka IT systémů",
+        "vývojář informačních a komunikačních technologií"
+      ],
+      "pl": [
+        "twórcy systemów informacyjno-telekomunikacyjnych",
+        "twórca systemu informacyjnego i telekomunikacyjnego",
+        "twórca systemów informacyjnych i telekomunikacyjnych",
+        "twórca systemu informacyjno-telekomunikacyjnego",
+        "twórca systemów ICT",
+        "twórca systemów TIK",
+        "projektant systemów informacyjno-telekomunikacyjnych"
+      ],
+      "ro": [
+        "dezvoltatoare de software de sistem",
+        "dezvoltator de software de sistem",
+        "programator de sistem",
+        "dezvoltatoare de sisteme IT",
+        "dezvoltatoare de sisteme în domeniul TIC",
+        "programatoare de sistem",
+        "dezvoltator de sisteme IT",
+        "dezvoltator de sisteme în domeniul TIC"
+      ],
+      "da": [
+        "udvikler af IKT systemer",
+        "systemudvikler",
+        "IT systemudvikler",
+        "komponentudvikler",
+        "automatiseringsingeniør",
+        "IT-udviker af IKT-systemer"
+      ],
+      "nl": [
+        "systeemontwerper",
+        "ICT systeemontwerper",
+        "automatiseringsingenieur",
+        "ICT system developer",
+        "systems programmer",
+        "component developer",
+        "system software developer",
+        "ict systeemontwerper",
+        "IT system developer"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_web_developer.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  },
+  {
+    "source": "ESCO / European Commission",
+    "source_uri": "http://data.europa.eu/esco/occupation/f2b15a0e-e65a-438a-affb-29b9d50b77d1",
+    "source_version": "API default; version not pinned",
+    "retrieved_at_utc": "2026-09-29T18:41:57.984108+00:00",
+    "type": "Occupation",
+    "labels": {
+      "en": "software developer",
+      "fr": "développeur de logiciels/développeuse de logiciels",
+      "ar": "مطور برمجيات / مطورة برمجيات"
+    },
+    "description": {
+      "no": {
+        "literal": "Programvareutviklere implementerer eller programmerer alle typer programvaresystemer, basert på spesifikasjoner og design ved hjelp av programmeringsspråk, verktøy og plattformer.",
+        "mimetype": "plain/text"
+      },
+      "de": {
+        "literal": "Softwareentwickler implementieren oder programmieren Softwaresystemen jeder Art auf der Grundlage von Spezifikationen bzw. Entwürfen unter Einsatz von Programmiersprachen, Tools und Plattformen.",
+        "mimetype": "plain/text"
+      },
+      "fi": {
+        "literal": "Ohjelmistokehittäjät toteuttavat tai ohjelmoivat kaikenlaisia ohjelmistojärjestelmiä, jotka perustuvat eritelmiin ja malleihin, käyttämällä ohjelmointikieliä, työkaluja ja alustoja.",
+        "mimetype": "plain/text"
+      },
+      "en-us": {
+        "literal": "Software developers implement or program all kinds of software systems based on specifications and designs by using programming languages, tools, and platforms.",
+        "mimetype": "plain/text"
+      },
+      "pt": {
+        "literal": "Os programadores de software implementam ou programam todos os tipos de sistemas de software baseados em especificações e conceções, utilizando linguagens, ferramentas e plataformas de programação.",
+        "mimetype": "plain/text"
+      },
+      "bg": {
+        "literal": "Разработчиците на софтуери прилагат или програмират всички видове софтуерни системи, въз основа на спецификации и проекти като използват програмни езици, инструменти и платформи.",
+        "mimetype": "plain/text"
+      },
+      "lt": {
+        "literal": "Programinės įrangos kūrėjai diegia arba programuoja visų rūšių programinės įrangos sistemas, remdamiesi specifikacijomis ir struktūra, ir naudodami programavimo kalbas, priemones ir platformas.",
+        "mimetype": "plain/text"
+      },
+      "lv": {
+        "literal": "Programmatūras izstrādātāji ievieš vai programmē dažādas programmatūras sistēmas, balstoties uz specifikācijām un projektiem, izmantojot programmēšanas valodas, rīkus un platformas.",
+        "mimetype": "plain/text"
+      },
+      "hr": {
+        "literal": "Razvojni programeri softvera uvode ili programiraju sve vrste softverskih sustava na temelju specifikacija i dizajna upotrebom programskih jezika, alata i platformi.",
+        "mimetype": "plain/text"
+      },
+      "fr": {
+        "literal": "Les concepteurs de logiciels mettent en œuvre ou programment tous types de systèmes logiciels fondés sur les spécifications et les modèles en utilisant les langages de programmation, les outils et les plateformes.",
+        "mimetype": "plain/text"
+      },
+      "hu": {
+        "literal": "A szoftverfejlesztők a programozási nyelvek, eszközök és platformok felhasználásával a specifikációkon és kialakításokon alapuló valamennyi szoftverrendszert megvalósítják vagy programozzák.",
+        "mimetype": "plain/text"
+      },
+      "sk": {
+        "literal": "Softvéroví vývojári implementujú alebo programujú všetky druhy softvérových systémov na základe špecifikácií a návrhov s použitím programovacích jazykov, nástrojov a platforiem.",
+        "mimetype": "plain/text"
+      },
+      "sl": {
+        "literal": "Razvijalci programske opreme izvajajo ali načrtujejo vse vrste sistemov programske opreme na podlagi specifikacij in zasnov in z uporabo programskih jezikov, orodij in platform.",
+        "mimetype": "plain/text"
+      },
+      "ga": {
+        "literal": "Déanann forbróirí bogearraí gach cineál córas bogearraí a chur chun feidhme nó a ríomhchlárú bunaithe ar shonraíochtaí agus dearaí trí theangacha ríomhchlárúcháin, uirlisí agus ardáin a úsáid.",
+        "mimetype": "plain/text"
+      },
+      "sv": {
+        "literal": "Programvaruutvecklare implementerar eller programmerar alla typer av programvarusystem utifrån deras specifikationer och utformning genom användning av programmeringsspråk, programmeringsverktyg och plattformar.",
+        "mimetype": "plain/text"
+      },
+      "mt": {
+        "literal": "L-iżviluppaturi tas-softwer jimplimentaw jew jipprogrammaw kull tip ta’ sistema ta’ softwer ibbażata fuq speċifikazzjonijiet u disinni billi jużaw lingwi ta’ programmar, għodod, u pjattaformi.",
+        "mimetype": "plain/text"
+      },
+      "el": {
+        "literal": "Οι μηχανικοί ανάπτυξης λογισμικού εφαρμόζουν ή προγραμματίζουν όλα τα είδη συστημάτων λογισμικού που βασίζονται σε προδιαγραφές και σχέδια χρησιμοποιώντας γλώσσες προγραμματισμού, εργαλεία και πλατφόρμες.",
+        "mimetype": "plain/text"
+      },
+      "en": {
+        "literal": "Software developers implement or program all kinds of software systems based on specifications and designs by using programming languages, tools, and platforms.",
+        "mimetype": "plain/text"
+      },
+      "is": {
+        "literal": "Hugbúnaðarforritarar innleiða eða forrita allar tegundir hugbúnaðarkerfa, og byggja á skilgreiningum og hönnunum með því að nota forritunarmál, tæki og stýrikerfi.",
+        "mimetype": "plain/text"
+      },
+      "it": {
+        "literal": "Gli sviluppatori di software realizzano o programmano tutti i tipi di sistemi software sulla base delle specifiche e dei progetti, utilizzando linguaggi di programmazione, strumenti e piattaforme.",
+        "mimetype": "plain/text"
+      },
+      "es": {
+        "literal": "Los desarrolladores de software implementan todos los tipos de sistemas de software basados en especificaciones y diseños, utilizando lenguajes, herramientas y plataformas de programación.",
+        "mimetype": "plain/text"
+      },
+      "et": {
+        "literal": "Tarkvaraarendajad rakendavad või programmeerivad nõuete või projektide alusel programmeerimiskeelte, vahendite ja platvormide abil igat liiki tarkvarasüsteeme.",
+        "mimetype": "plain/text"
+      },
+      "cs": {
+        "literal": "Vývojáři softwaru implementují nebo programují všechny typy softwarových systémů založených na specifikacích a návrzích s použitím programovacích jazyků, nástrojů a platforem.",
+        "mimetype": "plain/text"
+      },
+      "ar": {
+        "literal": "يقوم مطورو البرمجيات بتنفيذ أو برمجة جميع أنواع أنظمة البرامج استنادًا إلى المواصفات والتصميمات باستخدام لغة البرمجة والأدوات والمنصات.",
+        "mimetype": "plain/text"
+      },
+      "pl": {
+        "literal": "Twórcy oprogramowania wdrażają lub tworzą wszystkie rodzaje systemów na podstawie specyfikacji i projektów, stosując języki, narzędzia i platformy programowania.",
+        "mimetype": "plain/text"
+      },
+      "da": {
+        "literal": "Softwareudviklere implementerer eller programmerer alle former for softwaresystemer baseret på specifikationer og design ved hjælp af programmeringssprog, -værktøjer og -platforme.",
+        "mimetype": "plain/text"
+      },
+      "ro": {
+        "literal": "Dezvoltatorii de software implementează sau programează toate tipurile de sisteme de software bazate pe specificații și design, utilizând limbaje de programare, instrumente și platforme.",
+        "mimetype": "plain/text"
+      },
+      "nl": {
+        "literal": "Softwareontwikkelaars implementeren of programmeren allerlei softwaresystemen op basis van specificaties en ontwerpen met behulp van programmeertalen, tools en platforms.",
+        "mimetype": "plain/text"
+      }
+    },
+    "alternative_labels": {
+      "de": [
+        "Softwareentwicklerin",
+        "Softwareentwickler",
+        "Software-Developer"
+      ],
+      "fi": [
+        "ohjelmistokehittäjät",
+        "ratkaisujen kehittäjä",
+        "sovellusinsinööri",
+        "ratkaisukehittäjä",
+        "ohjelmistojen kehittäjä",
+        "sovellusinsinöörit"
+      ],
+      "sv": [
+        "programvaruutvecklare",
+        "applikationsprogrammerare",
+        "applikationsingenjör",
+        "lösningsutvecklare",
+        "xApplication-utvecklare"
+      ],
+      "pt": [
+        "Programadora de aplicações",
+        "Engenheira de aplicações",
+        "Engenheiro de aplicações",
+        "Programador de software",
+        "Programador de aplicações",
+        "Programadora de software",
+        "Programadora de software de aplicações",
+        "Programador de software de aplicações"
+      ],
+      "bg": [
+        "разработчик на приложен софтуер",
+        "разработчици на софтуер",
+        "разработчик на решения",
+        "инженер на приложения",
+        "инженерка на приложения"
+      ],
+      "el": [
+        "μηχανικός ανάπτυξης λογισμικού–προγραμματιστής",
+        "μηχανικός για την ανάπτυξη λογισμικού",
+        "μηχανικός ανάπτυξης λογισμικών",
+        "μηχανικός ανάπτυξης λογισμικού–προγραμματίστρια"
+      ],
+      "mt": [
+        "żviluppatur tal-applikazzjonijiet",
+        "programmatur tal-applikazzjonijiet tas-softwer",
+        "żviluppatur tas-software",
+        "żviluppatur ta' softwer",
+        "inġinier tal-applikazzjonijiet"
+      ],
+      "lt": [
+        "taikomųjų programų programuotojas",
+        "programinės įrangos kūrėja",
+        "programinės įrangos kūrėjas",
+        "taikomųjų programų kūrėjas",
+        "programinės įrangos programuotojas"
+      ],
+      "en": [
+        "application developer",
+        "application programmer",
+        "solutions developer",
+        "programmer",
+        "software specialist",
+        "application software developer",
+        "software developers",
+        "software engineer",
+        "applications engineer",
+        "soft developer",
+        "developer of software"
+      ],
+      "lv": [
+        "risinājumu izstrādātāja",
+        "programmaparatūras izstrādātājs",
+        "lietojumprogrammu izstrādātājs",
+        "programmaparatūras izstrādātāja",
+        "programmatūra izstrādātāja",
+        "lietotņu programmētājs",
+        "lietojumprogrammu izstrādātāja",
+        "lietojumprogrammu inženiere",
+        "lietotņu programmētāja",
+        "lietojumprogrammu inženieris",
+        "risinājumu izstrādātājs",
+        "programmatūras izstrādātājs"
+      ],
+      "is": [
+        "xApplication hönnuður",
+        "hugbúnaðarhönnuður",
+        "hugbúnaðarþróunarmanni",
+        "hugbúnaðarverkfræðingur",
+        "hugbúnaðarforritari",
+        "hugbúnaðarþróunarmanns",
+        "lausnahönnuður"
+      ],
+      "hr": [
+        "razvojni programer softwarea",
+        "razvojna programerka softwarea",
+        "softverski razvojni programer",
+        "razvojna programerka softvera",
+        "razvojna programerka za softver",
+        "razvojni programer softvera",
+        "softverska razvojna programerka",
+        "razvojni programer za softver"
+      ],
+      "it": [
+        "sviluppatore di soluzioni",
+        "sviluppatrice di soluzioni",
+        "sviluppatore di software",
+        "sviluppatrice di software"
+      ],
+      "fr": [
+        "développeur logiciels",
+        "développeuse de logiciels",
+        "développeur de logiciels",
+        "développeur applications",
+        "développeur de programmes",
+        "concepteur logiciel",
+        "concepteur d'applications",
+        "conceptrice logiciel",
+        "développeuse applications",
+        "développeuse logiciels",
+        "concepteur de logiciels"
+      ],
+      "hu": [
+        "szoftverfejlesztők",
+        "alkalmazásfejlesztő",
+        "szoftveralkalmazás fejlesztő"
+      ],
+      "es": [
+        "ingeniera de aplicaciones",
+        "desarrolladora de aplicaciones",
+        "desarrollador de aplicaciones",
+        "desarrollador de soluciones",
+        "desarrollador de software",
+        "desarrolladora de software",
+        "desarrolladora de soluciones",
+        "ingeniero de aplicaciones",
+        "desarrolladores de software"
+      ],
+      "et": [
+        "tarkvaraarendajad",
+        "tarkvara programmeerija",
+        "tarkvara programmeerijad"
+      ],
+      "cs": [
+        "programátor aplikací",
+        "programátorka softwaru",
+        "softwarový vývojář",
+        "vývojářka řešení",
+        "vývojář řešení",
+        "softwarová vývojářka",
+        "programátorka aplikací",
+        "vývojářka aplikací",
+        "programátor softwaru",
+        "vývojář aplikací"
+      ],
+      "sk": [
+        "vývojár softvéru",
+        "vývojárka softvérových riešení",
+        "inžinier aplikácií",
+        "vývojárka softvérových aplikácií",
+        "vývojár softvérových aplikácií",
+        "programátor aplikácií",
+        "vývojárka softvéru",
+        "programátorka aplikácií",
+        "inžinierka aplikácií",
+        "vývojár softvérových riešení"
+      ],
+      "sl": [
+        "razvijalec softvera",
+        "razvijalka programja",
+        "razvijalec programske opreme",
+        "razvijalka PO",
+        "razvijalka softvera",
+        "razvijalec programja",
+        "programski razvijalec",
+        "razvijalec PO",
+        "programska razvijalka",
+        "razvijalka programske opreme"
+      ],
+      "pl": [
+        "deweloper oprogramowania",
+        "twórca programów komputerowych",
+        "projektant oprogramowania",
+        "twórcy oprogramowania"
+      ],
+      "ro": [
+        "inginer de aplicații software",
+        "dezvoltator de soluții software",
+        "programator de software",
+        "programatoare de software",
+        "ingineră de aplicații software",
+        "inginer de software",
+        "ingineră de software"
+      ],
+      "da": [
+        "udvikler af applikationssoftware",
+        "udvikler af software",
+        "applikationsudvikler",
+        "udvikler af IKT-løsninger",
+        "udvikling af software",
+        "softwareudviklerer"
+      ],
+      "nl": [
+        "applicatie ontwikkelaar",
+        "software developper",
+        "application programmer",
+        "software ontwerper",
+        "application engineer",
+        "software engineer",
+        "software programmer",
+        "programmeur"
+      ]
+    },
+    "raw_file": "data/knowledge_base/2026-09-29/raw/esco_web_developer.json",
+    "review_status": "topic_screened; bilingual_and_domain_review_pending"
+  }
+]

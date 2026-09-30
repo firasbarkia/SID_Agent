@@ -1,16 +1,18 @@
 # Plan du MVP IA — SID Agent
 
-Statut : proposition de réalisation, sans implémentation fonctionnelle.
+Statut : plan fonctionnel du MVP ; première tranche API/IA commencée le 30 septembre 2026. Voir [les phases d'implémentation et tests](implementation-phases.md) pour les capacités livrées et restantes.
+
+Contraintes confirmées : MongoDB autohébergé est la base principale et la demande future est inconnue. Le plan doit permettre de dimensionner séparément l'API, les traitements IA et la recherche. Recommandation d'architecture : MongoDB comme source de vérité et Qdrant comme index de recherche reconstructible. Ce choix propose un second service à exploiter et une synchronisation explicite ; aucune installation n'est encore effectuée.
 
 ## 1. Objectif et point de départ
 
 Construire un assistant de recrutement pour les candidats et les entreprises, avec validation humaine obligatoire avant toute publication, candidature ou prise de contact. Les recherches, analyses et générations privées peuvent être exécutées sans confirmation supplémentaire.
 
-Le projet actuel contient uniquement une application FastAPI, les routes `/` et `/health`, un environnement Python et un verrouillage des dépendances avec uv. L'authentification, les données métier, le stockage documentaire et les services IA restent à construire ou à connecter.
+Le projet contient désormais une première tranche FastAPI : configuration, authentification interne par clé de service, aperçu de lettre non persisté, adaptateurs Groq/Gemini et circuit breakers par fournisseur. Les données métier, l'identité des utilisateurs, le stockage documentaire et les workflows persistants restent à construire ou à connecter. La clé de service ne remplace pas l'autorisation candidat/entreprise.
 
-Décision structurante à confirmer : ce service fournit-il uniquement l'IA à une plateforme existante, ou constitue-t-il aussi son backend métier ? Les étapes IA ci-dessous sont communes aux deux cas. Si aucune plateforme n'existe, prévoir un lot préalable pour les comptes, les organisations, les profils, les offres et les candidatures. Son interface utilisateur et son estimation sont distinctes de ce plan backend IA.
+Le service IA s'appuie sur la base MongoDB principale et réutilise les identifiants et schémas métier existants. Le cadrage doit identifier les modules déjà disponibles pour les comptes, organisations, profils, offres et candidatures, ainsi que le service propriétaire de leurs écritures. Construire uniquement les éléments manquants ; éviter de créer une deuxième copie faisant autorité sur ces données. Le frontend reste un périmètre distinct de ce plan backend IA.
 
-Hypothèses de travail : contenu français et anglais ; offres et informations d'entreprise fournies par la plateforme ; candidats débutants et stagiaires évaluables à partir de leurs projets ; aucun scraping d'entreprise nécessaire au MVP. Le fournisseur de modèles, le lieu d'hébergement et le budget restent à choisir avant les appels sur des données réelles.
+Hypothèses de travail : contenu français et anglais ; offres et informations d'entreprise fournies par la plateforme ; candidats débutants et stagiaires évaluables à partir de leurs projets ; aucun scraping d'entreprise nécessaire au MVP. Génération : Groq/Llama 3.1 en primaire, Gemini en repli. L'accès gratuit au modèle demandé doit être vérifié dans le compte Groq ; le modèle d'embedding, le lieu d'hébergement et le budget restent à préciser.
 
 ## 2. Parcours et périmètre
 
@@ -31,14 +33,26 @@ Le premier MVP accepte les PDF contenant du texte. Les fichiers scannés sont d�
 Un monolithe FastAPI organisé par domaine et un worker pour les tâches longues suffisent au MVP. L'« agent » est un orchestrateur de workflows explicites, avec des outils autorisés par étape.
 
 - **FastAPI et Pydantic** : API, validation des entrées, schémas de sortie IA et contrôle des autorisations.
-- **PostgreSQL, SQLAlchemy et Alembic** : données métier nécessaires, versions, validations, tâches et migrations.
-- **pgvector et recherche textuelle PostgreSQL** : recherche hybride dans la même base, avec filtres explicites. Commencer par une recherche vectorielle exacte à faible volume ; ajouter un index approximatif après mesure.
-- **Stockage privé compatible S3** : CV et documents, avec accès temporaires et contrôlés.
-- **Worker Celery et Redis** : extraction, génération et indexation ; état durable des tâches dans PostgreSQL, reprises idempotentes et délais maximum.
-- **Adaptateur IA** : interfaces `extract_structured`, `generate_text` et `embed`, indépendantes du fournisseur. Chaque sortie est validée avant stockage ou affichage.
+- **MongoDB et PyMongo Async** : accès asynchrone à la base principale, collections IA, versions, validations et tâches. Pydantic définit les contrats applicatifs ; les validateurs de collections, index et scripts de migration versionnés protègent les données persistées.
+- **Qdrant et un adaptateur `SearchService`** : index vectoriel indépendant pour les candidats et les offres, avec identifiants métier, versions et métadonnées de filtrage. Les dossiers, validations et candidatures restent dans MongoDB. La recherche lexicale peut initialement utiliser les index texte MongoDB ; sa combinaison avec la recherche sémantique est évaluée sur le corpus français/anglais.
+- **Stockage documentaire existant** : réutiliser le stockage privé de la plateforme. Si aucun stockage de fichiers n'existe et que tous les documents doivent rester dans MongoDB, utiliser GridFS ; les métadonnées et droits restent dans les collections métier.
+- **Worker Python et collection `ai_tasks`** : extraction, génération et indexation, sans broker supplémentaire au MVP. Réservation atomique des tâches, bail renouvelable, reprises idempotentes, nombre de tentatives limité et délais maximum. Le worker est un processus distinct du serveur FastAPI.
+- **Adaptateur IA** : gateway de génération Groq → Gemini avec circuit breaker par fournisseur, délais bornés et limitation de concurrence. La première API produit un brouillon texte non persisté ; extraction structurée et embeddings sont des capacités à ajouter. Le modèle d'embedding restera cohérent entre requêtes et index Qdrant, sans repli automatique vers un espace vectoriel incompatible.
 - **Adaptateurs métier** : accès aux profils, entreprises, offres et soumissions. Ils ciblent la plateforme existante ou les modules métier locaux suivant la décision d'intégration.
 
 Le modèle ne dispose pas d'un outil permettant de publier ou d'envoyer directement. Seul le code applicatif peut déclencher ces actions après contrôle de la confirmation.
+
+**Choix de recherche et croissance :** la séparation avec Qdrant est recommandée pour faire évoluer la recherche indépendamment de la version et des ressources du MongoDB existant. Elle ne prouve pas une supériorité de performance : comparer la qualité et la latence sur des données représentatives. MongoDB Vector Search avec des processus `mongot` séparés demeure une alternative capable de dimensionnement indépendant, sous réserve de compatibilité et de topologie.
+
+### Dimensionnement progressif
+
+- Développement : un processus API, un worker et un nœud Qdrant avec stockage persistant permettent de valider le parcours complet. Ce déploiement ne constitue pas une configuration hautement disponible.
+- Avant production : définir un objectif de disponibilité et les délais de reprise acceptables ; configurer sauvegardes, restauration et, si nécessaire, réplication sur plusieurs nœuds. Prévoir un test de perte de nœud et une stratégie de reconstruction de l'index.
+- Croissance : répliquer les instances FastAPI sans état local, augmenter les workers selon la file d'attente et les quotas du fournisseur IA, puis répartir les shards et réplicas Qdrant selon les mesures. Isoler les ressources de recherche de celles de MongoDB lorsque la contention l'exige.
+- Mesures de capacité : nombre de vecteurs et dimensions, volume de mises à jour, requêtes simultanées, latence p95, qualité du top 5, RAM, disque, retard d'indexation, âge des tâches et coût des appels IA. Tester des charges progressives, par exemple 1×, 5× et 10× une référence pilote mesurée ; ces facteurs sont des scénarios d'essai, pas des prévisions de trafic.
+- Limites de charge : files bornées, limites par organisation, reprise avec temporisation, concurrence maximale et pagination. Séparer les tâches interactives des réindexations massives pour préserver les temps de réponse. Mesurer aussi la charge de réservation des tâches sur MongoDB avant d'ajouter davantage de workers.
+
+Qdrant autohébergé supporte la distribution, mais ajouter un nœud ne répartit pas automatiquement les données ni ne configure leur réplication. Le nombre de shards et leur placement doivent être planifiés ; un changement de partitionnement peut nécessiter une nouvelle collection. Prévoir une procédure de reconstruction et de bascule, plutôt que promettre une élasticité automatique.
 
 Organisation indicative :
 
@@ -47,7 +61,8 @@ app/
   main.py
   api/                 # routes et dépendances d'authentification
   core/                # configuration et sécurité
-  db/                  # sessions, modèles et migrations
+  db/                  # client MongoDB, collections, index et migrations
+  repositories/        # accès aux collections et écritures conditionnelles
   schemas/             # contrats métier et sorties IA
   services/
     cv_import.py
@@ -56,7 +71,7 @@ app/
     search.py
     matching.py
     approvals.py
-  integrations/        # fournisseur IA, stockage, plateforme métier
+  integrations/        # fournisseur IA, Qdrant, stockage, plateforme métier
   workers/             # exécution asynchrone
 tests/
 ```
@@ -76,6 +91,38 @@ Entités principales :
 
 Une modification de profil ou d'offre invalide les caches et résultats dérivés concernés. L'indexation utilise les versions validées et actuellement visibles, avec filtrage des droits avant la recherche et contrôle à nouveau avant restitution.
 
+### Organisation MongoDB
+
+Les noms suivants sont indicatifs et seront adaptés aux collections existantes :
+
+| Collections | Responsabilité |
+|---|---|
+| Collections métier existantes | Profils, entreprises, offres et candidatures ; sources de vérité conservées |
+| `ai_cv_imports`, `ai_profile_evaluations` | Brouillons d'extraction, références sources et diagnostics |
+| `ai_application_drafts`, `ai_application_versions` | État courant du dossier et versions immuables à valider |
+| `ai_search_documents` | Texte normalisé, version et état d'indexation ; référence au point Qdrant et métadonnées de visibilité |
+| `ai_match_results` | Scores, preuves et versions de profil, d'offre et de barème |
+| `ai_approvals`, `ai_submissions`, `ai_outbox` | Confirmations, soumissions idempotentes et demandes d'envoi |
+| `ai_tasks`, `ai_audit_events` | Exécution asynchrone et événements d'audit |
+
+Les projections de recherche référencent les identifiants d'origine ; elles ne remplacent pas les profils et offres métier. Chaque projection conserve `source_id`, `source_version`, `embedding_model`, `embedding_dimensions`, `content_hash` et les droits nécessaires aux filtres. Une tâche tardive ne peut pas remplacer une projection plus récente. Une réindexation doit être prévue lors d'un changement de modèle ou de dimension des embeddings.
+
+### Synchronisation MongoDB → Qdrant
+
+Une mise à jour métier et un événement d'indexation sont enregistrés dans la même transaction MongoDB par le service propriétaire. Le worker traite cet événement après commit, relit les données autorisées, calcule l'embedding et écrit le point Qdrant. Il marque l'événement traité après acquittement ; les reprises sont idempotentes. Il n'y a pas de transaction distribuée entre les deux bases.
+
+Les points possèdent un identifiant déterministe dérivé du type d'entité, de son identifiant, de sa version et de la version d'embedding. Une ancienne tâche ne peut ainsi pas écraser le vecteur d'une nouvelle version. Avant toute restitution, le service vérifie la version courante, l'existence et la visibilité dans MongoDB ; les points obsolètes sont ignorés, nettoyés et, si nécessaire, la recherche récupère davantage de candidats dans une limite explicite.
+
+Une suppression ou une modification de visibilité déclenche également un événement. Le contrôle MongoDB bloque immédiatement l'exposition par l'application, même si Qdrant n'est pas encore à jour. Une réconciliation périodique supprime les points résiduels et répare les indexations manquantes. Les payloads Qdrant contiennent uniquement les données de recherche nécessaires, sans coordonnées privées. Qdrant reste accessible uniquement aux services autorisés.
+
+En cas de panne Qdrant, les modifications métier et brouillons restent disponibles dans MongoDB et les événements sont conservés. La recherche signale son indisponibilité ou propose explicitement une recherche lexicale dégradée ; aucune correspondance sémantique n'est inventée. Toute reconstruction conserve les filtres de visibilité et les versions avant la bascule.
+
+Prévoir des index sur les propriétaires et organisations, les références métier et versions, les filtres de recherche et le couple état/date de disponibilité des tâches. Ajouter des index uniques pour les clés d'idempotence et les versions d'un même dossier. Conserver les historiques et résultats volumineux dans des documents séparés, avec pagination, plutôt que dans des tableaux qui grandissent sans limite.
+
+La consommation d'une approbation, la création d'une soumission et l'insertion dans l'outbox doivent être atomiques. Le plan retient des transactions MongoDB sur un replica set ou un cluster shardé compatible ; une instance standalone ne suffit pas pour ces transactions multi-documents. Le service propriétaire de l'action exécute cette transaction ; si les écritures passent par une API métier existante, son contrat doit fournir les mêmes garanties sans supposer une transaction répartie entre services.
+
+Le worker réserve une tâche par `find_one_and_update` avec un état et une date d'éligibilité attendus. Il stocke un identifiant de réservation, une échéance de bail, un compteur de tentatives et une prochaine date d'exécution. Toute mise à jour de progression ou de résultat vérifie la réservation courante ; un worker dont le bail a expiré ne peut pas valider la tâche. La reprise après panne peut néanmoins rejouer un traitement : les effets persistants et les envois doivent donc rester idempotents. Les tâches en échec définitif sont conservées pour diagnostic.
+
 ## 5. Validation humaine : invariant serveur
 
 Pour les actions de publication et d'envoi :
@@ -91,7 +138,7 @@ BROUILLON → À_VALIDER → APPROUVÉ → EN_COURS → ENVOYÉ / PUBLIÉ
 3. La confirmation crée une autorisation portant sur une version immuable et sur une action précise.
 4. Le serveur vérifie l'identité, les droits, la version, le destinataire et l'état de l'autorisation avant l'action.
 5. Toute modification impose une nouvelle validation. L'acceptation d'un profil extrait n'autorise pas implicitement sa publication, son sourcing ou une candidature.
-6. Une clé d'idempotence et une contrainte d'unicité empêchent le double envoi. Une outbox transactionnelle conserve les demandes d'envoi à exécuter après validation.
+6. Une clé d'idempotence et un index unique MongoDB empêchent de créer deux soumissions pour la même action. Une transaction consomme l'approbation et crée la soumission et son événement d'outbox ; l'appel externe intervient après le commit et utilise la même clé d'idempotence.
 7. En cas de réponse réseau ambiguë, réconcilier l'état avec la plateforme destinataire avant une relance. L'absence de garantie d'idempotence externe doit être traitée explicitement par l'adaptateur.
 
 ## 6. Traitements IA
@@ -122,7 +169,7 @@ Exemple : « Je cherche un stage PFE en développement web à Sfax dans une star
 
 L'analyse produit des critères comme `type=stage`, `stage_type=PFE`, `city=Sfax`, `company_type=startup` et `query=développement web`. Les attributs absents des données ne sont pas inventés. Les critères interprétés sont affichés et modifiables.
 
-Appliquer les droits et les filtres explicites, combiner les résultats lexicaux et vectoriels, puis restituer des offres réellement stockées. Une contrainte explicite n'est jamais assouplie silencieusement ; si aucun résultat ne correspond, proposer à l'utilisateur les filtres à élargir. Les messages de suivi peuvent modifier les critères d'une recherche existante.
+Appliquer les droits et les filtres explicites dans les branches lexicale et vectorielle, combiner leurs classements dans `SearchService`, puis charger les documents métier depuis MongoDB. Recontrôler leurs versions, leur état et leurs droits avant restitution, car les index peuvent avoir un retard de mise à jour. Une contrainte explicite n'est jamais assouplie silencieusement ; si aucun résultat ne correspond, proposer à l'utilisateur les filtres à élargir. Les messages de suivi peuvent modifier les critères d'une recherche existante.
 
 ### 6.5 Matching et explications
 
@@ -173,13 +220,13 @@ Les routes CRUD des comptes, offres, organisations et candidatures seront spéci
 
 | Lot | Livrable | Preuve attendue |
 |---|---|---|
-| 0 — Cadrage et jeux d'essai | Contrats d'intégration, critères de visibilité, exemples anonymisés, choix fournisseur | Scénarios candidat et recruteur validés ; budget d'appels défini |
-| 1 — Socle | Authentification ou intégration, base, stockage, worker, versions et validations | Impossible de consulter les CV d'un autre utilisateur ou d'envoyer sans confirmation |
+| 0 — Cadrage et jeux d'essai | Schémas MongoDB, contrats d'intégration, topologie, évaluation Qdrant, objectifs de disponibilité et corpus | Propriété des écritures définie ; transactions et synchronisation spécifiées ; budget et scénarios de charge définis |
+| 1 — Socle | Authentification ou intégration, PyMongo Async, collections et index IA, stockage existant, worker MongoDB, versions et validations | Impossible de consulter les CV d'un autre utilisateur ou d'envoyer sans confirmation ; reprise d'une tâche après perte du worker |
 | 2 — CV et évaluation | Import, édition, acceptation, complétude et conseils | CV → profil validé ; champs absents préservés ; scan détecté ; projets valorisés |
 | 3 — Dossier et soumission | Matrice de preuves, lettre, conseils CV, approbation et envoi | Une modification invalide l'approbation ; une relance ne crée pas deux candidatures |
-| 4 — Recherche d'offres | Interprétation des requêtes, filtres et recherche hybride | Requête PFE/Sfax correcte ; contraintes respectées ; zéro résultat traité clairement |
+| 4 — Recherche d'offres | Index Qdrant, synchronisation, interprétation des requêtes, filtres et recherche hybride | Requête PFE/Sfax correcte ; contraintes respectées ; zéro résultat et retard d'indexation traités clairement |
 | 5 — Sourcing et top 5 | Recherche candidats, critères, score détaillé et explications | Alias reconnus ; compétences proches non confondues ; chaque justification sourcée |
-| 6 — Pilote | Mesures de qualité, coût, latence et corrections | Validation humaine des résultats sur le corpus pilote avant ouverture |
+| 6 — Pilote | Mesures de qualité, coût, charge, reprise après panne et corrections | Validation humaine des résultats ; objectifs de latence, restauration et retard d'indexation vérifiés avant ouverture |
 | Option — Anonymisation | Projection et tests de fuite d'identité | Identité masquée dans les réponses, textes libres et documents accessibles |
 
 La première démonstration complète doit suivre un seul parcours : importer un CV, valider le profil, choisir une offre, générer et corriger une lettre, puis confirmer une candidature. Le sourcing réutilise ensuite les mêmes profils validés et la même matrice de critères.
@@ -194,19 +241,27 @@ Mesurer séparément : exactitude de l'extraction par champ, respect des filtres
 
 Les contrôles bloquants couvrent : publication sans approbation, validation d'une ancienne version, accès entre organisations, CV contenant des instructions malveillantes, double envoi, panne du fournisseur et perte du worker. Les contenus importés sont des données non fiables ; ils ne peuvent ni changer les consignes de l'agent ni déclencher un outil externe.
 
+Les tests d'intégration MongoDB utilisent la topologie retenue, notamment un replica set pour les transactions. Vérifier également la réservation concurrente des tâches, l'expiration des baux, l'unicité des soumissions, le rollback approbation/outbox, la réindexation et la suppression effective d'un profil devenu invisible même si son index de recherche est encore en retard.
+
+Les tests de synchronisation couvrent les événements dupliqués ou désordonnés, un arrêt après écriture Qdrant mais avant acquittement MongoDB, une suppression pendant le calcul d'embedding, la panne Qdrant, la réconciliation et la restauration d'un index complet. Les tests de charge vérifient les limites de concurrence et la qualité de recherche en même temps que la latence ; un résultat rapide mais incomplet ne constitue pas un succès.
+
 Versionner modèles, prompts et barèmes. Limiter la concurrence et le nombre de tentatives ; conserver les brouillons si le fournisseur échoue. Prévoir la suppression du document, des données dérivées et des embeddings selon la politique de conservation définie. Les quotas et délais doivent produire des messages exploitables par l'utilisateur.
 
 ## 10. Décisions ouvertes
 
-1. Service IA intégré ou backend métier complet ; source des comptes, offres et profils.
-2. Fournisseur IA, hébergement, traitement des CV et budget mensuel.
+1. Schémas et modules métier déjà disponibles dans MongoDB ; service propriétaire des écritures et contrats d'intégration.
+2. Groq primaire et Gemini de repli décidés pour la génération ; vérifier accès réel aux modèles, quotas, hébergement, traitement des CV et budget. Sélectionner séparément le modèle d'embedding.
 3. Langues initiales et importance des CV scannés ; l'arabe doit être explicitement ajouté au corpus s'il entre dans le périmètre.
 4. Canaux de soumission et de contact ; garanties d'idempotence de la plateforme destinataire.
 5. Règles de visibilité des candidats et moment d'activation de l'affichage anonymisé.
-6. Volumétrie, objectifs de latence et critères d'acceptation métier du pilote.
+6. Demande inconnue : définir une charge pilote de référence, des scénarios de croissance, des objectifs de latence, de fraîcheur d'indexation et de disponibilité.
+7. MongoDB autohébergé confirmé : version et topologie pour les transactions ; mode d'exploitation Qdrant, dimensionnement initial et budget à préciser. L'architecture séparée est la recommandation actuelle, pas une infrastructure déjà déployée.
 
 ## Références techniques
 
-- [PostgreSQL — recherche textuelle](https://www.postgresql.org/docs/current/textsearch.html) : recherche lexicale et classement.
-- [pgvector — documentation officielle](https://github.com/pgvector/pgvector) : recherche vectorielle, filtrage et combinaison avec la recherche textuelle PostgreSQL.
+- [Qdrant — déploiement distribué](https://qdrant.tech/documentation/scaling/distributed_deployment/) : distribution, réplication, placement des shards et limites d'automatisation en autohébergement.
+- [MongoDB Vector Search — documentation officielle](https://www.mongodb.com/docs/vector-search/) : stockage des embeddings, recherche sémantique, filtres et combinaison avec la recherche textuelle ; disponibilité à vérifier sur le déploiement retenu.
+- [PyMongo Async — documentation officielle](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/reference/migration/) : API asynchrone du pilote Python.
+- [MongoDB — transactions et topologie](https://www.mongodb.com/docs/manual/core/transactions-production-consideration/) : prérequis des transactions multi-documents.
+- [MongoDB Search autohébergé — compatibilité](https://www.mongodb.com/docs/search/self-managed/current/deployment/compatibility-requirements/) : versions, éditions et plateformes supportées pour `mongot`.
 - [NIST — caractéristiques d'une IA digne de confiance](https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/) : distinction entre explicabilité, validité et gestion des biais. L'anonymisation n'est pas une preuve d'impartialité.

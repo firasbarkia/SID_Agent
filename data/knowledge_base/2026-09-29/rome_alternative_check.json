@@ -1,0 +1,12 @@
+{
+  "id": "rome_xlsx_probe",
+  "requested_url": "https://www.francetravail.org/files/live/sites/peorg/files/documents/Statistiques-et-analyses/Open-data/ROME/rome-arborescence-principale-juin-2026.xlsx",
+  "checked_at_utc": "2026-09-29T18:44:24.552255+00:00",
+  "retained": false,
+  "http_status": 200,
+  "final_url": "https://www.francetravail.org/files/live/sites/peorg/files/documents/Statistiques-et-analyses/Open-data/ROME/rome-arborescence-principale-juin-2026.xlsx",
+  "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "curl_exit_code": 0,
+  "bytes": 611226,
+  "sha256": "cc5daf20e1f64eda9c5d03f4b1195ad6580efaf94c094713f5b413e836596886"
+}

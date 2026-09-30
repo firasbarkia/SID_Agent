@@ -1,0 +1,15 @@
+{
+  "collected_at_utc": "2026-09-29T18:50:20.715651+00:00",
+  "counts": {
+    "esco_sample_concepts": 22,
+    "esco_it_topic_screened_concepts": 15,
+    "geonames_total_features": 25850,
+    "tunisia_populated_places_and_administrative_areas": 4631,
+    "onet_occupations_rows": 1016,
+    "onet_software_skills_rows": 31821,
+    "rome_json_files": 12,
+    "rome_occupation_profiles": 1911,
+    "rome_occupation_titles": 14301
+  },
+  "note": "Reference seed only. Not imported into MongoDB or Qdrant; no company, job or candidate corpus collected."
+}

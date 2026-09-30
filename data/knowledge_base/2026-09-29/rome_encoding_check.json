@@ -1,0 +1,15 @@
+{
+  "id": "rome_json_export",
+  "method": "GET",
+  "requested_url": "https://api.francetravail.fr/api-nomenclatureemploi/v1/open-data/json",
+  "checked_at_utc": "2026-09-29T18:46:44.216017+00:00",
+  "retained": false,
+  "http_status": 200,
+  "final_url": "https://api.francetravail.fr/api-nomenclatureemploi/v1/open-data/json",
+  "content_type": "application/zip",
+  "curl_exit_code": 0,
+  "bytes": 5492023,
+  "sha256": "0bfff103dfb91531d2fd109be8bcbe9398099b29fe50376c026ae506da791b80",
+  "json_files": [],
+  "error": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 72: invalid continuation byte"
+}
