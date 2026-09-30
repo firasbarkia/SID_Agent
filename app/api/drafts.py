@@ -88,4 +88,5 @@ async def preview_draft(payload: DraftRequest, request: Request) -> DraftRespons
 
 @router.get("/ai/status", tags=["Operations"])
 async def ai_status(request: Request) -> dict:
-    return {"scope": "process", "providers": await request.app.state.ai_gateway.status()}
+    gateway = request.app.state.ai_gateway
+    return {"scope": gateway.scope, "providers": await gateway.status()}

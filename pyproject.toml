@@ -8,6 +8,7 @@ dependencies = [
     "fastapi[standard]>=0.115,<1.0",
     "httpx>=0.28,<1.0",
     "pydantic-settings>=2.7,<3.0",
+    "pymongo>=4.13,<5.0",
 ]
 
 [dependency-groups]
@@ -25,6 +26,7 @@ testpaths = ["tests"]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 pythonpath = ["."]
+markers = ["mongodb: requires a disposable MongoDB replica set"]
 
 [tool.ruff]
 target-version = "py311"

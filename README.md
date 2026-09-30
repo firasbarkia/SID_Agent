@@ -1,8 +1,9 @@
 # SID Agent API
 
-A recruitment AI backend using Python 3.11+, FastAPI and uv. The first implemented
-slice generates an unsaved cover-letter draft using Groq, with Gemini fallback and
-an independent circuit breaker for each provider.
+A recruitment AI backend using Python 3.11+, FastAPI, MongoDB and uv. Groq generates
+letters with Gemini fallback. Phase 2 adds versioned profile/draft storage, candidate
+approval, a leased background worker and shared account-wide circuit/quota controls.
+See [Phase 2 setup and integration status](docs/phase-2.md).
 
 ## Setup
 
@@ -36,9 +37,10 @@ The development server runs at http://127.0.0.1:8000 with automatic reload.
 - Health check: http://127.0.0.1:8000/health
 - Configuration readiness: http://127.0.0.1:8000/health/ready
 
-The app starts without provider keys. Generation remains unavailable until a
-service key and at least one provider key are configured. Readiness checks only
-local configuration, not account validity, and consumes no provider quota.
+The app starts without provider keys. Preview generation requires a service key
+and at least one provider key. MongoDB-backed generation also requires explicit
+account quota limits. Readiness makes no AI calls; with MongoDB enabled, it checks
+database reachability, platform identity integration and provider-limit configuration.
 
 ## Generate a draft preview
 
@@ -57,17 +59,48 @@ Invoke-RestMethod -Method Post `
 
 The response includes `cover_letter`, `provider`, `model`, `fallback_used`,
 `status: "draft"`, `requires_human_approval: true`, and `persisted: false`.
-This endpoint does not save or submit applications. Content accuracy still needs
-human review. Full user authorization, persistent drafts and approval/submission
-workflows come in later phases.
+This preview endpoint does not save or submit applications. Content accuracy still
+needs human review. Persistent drafts use the separate Phase 2 workflow below.
 
 `GET /api/v1/ai/status` uses the same service key and exposes circuit states, never
 credentials. Timeouts, transient errors and quota errors can fall back to Gemini.
 Content refusals and ordinary invalid requests are not retried across providers.
 Both providers unavailable returns 503, preserving the caller's input for retry.
 
-The first breaker is process-local. Coordinate provider quotas and cooldowns before
-running multiple production replicas; see the implementation plan below.
+Without MongoDB, breakers are process-local. With `MONGODB_URI`, all API/worker
+instances use shared MongoDB circuit states, recovery leases and quota reservations.
+Use identical account scopes and budget settings across processes sharing credentials.
+
+## Phase 2: persistent workspace
+
+Start the local development replica set:
+
+```powershell
+docker compose -p sid-phase2 -f compose.mongodb.yml up -d --wait
+```
+
+Set MongoDB connection/database and actual provider RPM/TPM/RPD limits in `.env`.
+Zero limits disable that provider in Phase 2. The supplied schema is mapped through
+`app/platform.py`; confirm collection names and string-ID fields with the main platform.
+
+Connect the existing backend's trusted login verifier using
+`create_app(verify_user_id=...)`. The default application leaves persistent user
+endpoints disabled until that verifier is connected. A service key is not a user login.
+Roles and account status are reloaded from the platform's `User` collection.
+
+The workflow saves a profile, accepts its exact version, queues generation with an
+idempotency key, then permits letter edits and explicit candidate approval. It keeps
+immutable history and invalidates approval when sources or text change.
+
+Start the worker in a separate terminal after platform records, keys and limits are ready:
+
+```powershell
+uv run python -m app.worker
+```
+
+[Phase 2 documentation](docs/phase-2.md) contains endpoint bodies, authentication
+contract, schema mapping, lease behavior, policy-update command and remaining
+integration work. Submission and platform `Application` write-back belong to phase 5.
 
 ## Tests
 
@@ -77,12 +110,23 @@ uv run ruff check app tests
 uv run ruff format --check app tests
 ```
 
-Tests are offline and use fake keys and mock HTTP responses. No database or live
-model is required. They do not establish live model quality or account eligibility.
+These commands run offline tests; MongoDB integration tests are skipped without
+an explicit test URI. To verify Phase 2 against the local replica set:
+
+```powershell
+$env:SID_TEST_MONGODB_URI='mongodb://127.0.0.1:27018/?replicaSet=rs0&directConnection=true'
+uv run pytest -q
+```
+
+Tests use synthetic records, fake keys and mock provider responses. Each integration
+test creates and removes its own randomly named test database. No live model is called.
+Tests do not establish compatibility with the unconnected platform's authentication,
+live model quality or account eligibility.
 
 ## Plans and reference data
 
 - [Implementation phases and test gates](docs/implementation-phases.md)
+- [Phase 2 MongoDB integration and setup](docs/phase-2.md)
 - [MVP architecture and functional plan](docs/plan-mvp-ia.md)
 - [Knowledge-base sources and availability](docs/knowledge-base-sources.md)
 

@@ -39,7 +39,11 @@ async def test_draft_preview_is_explicitly_unsaved_and_requires_approval(setting
         assert data["persisted"] is False
         assert data["provider"] == "groq"
         assert data["fallback_used"] is False
-        assert (await client.post("/api/v1/application-drafts/submit")).status_code == 404
+        assert (await client.post("/api/v1/application-drafts/submit")).status_code == 405
+        assert (
+            "/api/v1/application-drafts/submit"
+            not in (await client.get("/openapi.json")).json()["paths"]
+        )
 
 
 async def test_real_adapters_fallback_and_quota_cooldown_through_api(settings, draft_payload):

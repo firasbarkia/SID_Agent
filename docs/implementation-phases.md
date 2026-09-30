@@ -8,16 +8,17 @@ measure demand before increasing capacity.
 
 | Phase | Implementation | Required tests / exit condition |
 |---|---|---|
-| 1 — AI foundation (this iteration) | Configuration, internal service authentication, Groq primary, Gemini fallback, per-provider circuit breakers, bounded generation and unsaved cover-letter preview | Adapter contracts, fallback, quota cooldowns, recovery probes, concurrency, cancellation, protected endpoints, draft-only behavior, controlled failure responses. All offline tests pass; live account access remains a separate check. |
-| 2 — MongoDB and platform integration | Map existing schemas and ownership; integrate user/organization identity; persist profile and draft versions, approvals, tasks and outbox; worker leases; shared provider quota/cooldown state | Replica-set integration tests; cross-user/organization denial; atomic approval/outbox writes; stale-version rejection; duplicate tasks and lease recovery; multiple workers share quota limits and one recovery probe. Required before multiple production replicas. |
+| 1 — AI foundation (implemented) | Configuration, internal service authentication, Groq primary, Gemini fallback, per-provider circuit breakers, bounded generation and unsaved cover-letter preview | Adapter contracts, fallback, quota cooldowns, recovery probes, concurrency, cancellation, protected endpoints, draft-only behavior, controlled failure responses. Offline tests pass; live account access remains a separate check. |
+| 2 — Persistence core implemented; live integration pending | Supplied UML mapped read-only; candidate/company ownership; versioned profiles/drafts, approvals, atomic outbox, leased tasks/worker, shared provider circuits and RPM/TPM/RPD budgets | Real replica-set integration tests pass for isolation, atomic rollback, stale versions, duplicate requests, lease recovery, account status and shared provider limits. Existing login verifier, actual collection names and main database connection still require integration. See [Phase 2 delivery](phase-2.md). |
 | 3 — Knowledge-base and search ingestion | Normalize the collected ESCO/ROME/O*NET/GeoNames data; preserve source IDs/licenses; choose a multilingual embedding model; build Qdrant collections and versioned indexing jobs | Idempotent imports, source coverage, encoding, bad rows, skill alias precision, vector dimensions, update/delete propagation, duplicate/out-of-order events, permission revocation, reindex and restore. |
 | 4 — CV import and profile evaluation | Private PDF upload, extraction with page evidence, structured draft, candidate corrections and acceptance; deterministic completeness score | Text PDFs, malformed/encrypted/scanned files, file limits, ambiguous dates, missing facts, conflicting fields, prompt injection; no silent overwrite; no invented qualification accepted without review. Human-scored extraction corpus in French/English. |
 | 5 — Persistent application dossier and human approval | Link validated profile, offer and company versions; evidence matrix, editable letter, CV suggestions; approve exact version and destination; integrate submission | Unsupported-claim evaluation, missing company context, user edits, approval invalidation, ownership, concurrent submit, retry after ambiguous delivery, exactly-once business effect where destination supports idempotency. No send without server-side approval. |
 | 6 — Conversational search and recruiter matching | Typed filters, lexical/vector retrieval, score breakdown, up to five candidates and sourced explanations; optional anonymized display | Natural-language filter interpretation, strict Sfax/PFE constraints, empty results, aliases vs broader skills, relevant projects for junior candidates, source visibility, no stale results, explanation fidelity, anonymization leakage. Evaluate top-5 relevance on human labels. |
 | 7 — Pilot and production readiness | End-to-end UI integration, operational metrics, tenant limits, backups, provider data-handling review, deployment and capacity tuning | Representative load at baseline/5x/10x, p95 latency, queue age, provider throttling, MongoDB/Qdrant/worker failure and recovery, deletion completeness, restore drill, cost/token budget. Human approval and access-control failures block release. |
 
-MongoDB credentials, schema access and the platform's identity contract are not yet
-provided. They are needed for phase 2, not for exercising phase 1 with mocked APIs.
+The platform UML has been supplied and mapped. MongoDB credentials, actual collection
+names/topology and the platform's identity contract are still pending. These are
+required to enable Phase 2 on the real platform; the core is verified locally.
 The preview service key authenticates a trusted backend caller; it is not a
 replacement for end-user authentication or organization authorization.
 
@@ -34,7 +35,8 @@ Trusted backend → authenticated FastAPI preview endpoint
 `POST /api/v1/application-drafts/preview` accepts candidate text, job text,
 optional company context and `fr`/`en`. It returns a draft with
 `requires_human_approval=true` and `persisted=false`. There is no publication,
-approval or submission endpoint in phase 1. Durable workflows are built in phase 2/5.
+approval or submission endpoint in phase 1. Phase 2 supplies a separate persistent
+draft/approval workflow; submission is phase 5.
 
 The prompt separates source data from instructions and prohibits invented facts.
 These instructions are not a factual-accuracy guarantee: human review and later
@@ -103,11 +105,12 @@ not a claim about the free-tier request/token allowance.
 and circuit states without keys or prompts. `/health` is liveness;
 `/health/ready` checks local key configuration only and makes no provider calls.
 
-The current breaker and concurrency limiter are **process-local** and reset on
-restart. Before horizontal production scaling, phase 2 must coordinate cooldowns,
-probe leases and account-wide request/token budgets through MongoDB. Adding API
-replicas alone must not multiply calls against the same free account. A circuit
-breaker is a failure-handling mechanism, not a complete rate limiter.
+The Phase 1 breaker and concurrency limiter are **process-local** without MongoDB.
+With MongoDB configured, Phase 2 uses shared cooldowns, probe/concurrency leases and
+account-wide request/token budgets. Every API/worker sharing credentials must use
+the same account scope, database and configured policy. Live platform integration,
+real account limits and load validation remain required before production scaling.
+A circuit breaker and a quota limiter are separate controls.
 
 ## Test execution
 
@@ -119,7 +122,9 @@ uv run ruff format --check app tests
 ```
 
 Phase 1 tests use HTTPX mock transports, fake providers, fake clocks and real
-FastAPI routing/lifespan. No external API, MongoDB or Qdrant is contacted.
+FastAPI routing/lifespan. Phase 2 tests use a real disposable replica set when
+`SID_TEST_MONGODB_URI` is set, as documented in [Phase 2 setup](phase-2.md).
+No live AI API or Qdrant is contacted.
 
 The provider contract suite covers request headers/bodies and response parsing;
 the breaker suite covers state transitions, cooldowns and stale concurrent results;
@@ -140,6 +145,6 @@ and record model access, latency and quota metadata without secrets.
 - Circuit/fallback/authentication tests and lint/format checks pass.
 - `.env.example`, sample request and run instructions available.
 
-Live model access, full user identity, durable drafts, MongoDB/Qdrant integration,
-PDF extraction, embeddings and submission are subsequent phases, not delivered
-capabilities of this initial slice.
+Live model access, the main platform login/database connection, Qdrant integration,
+PDF extraction, embeddings and submission remain pending. Durable drafts, profile
+versions and approvals are delivered by the Phase 2 core.

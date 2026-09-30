@@ -1,14 +1,14 @@
 # Plan du MVP IA — SID Agent
 
-Statut : plan fonctionnel du MVP ; première tranche API/IA commencée le 30 septembre 2026. Voir [les phases d'implémentation et tests](implementation-phases.md) pour les capacités livrées et restantes.
+Statut : phases 1 et cœur de persistance de la phase 2 implémentés ; intégration au backend principal en attente. Voir [les phases d'implémentation et tests](implementation-phases.md) et [la livraison phase 2](phase-2.md).
 
-Contraintes confirmées : MongoDB autohébergé est la base principale et la demande future est inconnue. Le plan doit permettre de dimensionner séparément l'API, les traitements IA et la recherche. Recommandation d'architecture : MongoDB comme source de vérité et Qdrant comme index de recherche reconstructible. Ce choix propose un second service à exploiter et une synchronisation explicite ; aucune installation n'est encore effectuée.
+Contraintes confirmées : MongoDB autohébergé est la base principale et la demande future est inconnue. Le plan doit permettre de dimensionner séparément l'API, les traitements IA et la recherche. Recommandation d'architecture : MongoDB comme source de vérité et Qdrant comme index de recherche reconstructible. Un replica set MongoDB local permet de tester la phase 2 ; Qdrant et la connexion MongoDB principale restent à configurer.
 
 ## 1. Objectif et point de départ
 
 Construire un assistant de recrutement pour les candidats et les entreprises, avec validation humaine obligatoire avant toute publication, candidature ou prise de contact. Les recherches, analyses et générations privées peuvent être exécutées sans confirmation supplémentaire.
 
-Le projet contient désormais une première tranche FastAPI : configuration, authentification interne par clé de service, aperçu de lettre non persisté, adaptateurs Groq/Gemini et circuit breakers par fournisseur. Les données métier, l'identité des utilisateurs, le stockage documentaire et les workflows persistants restent à construire ou à connecter. La clé de service ne remplace pas l'autorisation candidat/entreprise.
+Le projet contient l'aperçu FastAPI/Groq/Gemini et le cœur MongoDB de la phase 2 : snapshots versionnés, acceptation du profil, brouillons persistants, validation candidate, outbox transactionnel, worker avec baux et quotas/circuit breakers partagés. Le schéma fourni est mappé en lecture ; l'authentification existante et la connexion réelle restent à connecter. Les routes utilisateur restent fermées tant que le vérificateur de login n'est pas branché. La clé de service ne remplace pas l'autorisation candidat/entreprise.
 
 Le service IA s'appuie sur la base MongoDB principale et réutilise les identifiants et schémas métier existants. Le cadrage doit identifier les modules déjà disponibles pour les comptes, organisations, profils, offres et candidatures, ainsi que le service propriétaire de leurs écritures. Construire uniquement les éléments manquants ; éviter de créer une deuxième copie faisant autorité sur ces données. Le frontend reste un périmètre distinct de ce plan backend IA.
 
@@ -36,7 +36,7 @@ Un monolithe FastAPI organisé par domaine et un worker pour les tâches longues
 - **MongoDB et PyMongo Async** : accès asynchrone à la base principale, collections IA, versions, validations et tâches. Pydantic définit les contrats applicatifs ; les validateurs de collections, index et scripts de migration versionnés protègent les données persistées.
 - **Qdrant et un adaptateur `SearchService`** : index vectoriel indépendant pour les candidats et les offres, avec identifiants métier, versions et métadonnées de filtrage. Les dossiers, validations et candidatures restent dans MongoDB. La recherche lexicale peut initialement utiliser les index texte MongoDB ; sa combinaison avec la recherche sémantique est évaluée sur le corpus français/anglais.
 - **Stockage documentaire existant** : réutiliser le stockage privé de la plateforme. Si aucun stockage de fichiers n'existe et que tous les documents doivent rester dans MongoDB, utiliser GridFS ; les métadonnées et droits restent dans les collections métier.
-- **Worker Python et collection `ai_tasks`** : extraction, génération et indexation, sans broker supplémentaire au MVP. Réservation atomique des tâches, bail renouvelable, reprises idempotentes, nombre de tentatives limité et délais maximum. Le worker est un processus distinct du serveur FastAPI.
+- **Worker Python et collection `sid_tasks`** : génération persistante implémentée ; extraction et indexation à ajouter, sans broker supplémentaire au MVP. Réservation atomique des tâches, bail renouvelable, reprises idempotentes, nombre de tentatives limité et délais maximum. Le worker est un processus distinct du serveur FastAPI.
 - **Adaptateur IA** : gateway de génération Groq → Gemini avec circuit breaker par fournisseur, délais bornés et limitation de concurrence. La première API produit un brouillon texte non persisté ; extraction structurée et embeddings sont des capacités à ajouter. Le modèle d'embedding restera cohérent entre requêtes et index Qdrant, sans repli automatique vers un espace vectoriel incompatible.
 - **Adaptateurs métier** : accès aux profils, entreprises, offres et soumissions. Ils ciblent la plateforme existante ou les modules métier locaux suivant la décision d'intégration.
 

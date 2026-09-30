@@ -48,7 +48,7 @@ class CircuitBreaker:
         self._epoch = 0
         self._probe_inflight = False
 
-    async def acquire(self) -> Permit:
+    async def acquire(self, *, reserved_tokens: int = 0) -> Permit:
         async with self._lock:
             if self._state == CircuitState.OPEN:
                 remaining = self._retry_at - self._clock()

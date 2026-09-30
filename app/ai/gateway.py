@@ -17,15 +17,20 @@ logger = logging.getLogger(__name__)
 
 
 class AIGateway:
-    def __init__(self, providers: list[Provider], settings: Settings) -> None:
+    def __init__(self, providers: list[Provider], settings: Settings, *, breakers=None) -> None:
         self.providers = providers
         self.settings = settings
-        self.breakers = {
-            provider.name: CircuitBreaker(
-                settings.ai_circuit_failure_threshold, settings.ai_circuit_recovery_seconds
-            )
-            for provider in providers
-        }
+        self.scope = "mongodb" if breakers is not None else "process"
+        self.breakers = (
+            breakers
+            if breakers is not None
+            else {
+                provider.name: CircuitBreaker(
+                    settings.ai_circuit_failure_threshold, settings.ai_circuit_recovery_seconds
+                )
+                for provider in providers
+            }
+        )
         self._slots = asyncio.BoundedSemaphore(settings.ai_max_concurrent_requests)
 
     async def generate(self, system: str, prompt: str) -> Generation:
@@ -46,7 +51,15 @@ class AIGateway:
                 continue
             breaker = self.breakers[provider.name]
             try:
-                permit = await breaker.acquire()
+                # Conservative byte-based reservation plus output cap and framing.
+                # No refunds after an ambiguous timeout: the provider may charge it.
+                reserved_tokens = (
+                    len(system.encode())
+                    + len(prompt.encode())
+                    + self.settings.ai_max_output_tokens
+                    + 256
+                )
+                permit = await breaker.acquire(reserved_tokens=reserved_tokens)
             except CircuitOpen as exc:
                 retry_delays.append(exc.retry_after)
                 continue
