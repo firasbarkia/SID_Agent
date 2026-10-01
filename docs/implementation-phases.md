@@ -1,7 +1,7 @@
 # Implementation phases and test plan
 
-Updated: 30 September 2026. MongoDB is the existing self-hosted source of truth;
-Qdrant is the proposed independent search index. Start with a small deployment and
+Updated: 1 October 2026. MongoDB is the existing self-hosted source of truth;
+Qdrant is the independent reference search index. Start with a small deployment and
 measure demand before increasing capacity.
 
 ## Delivery sequence
@@ -10,7 +10,7 @@ measure demand before increasing capacity.
 |---|---|---|
 | 1 — AI foundation (implemented) | Configuration, internal service authentication, Groq primary, Gemini fallback, per-provider circuit breakers, bounded generation and unsaved cover-letter preview | Adapter contracts, fallback, quota cooldowns, recovery probes, concurrency, cancellation, protected endpoints, draft-only behavior, controlled failure responses. Offline tests pass; live account access remains a separate check. |
 | 2 — Persistence core implemented; live integration pending | Supplied UML mapped read-only; candidate/company ownership; versioned profiles/drafts, approvals, atomic outbox, leased tasks/worker, shared provider circuits and RPM/TPM/RPD budgets | Real replica-set integration tests pass for isolation, atomic rollback, stale versions, duplicate requests, lease recovery, account status and shared provider limits. Existing login verifier, actual collection names and main database connection still require integration. See [Phase 2 delivery](phase-2.md). |
-| 3 — Knowledge-base and search ingestion | Normalize the collected ESCO/ROME/O*NET/GeoNames data; preserve source IDs/licenses; choose a multilingual embedding model; build Qdrant collections and versioned indexing jobs | Idempotent imports, source coverage, encoding, bad rows, skill alias precision, vector dimensions, update/delete propagation, duplicate/out-of-order events, permission revocation, reindex and restore. |
+| 3 — Reference ingestion/search implemented | 51,921 normalized ESCO/ROME/O*NET/GeoNames references with IDs/licenses; pinned 384-dimension local multilingual ONNX model; MongoDB canonical records and batched/fenced Qdrant jobs; protected reference search | Real MongoDB/Qdrant tests for idempotent imports, encoding/coverage, aliases, dimensions, updates/deletions/revocation, duplicates/races, parallel workers, cutover, rebuild and native snapshot restore; real multilingual model smoke test. ESCO release/domain review and main-platform integration remain pending. See [Phase 3 delivery](phase-3.md). |
 | 4 — CV import and profile evaluation | Private PDF upload, extraction with page evidence, structured draft, candidate corrections and acceptance; deterministic completeness score | Text PDFs, malformed/encrypted/scanned files, file limits, ambiguous dates, missing facts, conflicting fields, prompt injection; no silent overwrite; no invented qualification accepted without review. Human-scored extraction corpus in French/English. |
 | 5 — Persistent application dossier and human approval | Link validated profile, offer and company versions; evidence matrix, editable letter, CV suggestions; approve exact version and destination; integrate submission | Unsupported-claim evaluation, missing company context, user edits, approval invalidation, ownership, concurrent submit, retry after ambiguous delivery, exactly-once business effect where destination supports idempotency. No send without server-side approval. |
 | 6 — Conversational search and recruiter matching | Typed filters, lexical/vector retrieval, score breakdown, up to five candidates and sourced explanations; optional anonymized display | Natural-language filter interpretation, strict Sfax/PFE constraints, empty results, aliases vs broader skills, relevant projects for junior candidates, source visibility, no stale results, explanation fidelity, anonymization leakage. Evaluate top-5 relevance on human labels. |
@@ -124,7 +124,8 @@ uv run ruff format --check app tests
 Phase 1 tests use HTTPX mock transports, fake providers, fake clocks and real
 FastAPI routing/lifespan. Phase 2 tests use a real disposable replica set when
 `SID_TEST_MONGODB_URI` is set, as documented in [Phase 2 setup](phase-2.md).
-No live AI API or Qdrant is contacted.
+No live generation API is contacted. Phase 3 Qdrant/model tests are explicitly
+opt-in as documented in [Phase 3 setup](phase-3.md).
 
 The provider contract suite covers request headers/bodies and response parsing;
 the breaker suite covers state transitions, cooldowns and stale concurrent results;
@@ -145,6 +146,7 @@ and record model access, latency and quota metadata without secrets.
 - Circuit/fallback/authentication tests and lint/format checks pass.
 - `.env.example`, sample request and run instructions available.
 
-Live model access, the main platform login/database connection, Qdrant integration,
-PDF extraction, embeddings and submission remain pending. Durable drafts, profile
-versions and approvals are delivered by the Phase 2 core.
+Live generation-model access, the main platform login/database connection,
+PDF extraction and submission remain pending. Durable drafts, profile versions
+and approvals are delivered by Phase 2; public reference ingestion, local
+embeddings and Qdrant indexing/search are delivered by Phase 3.

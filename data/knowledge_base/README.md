@@ -8,9 +8,14 @@ for HTTP evidence, source URLs, UTC timestamps and checksums. The `raw` director
 preserves source bytes. Normalized files are derived selections, not complete
 copies of their respective taxonomies.
 
-No records have been imported into MongoDB or Qdrant. No live-job, company-profile
-or candidate-CV corpus was collected. Source terms and attribution must travel
-with subsequent imports; public website access alone does not grant bulk reuse.
+Phase 3 normalizes 51,921 public reference records, with a committed
+`2026-09-29/normalized_manifest.json` and a repeatable MongoDB/Qdrant ingestion
+pipeline. The full snapshot has been imported into the local `sid_phase3_dev`
+MongoDB database and indexed into 55,035 vectors in local Qdrant. See
+[setup and coverage](../../docs/phase-3.md) to reproduce the active index.
+No main-platform database import is claimed. No live-job,
+company-profile or candidate-CV corpus was collected. License/source metadata
+travels with canonical records and search results.
 
 The collector is `scripts/collect_initial_kb.py` in the project root. It requires
 Python 3.11+ and curl, and writes a snapshot under the current UTC date. The source

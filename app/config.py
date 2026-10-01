@@ -35,9 +35,21 @@ class Settings(BaseSettings):
     worker_lease_seconds: int = Field(default=90, ge=10, le=600)
     worker_max_attempts: int = Field(default=3, ge=1, le=10)
     worker_poll_seconds: float = Field(default=1, gt=0, le=30)
+    qdrant_url: str = ""
+    qdrant_api_key: SecretStr = SecretStr("")
+    qdrant_timeout_seconds: float = Field(default=30, gt=0, le=120)
+    embedding_model_directory: str = ".models/multilingual-minilm"
+    embedding_threads: int = Field(default=2, ge=1, le=32)
+    indexing_batch_size: int = Field(default=16, ge=1, le=64)
+    knowledge_max_concurrent_queries: int = Field(default=2, ge=1, le=32)
 
     @field_validator(
-        "sid_service_api_key", "groq_api_key", "gemini_api_key", "mongodb_uri", mode="before"
+        "sid_service_api_key",
+        "groq_api_key",
+        "gemini_api_key",
+        "mongodb_uri",
+        "qdrant_api_key",
+        mode="before",
     )
     @classmethod
     def trim_keys(cls, value: str | SecretStr) -> str:

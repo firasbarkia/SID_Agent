@@ -1,7 +1,7 @@
 from datetime import timedelta
 from uuid import uuid4
 
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, UpdateOne
 
 from app.db.connection import server_time
 
@@ -14,7 +14,7 @@ class MongoQueue:
     """At-least-once delivery with a unique fencing token for every claim."""
 
     def __init__(self, db, collection="sid_tasks", lease_seconds=90):
-        if collection not in {"sid_tasks", "sid_outbox"}:
+        if collection not in {"sid_tasks", "sid_outbox", "sid_index_jobs"}:
             raise ValueError("Only owned task/outbox collections can be leased")
         self.db = db
         self.collection = db[collection]
@@ -22,24 +22,26 @@ class MongoQueue:
 
     async def claim(self):
         now = await server_time(self.db)
-        return await self.collection.find_one_and_update(
-            {
-                "$or": [
-                    {"state": "pending", "available_at": {"$lte": now}},
-                    {"state": "running", "lease_until": {"$lte": now}},
-                ]
-            },
-            {
-                "$set": {
-                    "state": "running",
-                    "lease_token": str(uuid4()),
-                    "lease_until": now + timedelta(seconds=self.lease_seconds),
+        # Separate indexed scans avoid sorting every pending job in the old OR query.
+        # Recover expired work first, then claim available pending work atomically.
+        for state, field in (("running", "lease_until"), ("pending", "available_at")):
+            claimed = await self.collection.find_one_and_update(
+                {"state": state, field: {"$lte": now}},
+                {
+                    "$set": {
+                        "state": "running",
+                        "lease_token": str(uuid4()),
+                        "lease_until": now + timedelta(seconds=self.lease_seconds),
+                    },
+                    "$inc": {"attempts": 1},
                 },
-                "$inc": {"attempts": 1},
-            },
-            sort=[("available_at", 1), ("_id", 1)],
-            return_document=ReturnDocument.AFTER,
-        )
+                sort=[(field, 1), ("_id", 1)],
+                hint=[("state", 1), (field, 1), ("_id", 1)],
+                return_document=ReturnDocument.AFTER,
+            )
+            if claimed is not None:
+                return claimed
+        return None
 
     def fence(self, task, now):
         return {
@@ -56,6 +58,25 @@ class MongoQueue:
             {"$set": {"lease_until": now + timedelta(seconds=self.lease_seconds)}},
         )
         if not result.matched_count:
+            raise LeaseLost()
+
+    async def finish_many(self, tasks, *, session):
+        """Caller owns the transaction: one lost lease rolls back the entire batch."""
+        now = await server_time(self.db)
+        result = await self.collection.bulk_write(
+            [
+                UpdateOne(
+                    self.fence(task, now),
+                    {
+                        "$set": {"state": "done", "error_code": None, "updated_at": now},
+                        "$unset": {"lease_token": "", "lease_until": ""},
+                    },
+                )
+                for task in tasks
+            ],
+            session=session,
+        )
+        if result.matched_count != len(tasks):
             raise LeaseLost()
 
     async def finish(self, task, *, state="done", error_code=None, retry_after=0, session=None):

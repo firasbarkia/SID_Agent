@@ -1,0 +1,9 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    ports:
+      - "127.0.0.1:6335:6333"
+    volumes:
+      - sid_qdrant:/qdrant/storage
+volumes:
+  sid_qdrant:

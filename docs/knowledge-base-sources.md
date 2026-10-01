@@ -20,7 +20,7 @@ Availability here means an actual HTTP/API/file check from this workspace. A suc
 
 ## Initial files
 
-The dated data folder contains raw open reference responses, normalized ESCO/location JSON, an availability log and a collection summary. No data has been imported into MongoDB or Qdrant.
+The dated data folder contains raw open reference responses, normalized ESCO/location JSON, an availability log and a collection summary. Phase 3 now provides a repeatable normalization/import/indexing pipeline and a 51,921-record normalization manifest; see [Phase 3 setup](phase-3.md). The full snapshot is imported into local development MongoDB, without a claim of integration into the main platform.
 
 - `raw/onet_occupations.json`: original occupation dataset, release 31.0.
 - `raw/onet_software_skills.json`: 31,821 source occupation-software associations, release 31.0; these are not 31,821 distinct technologies.
@@ -30,7 +30,7 @@ The dated data folder contains raw open reference responses, normalized ESCO/loc
 - `esco_seed.json`: all 22 unique search results, explicitly unreviewed.
 - `esco_it_seed.json`: 15 concepts screened for IT relevance, with English/French/Arabic labels; translation and domain review still pending.
 - `raw/rome_catalog.json`: dataset metadata and published resource URLs, not the ROME taxonomy itself.
-- `raw/rome_json_export.zip`: completed ROME archive; all 12 JSON members parsed successfully using a CP1252 fallback. The original archive is unchanged; production normalization is still pending.
+- `raw/rome_json_export.zip`: completed ROME archive; all 12 JSON members parsed successfully using strict UTF-8/CP1252 decoding. The original archive is unchanged. Phase 3 normalizes occupation profiles, competencies and knowledge, with source IDs and mixed-field repair; `version.txt` confirms ROME 4.0 version 61 / 26M06.
 - `availability_checks_first_pass.json`, `availability_checks.json` and `rome_alternative_check.json`: evidence, including unsuccessful requests.
 - `collection_summary.json`: actual retained record counts. Only completed, parsed downloads count as collected data.
 

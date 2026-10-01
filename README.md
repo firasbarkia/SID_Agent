@@ -4,6 +4,9 @@ A recruitment AI backend using Python 3.11+, FastAPI, MongoDB and uv. Groq gener
 letters with Gemini fallback. Phase 2 adds versioned profile/draft storage, candidate
 approval, a leased background worker and shared account-wide circuit/quota controls.
 See [Phase 2 setup and integration status](docs/phase-2.md).
+Phase 3 adds public reference ingestion, pinned local multilingual embeddings,
+versioned Qdrant indexing and protected reference search. See
+[Phase 3 setup, data coverage and recovery](docs/phase-3.md).
 
 ## Setup
 

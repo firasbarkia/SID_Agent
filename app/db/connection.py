@@ -61,7 +61,23 @@ async def ensure_indexes(db):
             ([("state", 1), ("available_at", 1), ("lease_until", 1)], {}),
         ],
         "sid_provider_state": [],
+        "sid_kb_records": [([("source", 1), ("kind", 1), ("public", 1), ("deleted", 1)], {})],
+        "sid_kb_catalog": [],
+        "sid_kb_generations": [],
+        "sid_kb_indexed": [([("generation", 1), ("record_id", 1)], {"unique": True})],
+        "sid_kb_imports": [],
+        "sid_index_jobs": [
+            ([("state", 1), ("available_at", 1), ("lease_until", 1)], {}),
+            ([("generation", 1), ("record_id", 1), ("version", 1)], {"unique": True}),
+        ],
     }
+    for name in ("sid_tasks", "sid_outbox", "sid_index_jobs"):
+        specs[name].extend(
+            [
+                ([("state", 1), ("available_at", 1), ("_id", 1)], {}),
+                ([("state", 1), ("lease_until", 1), ("_id", 1)], {}),
+            ]
+        )
     existing = set(await db.list_collection_names())
     for name, indexes in specs.items():
         if name not in existing:

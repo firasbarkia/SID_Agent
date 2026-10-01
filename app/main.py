@@ -1,3 +1,4 @@
+import asyncio
 from contextlib import asynccontextmanager
 
 import httpx
@@ -9,12 +10,16 @@ from app.ai.gateway import AIGateway
 from app.ai.mongo_circuit import shared_breakers
 from app.ai.providers import GeminiProvider, GroqProvider
 from app.api.drafts import router
+from app.api.knowledge import router as knowledge_router
 from app.api.persistence import router as persistence_router
 from app.config import Settings
 from app.db.connection import ensure_indexes, mongo_connection
 from app.db.store import Store
 from app.domain import DomainError
 from app.identity import UserIdVerifier
+from app.knowledge.embedding import LocalEmbedder
+from app.knowledge.qdrant import QdrantIndex, qdrant_client
+from app.knowledge.search import KnowledgeSearch
 from app.platform import PlatformReader
 
 
@@ -23,6 +28,7 @@ def create_app(
     *,
     transport: httpx.AsyncBaseTransport | None = None,
     verify_user_id: UserIdVerifier | None = None,
+    knowledge_embedder=None,
 ) -> FastAPI:
     config = settings if settings is not None else Settings()
 
@@ -37,6 +43,7 @@ def create_app(
                 limits=httpx.Limits(max_connections=20, max_keepalive_connections=10),
             ) as client,
         ):
+            application.state.knowledge_search = None
             application.state.store = (
                 Store(db, config.worker_max_attempts) if db is not None else None
             )
@@ -55,9 +62,23 @@ def create_app(
                 config,
                 breakers=breakers,
             )
-            yield
+            if db is not None and config.qdrant_url:
+                embedder = knowledge_embedder or await asyncio.to_thread(
+                    LocalEmbedder, config.embedding_model_directory, config.embedding_threads
+                )
+                async with qdrant_client(config) as search_client:
+                    index = QdrantIndex(search_client, embedder.dimensions, embedder.fingerprint)
+                    application.state.knowledge_search = KnowledgeSearch(
+                        db, index, embedder, config.knowledge_max_concurrent_queries
+                    )
+                    try:
+                        yield
+                    finally:
+                        await application.state.knowledge_search.close()
+            else:
+                yield
 
-    application = FastAPI(title="SID Agent API", version="0.2.0", lifespan=lifespan)
+    application = FastAPI(title="SID Agent API", version="0.3.0", lifespan=lifespan)
     application.state.settings = config
 
     async def resolve_identity(request):
@@ -71,6 +92,7 @@ def create_app(
     application.state.identity_resolver = resolve_identity if verify_user_id is not None else None
     application.include_router(router)
     application.include_router(persistence_router)
+    application.include_router(knowledge_router)
 
     @application.exception_handler(DomainError)
     async def domain_error(request, exc):

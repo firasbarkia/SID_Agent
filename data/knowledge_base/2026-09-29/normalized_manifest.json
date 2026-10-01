@@ -1,0 +1,151 @@
+{
+  "pipeline": "sid-reference-v1",
+  "counts": {
+    "esco:occupation": 4,
+    "esco:skill": 11,
+    "geonames:location": 4631,
+    "onet:occupation": 1016,
+    "onet:skill": 8753,
+    "rome:occupation": 1911,
+    "rome:skill": 35595
+  },
+  "coverage": {
+    "esco": {
+      "selected_it_sample": 15,
+      "full_taxonomy": false
+    },
+    "onet": {
+      "occupations": 1016,
+      "software_associations": 31821,
+      "distinct_software_labels": 8753,
+      "market": "US reference; not Tunisian demand"
+    },
+    "geonames": {
+      "selected_populated_or_administrative": 4631,
+      "feature_codes": {
+        "PPL": 1773,
+        "ADM1": 24,
+        "ADM2": 264,
+        "PPLA": 23,
+        "PCLI": 1,
+        "PPLC": 1,
+        "PPLX": 409,
+        "ADMD": 11,
+        "PPLA2": 2,
+        "PPLL": 13,
+        "ADM3H": 2,
+        "PPLH": 21,
+        "ADM3": 2084,
+        "PPLS": 1,
+        "PPLCH": 2
+      },
+      "note": "Typed features; historical places and administrative areas are not cities"
+    },
+    "rome": {
+      "profiles": 1911,
+      "appellation_rows": 14301,
+      "all_archive_json_files_verified": 12,
+      "normalized": "occupation profiles with appellations/relations, competencies and knowledge"
+    }
+  },
+  "files": {
+    "esco_it_seed.json": {
+      "sha256": "b6c4d32e3c6f22a131d1baedcf77418fe83bbe6d19a5c4b027d42a5b0d50efd8",
+      "encoding": "utf-8"
+    },
+    "raw/esco_javascript.json": {
+      "sha256": "643772d4e0dc864e87a52f5477be8dc366b7bbe132413a6a91dd6f4cf03999f8",
+      "encoding": "utf-8"
+    },
+    "raw/esco_python.json": {
+      "sha256": "238bd2a2b2ac777b13f4bd15dd5b12f6e2e33619b23f4cc36fd4dceabf846dab",
+      "encoding": "utf-8"
+    },
+    "raw/esco_react.json": {
+      "sha256": "0ecd1a804fddcfb935fd7bdc8c99f0990571bd7785b05a7e3e73635097515ddb",
+      "encoding": "utf-8"
+    },
+    "raw/esco_sql.json": {
+      "sha256": "d2868d15b35319091fd868507c85d3ba18fed44249d1f5c5810d124dfe431389",
+      "encoding": "utf-8"
+    },
+    "raw/esco_web_developer.json": {
+      "sha256": "d8a4443a964f3f079fa1a4c5ef15281cf3193b312a7e1c93eed67f7c1361f983",
+      "encoding": "utf-8"
+    },
+    "raw/onet_occupations.json": {
+      "sha256": "8eec5d2449c0b96a90fca0f67184b3bf76c15b3549c4f145adb48c3ae55f52f8",
+      "encoding": "utf-8"
+    },
+    "raw/onet_software_skills.json": {
+      "sha256": "bf4eb584f40e8139763babc50e3b9539b07e59a1df971d812293b307cbad84d1",
+      "encoding": "utf-8"
+    },
+    "tunisia_locations.json": {
+      "sha256": "27b96e5b9ce4a84da40d8ab7d42ff85ecc7cec21d66b56eb5f1982f7d00b52bb",
+      "encoding": "utf-8"
+    },
+    "raw/geonames_tunisia.zip": {
+      "sha256": "7bd8b02eb550e38d35c63362ac24430d2fb71e8dc9c12de1e1ffbb4c8ec46b23",
+      "encoding": "zip / utf-8"
+    },
+    "raw/rome_json_export.zip": {
+      "sha256": "0bfff103dfb91531d2fd109be8bcbe9398099b29fe50376c026ae506da791b80",
+      "encoding": "zip / mixed"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_centre_interet_v461.json": {
+      "sha256": "0e5aaf3dd70e2813d04f6a6fc553c5de5cb9b50f3f2bbebeff7ddfbc7810e6b4",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_competence_v461.json": {
+      "sha256": "b996714b3ba19e27c34c13bc668815748c340ba2ec189c01ff9e3f6d7d564a73",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_principale_v461.json": {
+      "sha256": "b3dbacefba53c3ef041050b2203a2064aecfe4b788c45ebab4455c73971010ef",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_secteur_activite_v461.json": {
+      "sha256": "0434196adc21523108885acb8769db5f096cc05d18f3a5109befa8de54f77475",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_secteur_naf_v461.json": {
+      "sha256": "eb148ee039eeedc75f0b7a56a4706e4772a1baf9e11e45061bc07a5bb583b5bf",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_arborescence_thematique_v461.json": {
+      "sha256": "0dcc52de2fe64ae1dbe4c3db7ffab7a3fdf676962dc6cd186f0a8cbbab8da0f7",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_fiche_emploi_metier_v461.json": {
+      "sha256": "42dd44cbc99db26c8b7eb57163514b56607041c5bc726f11da5fe3acbe1f16ea",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_referentiel_appellation_v461.json": {
+      "sha256": "ace5a5ab6ba46751e627717b874b705912e17830b3e4285203e802d8ece253f8",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_referentiel_code_rome_v461.json": {
+      "sha256": "6b8170728fb648e76513f55592048b348f31b55d3c887352fb8514f799361108",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_referentiel_competence_v461.json": {
+      "sha256": "c3f059c35bd24df6e76248854a6ce446ecbef563770bb2da0deb755e10080bef",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_referentiel_contexte_travail_v461.json": {
+      "sha256": "689c1d481f3941af39ffc8f421fd0b81a9a63d4c69bb0930df64f7355fc811fa",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!unix_referentiel_savoir_v461.json": {
+      "sha256": "2a9e610e2a826f87eeaaeaf1f3b56dbbe1016322905c245458e8abe23bcc950f",
+      "encoding": "cp1252"
+    },
+    "raw/rome_json_export.zip!version.txt": {
+      "sha256": "fc301908f1e1ac0b6715a7faa22596047d35755a278bd4349c38e9e417e39c55",
+      "encoding": "utf-8"
+    }
+  },
+  "rejected": [],
+  "records_sha256": "d723c4689a06ab0f19d7ea7b0303ecd1440b249a307a92deccff57c9b75a322b"
+}
