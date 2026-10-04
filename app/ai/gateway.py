@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from collections.abc import Callable
 from dataclasses import replace
 
 from app.ai.circuit import CircuitBreaker, CircuitOpen
@@ -33,18 +34,20 @@ class AIGateway:
         )
         self._slots = asyncio.BoundedSemaphore(settings.ai_max_concurrent_requests)
 
-    async def generate(self, system: str, prompt: str) -> Generation:
+    async def generate(
+        self, system: str, prompt: str, *, validate: Callable[[str], object] | None = None
+    ) -> Generation:
         # Fail fast instead of building an unbounded queue of expensive requests.
         if self._slots.locked():
             raise ServiceBusy()
         async with self._slots:
             try:
                 async with asyncio.timeout(self.settings.ai_request_timeout_seconds):
-                    return await self._generate(system, prompt)
+                    return await self._generate(system, prompt, validate)
             except TimeoutError as exc:
                 raise ProvidersUnavailable() from exc
 
-    async def _generate(self, system: str, prompt: str) -> Generation:
+    async def _generate(self, system: str, prompt: str, validate=None) -> Generation:
         retry_delays = []
         for index, provider in enumerate(self.providers):
             if not provider.configured:
@@ -68,6 +71,11 @@ class AIGateway:
                     result = await provider.generate(
                         system, prompt, self.settings.ai_max_output_tokens
                     )
+                    if validate is not None:
+                        try:
+                            validate(result.text)
+                        except ValueError as exc:
+                            raise ProviderFailure("invalid_response") from exc
             except (ProviderFailure, TimeoutError) as exc:
                 failure = exc if isinstance(exc, ProviderFailure) else ProviderFailure("transient")
                 cooldown = failure.retry_after

@@ -20,8 +20,9 @@ from app.ai.providers import GeminiProvider, GroqProvider
 from app.api.drafts import SYSTEM_PROMPT
 from app.config import Settings
 from app.db.connection import ensure_indexes, mongo_connection, server_time, transaction
-from app.db.queue import LeaseLost, MongoQueue
+from app.db.queue import MongoQueue
 from app.db.store import Store, emit, ownership
+from app.db.worker import LeasedWorker
 from app.domain import DomainError
 from app.identity import Principal
 from app.platform import PlatformReader
@@ -29,7 +30,7 @@ from app.platform import PlatformReader
 logger = logging.getLogger(__name__)
 
 
-class DraftWorker:
+class DraftWorker(LeasedWorker):
     def __init__(self, db, gateway, settings):
         self.db = db
         self.gateway = gateway
@@ -37,31 +38,6 @@ class DraftWorker:
         self.store = Store(db, settings.worker_max_attempts)
         self.queue = MongoQueue(db, lease_seconds=settings.worker_lease_seconds)
         self.platform = PlatformReader(db, settings)
-
-    async def _heartbeat(self, task):
-        while True:
-            await asyncio.sleep(self.settings.worker_lease_seconds / 3)
-            await self.queue.heartbeat(task)
-
-    async def run_once(self):
-        task = await self.queue.claim()
-        if task is None:
-            return False
-        work = asyncio.create_task(self._process(task))
-        heartbeat = asyncio.create_task(self._heartbeat(task))
-        try:
-            done, _ = await asyncio.wait({work, heartbeat}, return_when=asyncio.FIRST_COMPLETED)
-            if work in done:
-                await work
-            else:
-                await heartbeat  # A failed lease stops generation and prevents commit.
-        except LeaseLost:
-            logger.warning("Worker lost its task lease")
-        finally:
-            for running in (work, heartbeat):
-                running.cancel()
-            await asyncio.gather(work, heartbeat, return_exceptions=True)
-        return True
 
     async def _process(self, task):
         if task["attempts"] > task["max_attempts"]:
@@ -184,7 +160,7 @@ class DraftWorker:
         await transaction(self.db, write)
 
 
-async def main():
+async def main(worker_type=DraftWorker):
     settings = Settings()
     async with mongo_connection(settings) as db:
         if db is None:
@@ -212,7 +188,7 @@ async def main():
                 raise RuntimeError(
                     "Configure provider keys and shared quota limits before running workers"
                 )
-            worker = DraftWorker(db, gateway, settings)
+            worker = worker_type(db, gateway, settings)
             while True:
                 try:
                     if not await worker.run_once():

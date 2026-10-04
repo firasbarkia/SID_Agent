@@ -7,6 +7,12 @@ See [Phase 2 setup and integration status](docs/phase-2.md).
 Phase 3 adds public reference ingestion, pinned local multilingual embeddings,
 versioned Qdrant indexing and protected reference search. See
 [Phase 3 setup, data coverage and recovery](docs/phase-3.md).
+Phase 4 adds private PDF CV imports, page evidence, editable review drafts,
+exact-version confirmation and a deterministic profile completeness score. See
+[Phase 4 setup and API contract](docs/phase-4.md).
+The supplied conversation pipeline now has private history, context routing,
+reference-based advice and keyword memory. Matching remains disabled pending
+visibility rules. See [pipeline review and API contract](docs/pipeline-alignment.md).
 
 ## Setup
 
@@ -108,7 +114,7 @@ integration work. Submission and platform `Application` write-back belong to pha
 ## Tests
 
 ```powershell
-uv run pytest -q
+uv run python -m pytest -q
 uv run ruff check app tests
 uv run ruff format --check app tests
 ```
@@ -118,7 +124,7 @@ an explicit test URI. To verify Phase 2 against the local replica set:
 
 ```powershell
 $env:SID_TEST_MONGODB_URI='mongodb://127.0.0.1:27018/?replicaSet=rs0&directConnection=true'
-uv run pytest -q
+uv run python -m pytest -q
 ```
 
 Tests use synthetic records, fake keys and mock provider responses. Each integration

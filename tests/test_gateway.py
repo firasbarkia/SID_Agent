@@ -13,6 +13,7 @@ from app.ai.errors import (
 )
 from app.ai.gateway import AIGateway
 from app.ai.providers import Generation
+from app.cv.models import Extraction
 
 
 class StubProvider:
@@ -31,6 +32,28 @@ class StubProvider:
         if callable(action):
             action = await action()
         return Generation(action, self.name, self.model)
+
+
+async def test_invalid_structured_output_falls_back_and_counts_circuit_failures(settings):
+    primary = StubProvider("groq", ['{"facts":', '{"invented": "private source text"}'])
+    fallback = StubProvider("gemini", ['{"facts": []}'] * 3)
+    gateway = AIGateway([primary, fallback], settings)
+    for _ in range(3):
+        result = await gateway.generate("system", "data", validate=Extraction.model_validate_json)
+        assert result.fallback_used
+        assert result.text == '{"facts": []}'
+    assert primary.calls == 2 and fallback.calls == 3
+    assert (await gateway.status())[0]["state"] == "open"
+
+
+async def test_both_invalid_structured_outputs_return_unavailable(settings):
+    providers = [StubProvider(name, ["not json"]) for name in ("groq", "gemini")]
+    with pytest.raises(ProvidersUnavailable):
+        await AIGateway(providers, settings).generate(
+            "system",
+            "data",
+            validate=Extraction.model_validate_json,
+        )
 
 
 async def test_primary_success_never_calls_fallback(settings):

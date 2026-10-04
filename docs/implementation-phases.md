@@ -1,6 +1,6 @@
 # Implementation phases and test plan
 
-Updated: 1 October 2026. MongoDB is the existing self-hosted source of truth;
+Updated: 4 October 2026. MongoDB is the existing self-hosted source of truth;
 Qdrant is the independent reference search index. Start with a small deployment and
 measure demand before increasing capacity.
 
@@ -11,9 +11,9 @@ measure demand before increasing capacity.
 | 1 — AI foundation (implemented) | Configuration, internal service authentication, Groq primary, Gemini fallback, per-provider circuit breakers, bounded generation and unsaved cover-letter preview | Adapter contracts, fallback, quota cooldowns, recovery probes, concurrency, cancellation, protected endpoints, draft-only behavior, controlled failure responses. Offline tests pass; live account access remains a separate check. |
 | 2 — Persistence core implemented; live integration pending | Supplied UML mapped read-only; candidate/company ownership; versioned profiles/drafts, approvals, atomic outbox, leased tasks/worker, shared provider circuits and RPM/TPM/RPD budgets | Real replica-set integration tests pass for isolation, atomic rollback, stale versions, duplicate requests, lease recovery, account status and shared provider limits. Existing login verifier, actual collection names and main database connection still require integration. See [Phase 2 delivery](phase-2.md). |
 | 3 — Reference ingestion/search implemented | 51,921 normalized ESCO/ROME/O*NET/GeoNames references with IDs/licenses; pinned 384-dimension local multilingual ONNX model; MongoDB canonical records and batched/fenced Qdrant jobs; protected reference search | Real MongoDB/Qdrant tests for idempotent imports, encoding/coverage, aliases, dimensions, updates/deletions/revocation, duplicates/races, parallel workers, cutover, rebuild and native snapshot restore; real multilingual model smoke test. ESCO release/domain review and main-platform integration remain pending. See [Phase 3 delivery](phase-3.md). |
-| 4 — CV import and profile evaluation | Private PDF upload, extraction with page evidence, structured draft, candidate corrections and acceptance; deterministic completeness score | Text PDFs, malformed/encrypted/scanned files, file limits, ambiguous dates, missing facts, conflicting fields, prompt injection; no silent overwrite; no invented qualification accepted without review. Human-scored extraction corpus in French/English. |
+| 4 — CV import and profile evaluation implemented; live quality pending | Private bounded PDF upload, isolated parser, shared Groq/Gemini gateway, page-grounded facts, immutable review drafts, candidate corrections/confirmation, deterministic completeness | Synthetic French/English PDF corpus; malformed/encrypted/scanned files, limits, missing/unsupported facts, conflicts/dates, stale versions, atomic history, concurrent acceptance, ownership/deletion and account status. No overwrite or automatic profile validation. Human-scored live extraction and main-platform integration remain pilot gates. See [Phase 4 delivery](phase-4.md). |
 | 5 — Persistent application dossier and human approval | Link validated profile, offer and company versions; evidence matrix, editable letter, CV suggestions; approve exact version and destination; integrate submission | Unsupported-claim evaluation, missing company context, user edits, approval invalidation, ownership, concurrent submit, retry after ambiguous delivery, exactly-once business effect where destination supports idempotency. No send without server-side approval. |
-| 6 — Conversational search and recruiter matching | Typed filters, lexical/vector retrieval, score breakdown, up to five candidates and sourced explanations; optional anonymized display | Natural-language filter interpretation, strict Sfax/PFE constraints, empty results, aliases vs broader skills, relevant projects for junior candidates, source visibility, no stale results, explanation fidelity, anonymization leakage. Evaluate top-5 relevance on human labels. |
+| 6 — Conversation foundation implemented; matching explicitly disabled | Diagram-aligned context routing, private history, validated profile context, top-five reference RAG, cited advice and keyword memory. Job/candidate indexes, strict filters and matching remain pending. See [pipeline review](pipeline-alignment.md). | Conversation ownership, idempotency, lease fencing, atomic history/memory, stale profiles, citation validation and failure recovery. Future matching gates: strict Sfax/PFE constraints, visibility/discovery, junior projects, explanation fidelity, anonymization and human-labelled top-five relevance. |
 | 7 — Pilot and production readiness | End-to-end UI integration, operational metrics, tenant limits, backups, provider data-handling review, deployment and capacity tuning | Representative load at baseline/5x/10x, p95 latency, queue age, provider throttling, MongoDB/Qdrant/worker failure and recovery, deletion completeness, restore drill, cost/token budget. Human approval and access-control failures block release. |
 
 The platform UML has been supplied and mapped. MongoDB credentials, actual collection
@@ -147,6 +147,7 @@ and record model access, latency and quota metadata without secrets.
 - `.env.example`, sample request and run instructions available.
 
 Live generation-model access, the main platform login/database connection,
-PDF extraction and submission remain pending. Durable drafts, profile versions
+live extraction-quality evaluation and submission remain pending. Durable drafts, profile versions
 and approvals are delivered by Phase 2; public reference ingestion, local
-embeddings and Qdrant indexing/search are delivered by Phase 3.
+embeddings and Qdrant indexing/search are delivered by Phase 3. Private PDF import,
+candidate review/confirmation and profile completeness are delivered by Phase 4.

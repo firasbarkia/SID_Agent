@@ -1,0 +1,12 @@
+{
+  "expected_version": 1,
+  "facts": [
+    {"field": "name", "value": "Amira Exemple"},
+    {"field": "email", "value": "amira@example.invalid"},
+    {"field": "location", "value": "Sfax"},
+    {"field": "headline", "value": "Stage PFE en développement web"},
+    {"field": "skill", "value": "Python"},
+    {"field": "education", "value": "Licence informatique - 2024"},
+    {"field": "project", "value": "Application de gestion de stock avec Python"}
+  ]
+}

@@ -14,7 +14,7 @@ class MongoQueue:
     """At-least-once delivery with a unique fencing token for every claim."""
 
     def __init__(self, db, collection="sid_tasks", lease_seconds=90):
-        if collection not in {"sid_tasks", "sid_outbox", "sid_index_jobs"}:
+        if collection not in {"sid_tasks", "sid_outbox", "sid_index_jobs", "sid_cv_tasks"}:
             raise ValueError("Only owned task/outbox collections can be leased")
         self.db = db
         self.collection = db[collection]

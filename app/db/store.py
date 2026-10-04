@@ -63,7 +63,9 @@ class Store:
     async def draft(self, principal, draft_id):
         return await require_document(self.db.sid_drafts, {"_id": draft_id, **ownership(principal)})
 
-    async def create_profile(self, principal, payload):
+    async def create_profile(
+        self, principal, payload, *, structured_data=None, session=None, validated=False
+    ):
         now = await server_time(self.db)
         profile_id = str(uuid4())
         head = {
@@ -71,7 +73,8 @@ class Store:
             **ownership(principal),
             "version": 1,
             **payload.model_dump(),
-            "validated_version": None,
+            "structured_data": structured_data,
+            "validated_version": 1 if validated else None,
             "approval_guard": 0,
             "created_at": now,
             "updated_at": now,
@@ -92,7 +95,7 @@ class Store:
             )
             return head
 
-        return await transaction(self.db, write)
+        return await write(session) if session is not None else await transaction(self.db, write)
 
     async def _profile_version(self, head, session):
         await self.db.sid_profile_versions.insert_one(
@@ -102,6 +105,7 @@ class Store:
                 **ownership_from(head),
                 "version": head["version"],
                 "content": head["content"],
+                "structured_data": head.get("structured_data"),
                 "external_profile_id": head.get("external_profile_id"),
                 "created_at": head["updated_at"],
             },
@@ -121,6 +125,7 @@ class Store:
                     "$inc": {"version": 1},
                     "$set": {
                         "content": payload.content,
+                        "structured_data": None,
                         "validated_version": None,
                         "updated_at": now,
                     },

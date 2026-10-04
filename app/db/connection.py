@@ -61,6 +61,17 @@ async def ensure_indexes(db):
             ([("state", 1), ("available_at", 1), ("lease_until", 1)], {}),
         ],
         "sid_provider_state": [],
+        "sid_conversations": [([("scope_id", 1), ("owner_id", 1)], {})],
+        "sid_conversation_turns": [
+            ([("conversation_id", 1), ("revision", 1)], {"unique": True}),
+            ([("conversation_id", 1), ("idempotency_key", 1)], {"unique": True}),
+        ],
+        "sid_cv_imports": [
+            ([("scope_id", 1), ("owner_id", 1), ("idempotency_key", 1)], {"unique": True}),
+        ],
+        "sid_cv_files": [],
+        "sid_cv_versions": [([("import_id", 1), ("version", 1)], {"unique": True})],
+        "sid_cv_tasks": [([("import_id", 1)], {"unique": True})],
         "sid_kb_records": [([("source", 1), ("kind", 1), ("public", 1), ("deleted", 1)], {})],
         "sid_kb_catalog": [],
         "sid_kb_generations": [],
@@ -71,7 +82,7 @@ async def ensure_indexes(db):
             ([("generation", 1), ("record_id", 1), ("version", 1)], {"unique": True}),
         ],
     }
-    for name in ("sid_tasks", "sid_outbox", "sid_index_jobs"):
+    for name in ("sid_tasks", "sid_outbox", "sid_index_jobs", "sid_cv_tasks"):
         specs[name].extend(
             [
                 ([("state", 1), ("available_at", 1), ("_id", 1)], {}),

@@ -12,6 +12,8 @@ dependencies = [
     "numpy>=1.26,<3",
     "onnxruntime>=1.20,<2",
     "tokenizers>=0.21,<1",
+    "pypdf>=6.12,<7",
+    "psutil>=7,<8",
 ]
 
 [dependency-groups]
