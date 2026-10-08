@@ -1,0 +1,62 @@
+name: Backend checks
+on:
+  push:
+    branches: [firas, main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SID_TEST_MONGODB_URI: mongodb://127.0.0.1:27018/?replicaSet=rs0&directConnection=true
+      SID_TEST_QDRANT_URL: http://127.0.0.1:6335
+      SID_TEST_EMBEDDING_DIRECTORY: .models/multilingual-minilm
+      EMBEDDING_MODEL_DIRECTORY: .models/multilingual-minilm
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.11.18
+      - run: uv sync --locked
+      - run: uv run --no-sync ruff check app tests
+      - run: uv run --no-sync ruff format --check app tests
+      - name: Start disposable databases
+        run: |
+          docker compose -p sid-ci-mongo -f compose.mongodb.yml up -d --wait --wait-timeout 120
+          docker compose -p sid-ci-qdrant -f compose.qdrant.yml up -d
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:6335/readyz; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Download checksum-verified embedding model
+        run: uv run --no-sync python -m app.knowledge.cli download-model
+      - name: Unit and real database/model integration tests
+        run: uv run --no-sync python -m pytest -q
+      - name: Build runtime image
+        run: docker build -t sid-agent:ci .
+      - name: Container liveness smoke test
+        run: |
+          docker run -d --name sid-ci-api --read-only --tmpfs /tmp:rw,noexec,nosuid,size=128m -p 127.0.0.1:8001:8000 sid-agent:ci
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8001/health; then exit 0; fi
+            sleep 1
+          done
+          docker logs sid-ci-api
+          exit 1
+      - name: Clean up disposable services
+        if: always()
+        run: |
+          docker rm -f sid-ci-api || true
+          docker compose -p sid-ci-mongo -f compose.mongodb.yml down -v
+          docker compose -p sid-ci-qdrant -f compose.qdrant.yml down -v

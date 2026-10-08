@@ -393,5 +393,31 @@ async def test_api_contract_and_private_history(mongo_db, candidate_user, settin
         assert "idempotency_key" not in history["turns"][0]
         candidate_user = Principal(user_id="other", role="CANDIDATE")
         assert (await client.get(path)).status_code == 404
+        assert (await client.delete(path)).status_code == 404
+        candidate_user = Principal(user_id="candidate-one", role="CANDIDATE")
+        assert (await client.delete(path)).status_code == 204
+        assert (await client.get(path)).status_code == 404
+        assert await mongo_db.sid_conversation_turns.count_documents({}) == 0
         candidate_user = Principal(user_id="admin", role="ADMIN")
         assert (await client.post("/api/v1/conversations", json={})).status_code == 403
+
+
+@pytest.mark.mongodb
+async def test_deletion_during_generation_prevents_history_resurrection(
+    mongo_db, candidate_user, settings
+):
+    store, head, service, gateway = await workspace(mongo_db, candidate_user, settings)
+    await service.respond(candidate_user, head["_id"], request(), "first-turn")
+    deleted = False
+
+    async def delete_once():
+        nonlocal deleted
+        if not deleted:
+            await store.delete(candidate_user, head["_id"])
+            deleted = True
+
+    gateway.action = delete_once
+    with pytest.raises(DomainError, match="conversation_lease_lost"):
+        await service.respond(candidate_user, head["_id"], request(1), "late-turn")
+    assert await mongo_db.sid_conversations.count_documents({}) == 0
+    assert await mongo_db.sid_conversation_turns.count_documents({}) == 0

@@ -79,6 +79,14 @@ async def read_draft(draft_id: str, principal: Candidate, store: Database):
     return public(await store.draft(principal, draft_id))
 
 
+@router.post("/application-dossiers", status_code=202)
+async def request_dossier(
+    payload: DraftCreate, principal: Candidate, store: Database, idempotency_key: IdempotencyKey
+):
+    """Generate a review dossier from candidate-supplied job/company text."""
+    return await store.request_draft(principal, payload, idempotency_key, dossier=True)
+
+
 @router.put("/application-drafts/{draft_id}")
 async def edit_draft(draft_id: str, payload: DraftEdit, principal: Candidate, store: Database):
     return public(await store.edit_draft(principal, draft_id, payload))

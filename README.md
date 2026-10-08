@@ -13,6 +13,11 @@ exact-version confirmation and a deterministic profile completeness score. See
 The supplied conversation pipeline now has private history, context routing,
 reference-based advice and keyword memory. Matching remains disabled pending
 visibility rules. See [pipeline review and API contract](docs/pipeline-alignment.md).
+Application dossiers add quoted evidence, CV suggestions and source-bound approval
+using candidate-supplied job/company text. See [Phase 5](docs/phase-5.md).
+Conversation deletion, queue status, a non-root Docker image and integration CI
+provide the [operations baseline](docs/operations.md). Platform login, canonical
+offer binding and submission still require the main backend's contracts.
 
 ## Setup
 
@@ -138,6 +143,8 @@ live model quality or account eligibility.
 - [Phase 2 MongoDB integration and setup](docs/phase-2.md)
 - [MVP architecture and functional plan](docs/plan-mvp-ia.md)
 - [Knowledge-base sources and availability](docs/knowledge-base-sources.md)
+- [Application dossiers, evidence and approval](docs/phase-5.md)
+- [Containers, operational status and CI](docs/operations.md)
 
 Application lifecycle and health routes are in `app/main.py`, draft routes in
 `app/api/drafts.py`, and provider routing in `app/ai/`. Dependencies are declared

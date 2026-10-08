@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 
 from app.ai.errors import (
     ProviderRefused,
@@ -67,3 +67,9 @@ async def respond(
         raise HTTPException(422, detail={"code": "generation_blocked"}) from exc
     except ProviderRequestRejected as exc:
         raise HTTPException(502, detail={"code": "provider_request_rejected"}) from exc
+
+
+@router.delete("/{conversation_id}", status_code=204)
+async def delete(conversation_id: str, principal: User, store: Database):
+    await ConversationStore(store.db).delete(principal, conversation_id)
+    return Response(status_code=204)

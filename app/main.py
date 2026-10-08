@@ -13,6 +13,7 @@ from app.api.conversations import router as conversations_router
 from app.api.cv import router as cv_router
 from app.api.drafts import router
 from app.api.knowledge import router as knowledge_router
+from app.api.operations import router as operations_router
 from app.api.persistence import router as persistence_router
 from app.config import Settings
 from app.db.connection import ensure_indexes, mongo_connection
@@ -80,7 +81,7 @@ def create_app(
             else:
                 yield
 
-    application = FastAPI(title="SID Agent API", version="0.5.0", lifespan=lifespan)
+    application = FastAPI(title="SID Agent API", version="0.6.0", lifespan=lifespan)
     application.state.settings = config
 
     async def resolve_identity(request):
@@ -97,6 +98,7 @@ def create_app(
     application.include_router(knowledge_router)
     application.include_router(cv_router)
     application.include_router(conversations_router)
+    application.include_router(operations_router)
 
     @application.exception_handler(DomainError)
     async def domain_error(request, exc):

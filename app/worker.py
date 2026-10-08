@@ -24,6 +24,7 @@ from app.db.queue import MongoQueue
 from app.db.store import Store, emit, ownership
 from app.db.worker import LeasedWorker
 from app.domain import DomainError
+from app.dossier import DOSSIER_PROMPT, Dossier, source_snapshot, validate_dossier
 from app.identity import Principal
 from app.platform import PlatformReader
 
@@ -72,22 +73,31 @@ class DraftWorker(LeasedWorker):
             )
             if snapshot is None:
                 raise DomainError(409, "profile_snapshot_missing")
-            generation = await self.gateway.generate(
-                SYSTEM_PROMPT,
-                json.dumps(
-                    {
-                        "candidate_profile": snapshot["content"],
-                        "job_description": head["job_description"],
-                        "company_context": head["company_context"],
-                        "language": head["language"],
-                    },
-                    ensure_ascii=False,
-                ),
-            )
+            prompt_data = {
+                "candidate_profile": snapshot["content"],
+                "job_description": head["job_description"],
+                "company_context": head["company_context"],
+                "language": head["language"],
+            }
+            analysis = None
+            if head.get("dossier_requested"):
+                prompt_data["schema"] = Dossier.model_json_schema()
+
+                def validate(text):
+                    return validate_dossier(text, snapshot["content"], head["job_description"])
+
+                generation = await self.gateway.generate(
+                    DOSSIER_PROMPT, json.dumps(prompt_data, ensure_ascii=False), validate=validate
+                )
+                analysis = validate(generation.text)
+            else:
+                generation = await self.gateway.generate(
+                    SYSTEM_PROMPT, json.dumps(prompt_data, ensure_ascii=False)
+                )
             current_user = await self.platform.principal(task["owner_id"])
             if current_user.role != "CANDIDATE":
                 raise DomainError(403, "candidate_access_required")
-            await self._complete(task, principal, head, generation)
+            await self._complete(task, principal, head, generation, analysis, snapshot)
         except (ProviderRefused, ProviderRequestRejected) as exc:
             code = (
                 "generation_blocked"
@@ -100,7 +110,7 @@ class DraftWorker(LeasedWorker):
         except (ProvidersUnavailable, ServiceBusy) as exc:
             await self._fail(task, "ai_unavailable", retry_after=getattr(exc, "retry_after", 1))
 
-    async def _complete(self, task, principal, head, generation):
+    async def _complete(self, task, principal, head, generation, analysis=None, profile=None):
         now = await server_time(self.db)
 
         async def write(session):
@@ -113,11 +123,19 @@ class DraftWorker(LeasedWorker):
                 "version": 1,
                 "status": "draft",
                 "updated_at": now,
-                "cover_letter": generation.text,
+                "cover_letter": analysis.cover_letter if analysis else generation.text,
                 "provider": generation.provider,
                 "model": generation.model,
                 "fallback_used": generation.fallback_used,
             }
+            if analysis:
+                updated.update(
+                    {
+                        "dossier_analysis": analysis.model_dump(exclude={"cover_letter"}),
+                        "analysis_letter_version": 1,
+                        "source_snapshot": source_snapshot(head, profile),
+                    }
+                )
             result = await self.db.sid_drafts.replace_one(
                 {"_id": head["_id"], **ownership(principal), "version": 0, "status": "queued"},
                 updated,

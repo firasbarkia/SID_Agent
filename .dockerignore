@@ -1,0 +1,9 @@
+**
+!app/
+!app/**
+!pyproject.toml
+!uv.lock
+!README.md
+!Dockerfile
+app/**/__pycache__/
+app/**/*.pyc

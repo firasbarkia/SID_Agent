@@ -1,6 +1,6 @@
 # Implementation phases and test plan
 
-Updated: 4 October 2026. MongoDB is the existing self-hosted source of truth;
+Updated: 8 October 2026. MongoDB is the existing self-hosted source of truth;
 Qdrant is the independent reference search index. Start with a small deployment and
 measure demand before increasing capacity.
 
@@ -12,9 +12,9 @@ measure demand before increasing capacity.
 | 2 — Persistence core implemented; live integration pending | Supplied UML mapped read-only; candidate/company ownership; versioned profiles/drafts, approvals, atomic outbox, leased tasks/worker, shared provider circuits and RPM/TPM/RPD budgets | Real replica-set integration tests pass for isolation, atomic rollback, stale versions, duplicate requests, lease recovery, account status and shared provider limits. Existing login verifier, actual collection names and main database connection still require integration. See [Phase 2 delivery](phase-2.md). |
 | 3 — Reference ingestion/search implemented | 51,921 normalized ESCO/ROME/O*NET/GeoNames references with IDs/licenses; pinned 384-dimension local multilingual ONNX model; MongoDB canonical records and batched/fenced Qdrant jobs; protected reference search | Real MongoDB/Qdrant tests for idempotent imports, encoding/coverage, aliases, dimensions, updates/deletions/revocation, duplicates/races, parallel workers, cutover, rebuild and native snapshot restore; real multilingual model smoke test. ESCO release/domain review and main-platform integration remain pending. See [Phase 3 delivery](phase-3.md). |
 | 4 — CV import and profile evaluation implemented; live quality pending | Private bounded PDF upload, isolated parser, shared Groq/Gemini gateway, page-grounded facts, immutable review drafts, candidate corrections/confirmation, deterministic completeness | Synthetic French/English PDF corpus; malformed/encrypted/scanned files, limits, missing/unsupported facts, conflicts/dates, stale versions, atomic history, concurrent acceptance, ownership/deletion and account status. No overwrite or automatic profile validation. Human-scored live extraction and main-platform integration remain pilot gates. See [Phase 4 delivery](phase-4.md). |
-| 5 — Persistent application dossier and human approval | Link validated profile, offer and company versions; evidence matrix, editable letter, CV suggestions; approve exact version and destination; integrate submission | Unsupported-claim evaluation, missing company context, user edits, approval invalidation, ownership, concurrent submit, retry after ambiguous delivery, exactly-once business effect where destination supports idempotency. No send without server-side approval. |
+| 5 — Review dossier implemented; canonical offer and submission pending | Validated profile and supplied job/company text; evidence matrix, editable letter, CV suggestions, source hashes and exact-version approval. See [Phase 5](phase-5.md). | Quote validation, provider fallback, history, idempotency, approval invalidation and mid-generation profile changes. Canonical offer binding, human-scored claims and idempotent submission require integration. |
 | 6 — Conversation foundation implemented; matching explicitly disabled | Diagram-aligned context routing, private history, validated profile context, top-five reference RAG, cited advice and keyword memory. Job/candidate indexes, strict filters and matching remain pending. See [pipeline review](pipeline-alignment.md). | Conversation ownership, idempotency, lease fencing, atomic history/memory, stale profiles, citation validation and failure recovery. Future matching gates: strict Sfax/PFE constraints, visibility/discovery, junior projects, explanation fidelity, anonymization and human-labelled top-five relevance. |
-| 7 — Pilot and production readiness | End-to-end UI integration, operational metrics, tenant limits, backups, provider data-handling review, deployment and capacity tuning | Representative load at baseline/5x/10x, p95 latency, queue age, provider throttling, MongoDB/Qdrant/worker failure and recovery, deletion completeness, restore drill, cost/token budget. Human approval and access-control failures block release. |
+| 7 — Operations baseline implemented; pilot gates pending | Non-root runtime image, queue/circuit status, conversation deletion and real-database/model CI. See [operations](operations.md). | UI integration, tenant load at baseline/5x/10x, latency/queue-age metrics, full database restore drill, account-wide retention and live model evaluation remain pending. Human approval and access-control failures block release. |
 
 The platform UML has been supplied and mapped. MongoDB credentials, actual collection
 names/topology and the platform's identity contract are still pending. These are
@@ -132,7 +132,7 @@ the breaker suite covers state transitions, cooldowns and stale concurrent resul
 the gateway suite covers fallback, deadlines, cancellation and admission limits;
 API tests cover authentication, validation, errors and draft-only behavior.
 
-Later CI should add disposable MongoDB replica-set and Qdrant services for
+CI now includes disposable MongoDB replica-set and Qdrant services for
 integration tests. Keep model-quality evaluation separate from deterministic unit
 tests: use a versioned synthetic/consented corpus and human scoring, not exact
 string comparisons. Live provider smoke tests must be opt-in, use synthetic data,

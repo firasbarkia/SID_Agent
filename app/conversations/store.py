@@ -102,6 +102,18 @@ class ConversationStore:
         )
         return list(reversed(turns))
 
+    async def delete(self, principal, conversation_id):
+        async def write(session):
+            await self.get(principal, conversation_id, session)
+            await self.db.sid_conversations.delete_one(
+                {"_id": conversation_id, **ownership(principal)}, session=session
+            )
+            await self.db.sid_conversation_turns.delete_many(
+                {"conversation_id": conversation_id, **ownership(principal)}, session=session
+            )
+
+        await transaction(self.db, write)
+
     async def begin(self, principal, conversation_id, payload, key):
         head = await self.get(principal, conversation_id)
         request_hash = hashlib.sha256(payload.model_dump_json().encode()).hexdigest()

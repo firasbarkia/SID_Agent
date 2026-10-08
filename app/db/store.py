@@ -217,10 +217,14 @@ class Store:
             raise DomainError(409, "profile_version_not_validated")
         return profile
 
-    async def request_draft(self, principal, payload, idempotency_key):
+    async def request_draft(self, principal, payload, idempotency_key, *, dossier=False):
         now = await server_time(self.db)
         draft_id, task_id = str(uuid4()), str(uuid4())
-        request_hash = hashlib.sha256(payload.model_dump_json().encode()).hexdigest()
+        request_bytes = payload.model_dump_json().encode()
+        # Preserve existing letter-only idempotency hashes.
+        request_hash = hashlib.sha256(
+            request_bytes + (b":dossier:v1" if dossier else b"")
+        ).hexdigest()
         task_query = {**ownership(principal), "idempotency_key": idempotency_key}
 
         def existing(task):
@@ -240,6 +244,7 @@ class Store:
                     "_id": draft_id,
                     **ownership(principal),
                     **payload.model_dump(),
+                    "dossier_requested": dossier,
                     "version": 0,
                     "status": "queued",
                     "requires_human_approval": True,
@@ -290,6 +295,9 @@ class Store:
                 **ownership_from(head),
                 "version": head["version"],
                 "cover_letter": head["cover_letter"],
+                "dossier_analysis": head.get("dossier_analysis"),
+                "source_snapshot": head.get("source_snapshot"),
+                "analysis_letter_version": head.get("analysis_letter_version"),
                 "profile_id": head["profile_id"],
                 "profile_version": head["profile_version"],
                 "job_description": head["job_description"],
@@ -315,6 +323,7 @@ class Store:
                     "$inc": {"version": 1},
                     "$set": {
                         "cover_letter": payload.cover_letter,
+                        "analysis_letter_version": None,
                         "status": "draft",
                         "requires_human_approval": True,
                         "approval_id": None,
@@ -364,15 +373,23 @@ class Store:
                 )
                 if prior and prior["active"] and prior["destination_id"] == payload.destination_id:
                     return prior
+            approved_content = {
+                "letter": head["cover_letter"],
+                "profile_version": head["profile_version"],
+                "job": head["job_description"],
+                "company": head["company_context"],
+                "destination": payload.destination_id,
+            }
+            if head.get("dossier_requested"):
+                approved_content.update(
+                    {
+                        "dossier_analysis": head.get("dossier_analysis"),
+                        "source_snapshot": head.get("source_snapshot"),
+                    }
+                )
             digest = hashlib.sha256(
                 json.dumps(
-                    {
-                        "letter": head["cover_letter"],
-                        "profile_version": head["profile_version"],
-                        "job": head["job_description"],
-                        "company": head["company_context"],
-                        "destination": payload.destination_id,
-                    },
+                    approved_content,
                     sort_keys=True,
                     ensure_ascii=False,
                 ).encode()
