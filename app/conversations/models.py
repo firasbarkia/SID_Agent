@@ -3,6 +3,7 @@ from typing import Annotated, Literal
 from pydantic import Field, model_validator
 
 from app.domain import Input
+from app.matching.models import OfferFilters
 
 Keyword = Annotated[str, Field(min_length=2, max_length=40)]
 
@@ -28,6 +29,7 @@ class ContextDecision(Input):
     intent: Literal["advice", "matching", "clarify"]
     query: str = Field(min_length=2, max_length=350)
     keywords: list[Keyword] = Field(max_length=8)
+    filters: OfferFilters = Field(default_factory=OfferFilters)
 
 
 class Answer(Input):

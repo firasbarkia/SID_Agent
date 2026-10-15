@@ -1,5 +1,9 @@
 # Implementation phases and test plan
 
+For the current scope audit and next AI API sequence, use the
+[12 October roadmap](ai-scope-and-api-roadmap-2026-10-12.md). The phase table below
+records the earlier sequence; it does not establish matching or integration completion.
+
 Updated: 8 October 2026. MongoDB is the existing self-hosted source of truth;
 Qdrant is the independent reference search index. Start with a small deployment and
 measure demand before increasing capacity.

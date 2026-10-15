@@ -13,6 +13,10 @@ exact-version confirmation and a deterministic profile completeness score. See
 The supplied conversation pipeline now has private history, context routing,
 reference-based advice and keyword memory. Matching remains disabled pending
 visibility rules. See [pipeline review and API contract](docs/pipeline-alignment.md).
+The [Agent v1 facade](docs/agent-api.md) now exposes typed `/agent/parse-cv`,
+`/agent/generate-pack` and `/agent/chat` contracts. The explicit local demo can
+search synthetic offers; real private matching and canonical offer resolution
+remain disabled pending verified platform contracts.
 Application dossiers add quoted evidence, CV suggestions and source-bound approval
 using candidate-supplied job/company text. See [Phase 5](docs/phase-5.md).
 Conversation deletion, queue status, a non-root Docker image and integration CI
@@ -139,6 +143,8 @@ live model quality or account eligibility.
 
 ## Plans and reference data
 
+- [AI scope audit and API delivery roadmap, 12 October 2026](docs/ai-scope-and-api-roadmap-2026-10-12.md) - current priorities against the supplied PDFs and pipeline.
+- [Agent v1 facade, synthetic offer search and backend consumer](docs/agent-api.md) - A/B delivery and pending integration gates.
 - [Implementation phases and test gates](docs/implementation-phases.md)
 - [Phase 2 MongoDB integration and setup](docs/phase-2.md)
 - [MVP architecture and functional plan](docs/plan-mvp-ia.md)

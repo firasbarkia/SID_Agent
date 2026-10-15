@@ -3,6 +3,7 @@ from typing import Literal
 from fastapi import APIRouter, Request, Response
 
 from app.api.persistence import Database, IdempotencyKey
+from app.contracts.models import CVImportView
 from app.cv.models import Corrections, evaluate
 from app.cv.pdf import MAX_BYTES
 from app.cv.store import CVStore, view
@@ -16,6 +17,8 @@ router = APIRouter(prefix="/api/v1", tags=["Private CV imports"])
 @router.post(
     "/cv-imports",
     status_code=202,
+    response_model=CVImportView,
+    response_model_exclude_unset=True,
     openapi_extra={
         "requestBody": {
             "required": True,
@@ -51,12 +54,16 @@ async def upload_cv(
     return view(head)
 
 
-@router.get("/cv-imports/{import_id}")
+@router.get(
+    "/cv-imports/{import_id}", response_model=CVImportView, response_model_exclude_unset=True
+)
 async def get_cv(import_id: str, principal: Candidate, store: Database):
     return view(await CVStore(store.db).get(principal, import_id))
 
 
-@router.put("/cv-imports/{import_id}")
+@router.put(
+    "/cv-imports/{import_id}", response_model=CVImportView, response_model_exclude_unset=True
+)
 async def correct_cv(import_id: str, payload: Corrections, principal: Candidate, store: Database):
     return view(await CVStore(store.db).edit(principal, import_id, payload))
 
@@ -76,7 +83,9 @@ async def cv_version(import_id: str, version: int, principal: Candidate, store: 
     )
 
 
-@router.post("/cv-imports/{import_id}/accept")
+@router.post(
+    "/cv-imports/{import_id}/accept", response_model=CVImportView, response_model_exclude_unset=True
+)
 async def accept_cv(
     import_id: str,
     payload: ConfirmVersion,

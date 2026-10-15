@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Path, Request
 
+from app.contracts.models import DraftView, TaskStatus
 from app.db.store import Store, ownership, public, require_document
 from app.domain import (
     ApproveDraft,
@@ -75,7 +76,9 @@ async def request_draft(
     return await store.request_draft(principal, payload, idempotency_key)
 
 
-@router.get("/application-drafts/{draft_id}")
+@router.get(
+    "/application-drafts/{draft_id}", response_model=DraftView, response_model_exclude_unset=True
+)
 async def read_draft(draft_id: str, principal: Candidate, store: Database):
     return public(await store.draft(principal, draft_id))
 
@@ -120,7 +123,7 @@ async def approve_draft(
     return public(await store.approve_draft(principal, draft_id, payload))
 
 
-@router.get("/tasks/{task_id}")
+@router.get("/tasks/{task_id}", response_model=TaskStatus)
 async def read_task(task_id: str, principal: Candidate, store: Database):
     task = await require_document(store.db.sid_tasks, {"_id": task_id, **ownership(principal)})
     return {

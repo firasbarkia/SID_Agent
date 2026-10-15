@@ -9,6 +9,8 @@ from pymongo.errors import PyMongoError
 from app.ai.gateway import AIGateway
 from app.ai.mongo_circuit import shared_breakers
 from app.ai.providers import GeminiProvider, GroqProvider
+from app.api.agent import document_facade_security
+from app.api.agent import router as agent_router
 from app.api.conversations import router as conversations_router
 from app.api.cv import router as cv_router
 from app.api.drafts import router
@@ -24,6 +26,7 @@ from app.identity import UserIdVerifier
 from app.knowledge.embedding import LocalEmbedder
 from app.knowledge.qdrant import QdrantIndex, qdrant_client
 from app.knowledge.search import KnowledgeSearch
+from app.matching.synthetic import SyntheticOfferSearch
 from app.platform import PlatformReader
 
 
@@ -33,7 +36,13 @@ def create_app(
     transport: httpx.AsyncBaseTransport | None = None,
     verify_user_id: UserIdVerifier | None = None,
     knowledge_embedder=None,
+    synthetic_offer_search: SyntheticOfferSearch | None = None,
 ) -> FastAPI:
+    if (
+        synthetic_offer_search is not None
+        and type(synthetic_offer_search) is not SyntheticOfferSearch
+    ):
+        raise TypeError("Only the explicit synthetic offer adapter is supported until integration")
     config = settings if settings is not None else Settings()
 
     @asynccontextmanager
@@ -82,8 +91,9 @@ def create_app(
             else:
                 yield
 
-    application = FastAPI(title="SID Agent API", version="0.6.0", lifespan=lifespan)
+    application = FastAPI(title="SID Agent API", version="0.7.0", lifespan=lifespan)
     application.state.settings = config
+    application.state.synthetic_offer_search = synthetic_offer_search
     application.add_middleware(BodyLimits, settings=config)
 
     async def resolve_identity(request):
@@ -101,6 +111,8 @@ def create_app(
     application.include_router(cv_router)
     application.include_router(conversations_router)
     application.include_router(operations_router)
+    application.include_router(agent_router)
+    document_facade_security(application)
 
     @application.exception_handler(DomainError)
     async def domain_error(request, exc):

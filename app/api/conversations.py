@@ -58,6 +58,7 @@ async def respond(
         request.app.state.ai_gateway,
         request.app.state.knowledge_search,
         request.app.state.platform,
+        getattr(request.app.state, "synthetic_offer_search", None),
     )
     try:
         return await service.respond(principal, conversation_id, payload, idempotency_key)

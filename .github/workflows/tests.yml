@@ -58,6 +58,8 @@ jobs:
         run: uv run --no-sync python -m pytest -q
       - name: Offline synthetic evaluation report (quality gate unassessed)
         run: uv run --no-sync python -m app.evaluation.cli score --outputs data/evaluation/synthetic-baseline-v1.json --out .artifacts/evaluation/baseline-v1.json --markdown .artifacts/evaluation/baseline-v1.md
+      - name: Export typed AI facade and proposed profile-sync contracts
+        run: uv run --no-sync python -m scripts.export_agent_contract
       - name: Build runtime image
         run: docker build -t sid-agent:ci .
       - name: Container liveness smoke test

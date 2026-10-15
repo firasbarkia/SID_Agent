@@ -66,7 +66,8 @@ def validate_dossier(text, candidate, job):
 
 def source_snapshot(head, profile):
     return {
-        "kind": "candidate_supplied_text",
+        "kind": "synthetic_offer" if head.get("offer_snapshot") else "candidate_supplied_text",
+        **({"offer": head["offer_snapshot"]} if head.get("offer_snapshot") else {}),
         "profile_id": head["profile_id"],
         "profile_version": profile["version"],
         "profile_sha256": hashlib.sha256(profile["content"].encode()).hexdigest(),

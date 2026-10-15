@@ -1,5 +1,9 @@
 # System improvement plan, 9 October 2026
 
+Future AI work now follows the [12 October scope and API roadmap](ai-scope-and-api-roadmap-2026-10-12.md).
+This document preserves the earlier hardening plan; matching completion is part
+of the new AI API delivery sequence, while final submission belongs to Node.js.
+
 The four confirmed defects from the 8 October review have been addressed. The
 next objective is a measurable staging workflow: one authenticated candidate
 imports or creates a profile, corrects and accepts an exact version, generates a

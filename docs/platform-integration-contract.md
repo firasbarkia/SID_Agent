@@ -25,6 +25,8 @@ First staging acceptance: one authenticated candidate creates/imports, corrects
 and accepts an exact profile version, generates against one accessible canonical
 offer and reviews the dossier. Test expired/revoked identity, inactive accounts,
 wrong ownership, private/deleted/changed offers, stale approval and duplicate work.
-Keep real private matching/submission disabled.
+Keep real private matching/submission disabled. The [A/B contract handoff](agent-api.md)
+provides an explicit synthetic offer adapter and facade fixtures while these inputs
+are pending; it is not a live canonical offer or synchronization adapter.
 Capture the resolved fields and test evidence
 here when the real contract becomes available.

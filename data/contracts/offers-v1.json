@@ -1,0 +1,13 @@
+{
+  "synthetic": true,
+  "version": "offers-v1",
+  "offers": [
+    {"source":"synthetic","id":"fixture-python-pfe","version":1,"company_id":"fixture-company-a","company_version":1,"company_context":"Synthetic Sfax software company.","title":"Python web PFE","description":"PFE internship in Sfax. Build web applications using Python and SQL.","location":"Sfax","contract":"PFE","skills":["Python","SQL","Frontend"],"status":"OPEN","visibility":"PUBLIC"},
+    {"source":"synthetic","id":"fixture-react-pfe","version":2,"company_id":"fixture-company-b","company_version":1,"company_context":"Synthetic Sfax product studio.","title":"ReactJS frontend PFE","description":"PFE internship in Sfax. Develop frontend features using ReactJS and SQL.","location":"Sfax","contract":"PFE","skills":["ReactJS","SQL","Frontend"],"status":"OPEN","visibility":"PUBLIC"},
+    {"source":"synthetic","id":"fixture-python-internship","version":1,"company_id":"fixture-company-a","company_version":1,"company_context":"Synthetic Sfax software company.","title":"Python summer internship","description":"Summer internship in Sfax. Build Python automation and SQL reporting.","location":"Sfax","contract":"INTERNSHIP","skills":["Python","SQL"],"status":"OPEN","visibility":"PUBLIC"},
+    {"source":"synthetic","id":"fixture-tunis-pfe","version":1,"company_id":"fixture-company-c","company_version":1,"company_context":"Synthetic Tunis software company.","title":"Python web PFE Tunis","description":"PFE internship in Tunis. Develop web features with Python and SQL.","location":"Tunis","contract":"PFE","skills":["Python","SQL","Frontend"],"status":"OPEN","visibility":"PUBLIC"},
+    {"source":"synthetic","id":"fixture-closed","version":2,"company_id":"fixture-company-a","company_version":1,"company_context":"Synthetic Sfax software company.","title":"Closed Python PFE","description":"Closed PFE internship in Sfax using Python and SQL.","location":"Sfax","contract":"PFE","skills":["Python","SQL"],"status":"CLOSED","visibility":"PUBLIC"},
+    {"source":"synthetic","id":"fixture-private","version":1,"company_id":"fixture-company-a","company_version":1,"company_context":"Synthetic Sfax software company.","title":"Private Python PFE","description":"Private PFE internship in Sfax using Python and SQL.","location":"Sfax","contract":"PFE","skills":["Python","SQL"],"status":"OPEN","visibility":"PRIVATE"},
+    {"source":"synthetic","id":"fixture-java-job","version":1,"company_id":"fixture-company-b","company_version":1,"company_context":"Synthetic Sfax product studio.","title":"Java employment","description":"Full-time Java employment in Sfax building internal tools.","location":"Sfax","contract":"EMPLOYMENT","skills":["Java"],"status":"OPEN","visibility":"PUBLIC"}
+  ]
+}
