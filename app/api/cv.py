@@ -45,7 +45,7 @@ async def upload_cv(
         data.extend(chunk)
     if not data.startswith(b"%PDF-"):
         raise DomainError(422, "invalid_pdf")
-    head = await CVStore(store.db, store.max_attempts).upload(
+    head = await CVStore(store.db, store.max_attempts, settings=store.settings).upload(
         principal, bytes(data), idempotency_key, language
     )
     return view(head)

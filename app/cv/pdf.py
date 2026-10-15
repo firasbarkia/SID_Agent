@@ -18,6 +18,10 @@ MAX_STREAM = 1024 * 1024
 MAX_MEMORY = 512 * 1024 * 1024
 
 
+class ParserUnavailable(Exception):
+    """Temporary parser process/monitor resource failure, safe to retry boundedly."""
+
+
 def parse_pdf(data):
     if len(data) > MAX_BYTES:
         raise DomainError(413, "cv_file_too_large")
@@ -50,14 +54,17 @@ def parse_pdf(data):
 
 
 async def extract_pdf(data, *, timeout=15):
-    process = await asyncio.create_subprocess_exec(
-        sys.executable,
-        "-m",
-        "app.cv.pdf",
-        stdin=asyncio.subprocess.PIPE,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.DEVNULL,
-    )
+    try:
+        process = await asyncio.create_subprocess_exec(
+            sys.executable,
+            "-m",
+            "app.cv.pdf",
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.DEVNULL,
+        )
+    except OSError as exc:
+        raise ParserUnavailable() from exc
     communication = asyncio.create_task(process.communicate(data))
     try:
         async with asyncio.timeout(timeout):
@@ -75,6 +82,8 @@ async def extract_pdf(data, *, timeout=15):
         return parsed["pages"]
     except TimeoutError as exc:
         raise DomainError(422, "cv_parser_timeout") from exc
+    except (OSError, psutil.Error) as exc:
+        raise ParserUnavailable() from exc
     finally:
         if process.returncode is None:
             with suppress(ProcessLookupError):

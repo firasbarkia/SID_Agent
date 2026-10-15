@@ -5,8 +5,11 @@ from uuid import uuid4
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
+from app.config import Settings
+from app.db.admission import reserve
 from app.db.connection import server_time, transaction
 from app.domain import DomainError
+from app.dossier import validate_evidence
 
 
 def ownership(principal):
@@ -51,9 +54,10 @@ async def emit(db, aggregate_id, event_key, event_type, principal, payload, now,
 
 
 class Store:
-    def __init__(self, db, max_attempts=3):
+    def __init__(self, db, max_attempts=3, *, settings=None):
         self.db = db
         self.max_attempts = max_attempts
+        self.settings = settings if settings is not None else Settings(_env_file=None)
 
     async def profile(self, principal, profile_id):
         return await require_document(
@@ -239,6 +243,7 @@ class Store:
             await self._guard_profile(
                 principal, payload.profile_id, payload.profile_version, session
             )
+            await reserve(self.db, principal, self.settings, session)
             await self.db.sid_drafts.insert_one(
                 {
                     "_id": draft_id,
@@ -298,6 +303,7 @@ class Store:
                 "dossier_analysis": head.get("dossier_analysis"),
                 "source_snapshot": head.get("source_snapshot"),
                 "analysis_letter_version": head.get("analysis_letter_version"),
+                "analysis_review": head.get("analysis_review"),
                 "profile_id": head["profile_id"],
                 "profile_version": head["profile_version"],
                 "job_description": head["job_description"],
@@ -355,6 +361,86 @@ class Store:
 
         return await transaction(self.db, write)
 
+    async def edit_evidence(self, principal, draft_id, payload):
+        now = await server_time(self.db)
+
+        async def write(session):
+            old = await require_document(
+                self.db.sid_drafts, {"_id": draft_id, **ownership(principal)}, session
+            )
+            if old["version"] != payload.expected_version:
+                raise DomainError(409, "stale_draft_version")
+            if not old.get("dossier_requested") or not old.get("dossier_analysis"):
+                raise DomainError(409, "dossier_not_ready")
+            # Keep every original requirement in order: corrections cannot hide
+            # missing requirements or silently replace the job source.
+            original = old["dossier_analysis"]["evidence"]
+            if [(r.requirement, r.job_quote) for r in payload.evidence] != [
+                (r["requirement"], r["job_quote"]) for r in original
+            ]:
+                raise DomainError(422, "dossier_requirements_immutable")
+            await self._guard_profile(principal, old["profile_id"], old["profile_version"], session)
+            profile = await require_document(
+                self.db.sid_profile_versions,
+                {
+                    "profile_id": old["profile_id"],
+                    "version": old["profile_version"],
+                    **ownership(principal),
+                },
+                session,
+            )
+            try:
+                validate_evidence(payload.evidence, profile["content"], old["job_description"])
+            except ValueError as exc:
+                raise DomainError(422, "invalid_dossier_evidence") from exc
+            review = {
+                "kind": "candidate_corrected",
+                "original_version": (old.get("analysis_review") or {}).get("original_version", 1),
+                "corrected_by": principal.user_id,
+                "reason": payload.reason,
+            }
+            head = await self.db.sid_drafts.find_one_and_update(
+                {"_id": draft_id, **ownership(principal), "version": payload.expected_version},
+                {
+                    "$inc": {"version": 1},
+                    "$set": {
+                        "dossier_analysis": {
+                            **old["dossier_analysis"],
+                            "evidence": [r.model_dump() for r in payload.evidence],
+                        },
+                        "analysis_review": review,
+                        "analysis_letter_version": None,
+                        "status": "draft",
+                        "requires_human_approval": True,
+                        "approval_id": None,
+                        "updated_at": now,
+                    },
+                },
+                return_document=ReturnDocument.AFTER,
+                session=session,
+            )
+            if head is None:
+                raise DomainError(409, "stale_draft_version")
+            await self._draft_version(head, session)
+            await self.db.sid_approvals.update_many(
+                {"draft_id": draft_id, **ownership(principal), "active": True},
+                {"$set": {"active": False, "invalidated_at": now}},
+                session=session,
+            )
+            await emit(
+                self.db,
+                draft_id,
+                f"evidence_corrected:{head['version']}",
+                "draft.evidence_corrected",
+                principal,
+                {"draft_id": draft_id, "version": head["version"]},
+                now,
+                session,
+            )
+            return head
+
+        return await transaction(self.db, write)
+
     async def approve_draft(self, principal, draft_id, payload):
         now, approval_id = await server_time(self.db), str(uuid4())
 
@@ -387,6 +473,8 @@ class Store:
                         "source_snapshot": head.get("source_snapshot"),
                     }
                 )
+                if (head.get("analysis_review") or {}).get("kind") == "candidate_corrected":
+                    approved_content["analysis_review"] = head["analysis_review"]
             digest = hashlib.sha256(
                 json.dumps(
                     approved_content,

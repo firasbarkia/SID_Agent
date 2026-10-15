@@ -35,6 +35,13 @@ class Settings(BaseSettings):
     worker_lease_seconds: int = Field(default=90, ge=10, le=600)
     worker_max_attempts: int = Field(default=3, ge=1, le=10)
     worker_poll_seconds: float = Field(default=1, gt=0, le=30)
+    http_json_max_bytes: int = Field(default=256 * 1024, ge=1024, le=5 * 1024 * 1024)
+    http_body_timeout_seconds: float = Field(default=10, gt=0, le=120)
+    http_max_concurrent_bodies: int = Field(default=16, ge=1, le=100)
+    admission_user_pending_jobs: int = Field(default=5, ge=1, le=1000)
+    admission_user_cv_bytes: int = Field(default=50 * 1024 * 1024, ge=1)
+    admission_global_pending_jobs: int = Field(default=1000, ge=1)
+    admission_user_requests_per_minute: int = Field(default=10, ge=1, le=1000)
     qdrant_url: str = ""
     qdrant_api_key: SecretStr = SecretStr("")
     qdrant_timeout_seconds: float = Field(default=30, gt=0, le=120)

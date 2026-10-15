@@ -61,6 +61,7 @@ async def ensure_indexes(db):
             ([("state", 1), ("available_at", 1), ("lease_until", 1)], {}),
         ],
         "sid_provider_state": [],
+        "sid_admission": [],
         "sid_conversations": [([("scope_id", 1), ("owner_id", 1)], {})],
         "sid_conversation_turns": [
             ([("conversation_id", 1), ("revision", 1)], {"unique": True}),
@@ -89,9 +90,15 @@ async def ensure_indexes(db):
                 ([("state", 1), ("lease_until", 1), ("_id", 1)], {}),
             ]
         )
+    for name in ("sid_tasks", "sid_cv_tasks"):
+        specs[name].append(([("owner_id", 1), ("state", 1)], {}))
+    specs["sid_cv_imports"].append(([("owner_id", 1), ("status", 1)], {}))
     existing = set(await db.list_collection_names())
     for name, indexes in specs.items():
         if name not in existing:
             await db.create_collection(name)
         for keys, options in indexes:
             await db[name].create_index(keys, **options)
+    await db.sid_admission.update_one(
+        {"_id": "queue"}, {"$setOnInsert": {"revision": 0}}, upsert=True
+    )

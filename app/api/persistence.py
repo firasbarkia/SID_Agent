@@ -11,6 +11,7 @@ from app.domain import (
     ProfileCreate,
     ProfileEdit,
 )
+from app.dossier import EvidenceEdit
 from app.identity import Candidate
 
 router = APIRouter(prefix="/api/v1", tags=["Persistent candidate workspace"])
@@ -103,6 +104,13 @@ async def draft_version(
             {"draft_id": draft_id, "version": version, **ownership(principal)},
         )
     )
+
+
+@router.put("/application-drafts/{draft_id}/evidence")
+async def correct_evidence(
+    draft_id: str, payload: EvidenceEdit, principal: Candidate, store: Database
+):
+    return public(await store.edit_evidence(principal, draft_id, payload))
 
 
 @router.post("/application-drafts/{draft_id}/approvals", status_code=201)

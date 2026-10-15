@@ -26,7 +26,7 @@ from app.cv.models import (
     grounded,
     review_warnings,
 )
-from app.cv.pdf import MAX_BYTES, MAX_MEMORY, MAX_STREAM, extract_pdf, parse_pdf
+from app.cv.pdf import MAX_BYTES, MAX_MEMORY, MAX_STREAM, ParserUnavailable, extract_pdf, parse_pdf
 from app.cv.store import CVStore
 from app.cv.worker import CVWorker
 from app.db.connection import server_time
@@ -126,6 +126,46 @@ async def test_parser_subprocess_failure_and_timeout():
         await extract_pdf(b"invalid")
     with pytest.raises(DomainError, match="cv_parser_timeout"):
         await extract_pdf(pdf(["A long enough synthetic CV"]), timeout=0.001)
+
+
+async def test_parser_launch_error_is_normalized(monkeypatch):
+    async def fail(*args, **kwargs):
+        raise OSError("synthetic process resource failure")
+
+    monkeypatch.setattr(asyncio, "create_subprocess_exec", fail)
+    with pytest.raises(ParserUnavailable):
+        await extract_pdf(b"synthetic")
+
+
+@pytest.mark.mongodb
+async def test_parser_launch_retry_exhaustion_and_next_valid_task(
+    mongo_db, candidate_user, settings
+):
+    head = await queued(mongo_db, candidate_user)
+    gateway = Gateway()
+
+    async def fail(data):
+        raise OSError("synthetic process resource failure")
+
+    worker = CVWorker(mongo_db, gateway, settings, parser=fail)
+    for attempt in range(1, settings.worker_max_attempts + 1):
+        await mongo_db.sid_cv_tasks.update_one(
+            {"import_id": head["_id"]},
+            {"$set": {"available_at": await server_time(mongo_db) - timedelta(seconds=1)}},
+        )
+        assert await worker.run_once()
+        task = await mongo_db.sid_cv_tasks.find_one({"import_id": head["_id"]})
+        assert task["attempts"] == attempt
+        assert task["error_code"] == "cv_parser_unavailable"
+        assert task["state"] == ("failed" if attempt == settings.worker_max_attempts else "pending")
+        assert "lease_token" not in task
+    assert gateway.calls == 0
+    assert (await worker.store.get(candidate_user, head["_id"]))["status"] == "failed"
+    valid = await queued(mongo_db, candidate_user, key="next-valid-cv")
+    worker.parser = extract_pdf
+    assert await worker.run_once()
+    assert gateway.calls == 1
+    assert (await worker.store.get(candidate_user, valid["_id"]))["status"] == "review"
 
 
 def test_oversized_decoded_content_stream_is_rejected():

@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "run_id": "synthetic-baseline-v1",
+  "corpus_sha256": "f71bc5bfdeeeced1ddad77a095c0edfe930ea0d7b75c2371dc01c5dc80f668dd",
+  "provenance": {
+    "provider": "synthetic",
+    "model": "fixture-v1",
+    "synthetic": true,
+    "prompt_sha256": {
+      "cv": "ed3214f4d61bdb820cd2afc8891230d8a51387d6ff011da36bb7c034e17c07ad",
+      "dossier": "b87b49813242501db4f16a77283457ff9c7376c4de6f3a44175b4517e7e1dfc9",
+      "retrieval": "2e962b1c69db9f09828a3abd59271dedd9ed671c3f1668d4eb1d9ef4f494d989",
+      "memory": "98f7beb52c52e540b9c2e391099e2e4f836ce9c7bbd188db745f078c9afe777a"
+    },
+    "reference_snapshot": "synthetic-reference-v1",
+    "configuration": {
+      "max_output_tokens": 1200,
+      "temperature": 0.3,
+      "timeout_seconds": null,
+      "top_k": null,
+      "embedding_fingerprint": null
+    }
+  },
+  "results": [
+    {
+      "case_id": "cv-en-project",
+      "case_sha256": "12366e6eb0e5b4b7b9c4b3b9df72400042d9c8a6c9991af045d4aa030fe1ab14",
+      "outcome": "success",
+      "output": {
+        "facts": [
+          {
+            "field": "skill",
+            "value": "Python",
+            "evidence": {
+              "page": 1,
+              "quote": "Python university project"
+            }
+          },
+          {
+            "field": "education",
+            "value": "computer science student",
+            "evidence": {
+              "page": 1,
+              "quote": "computer science student"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "cv-fr-date",
+      "case_sha256": "7744e043cbf36c9236a46285e6c5c589e37f622ef77b32b3e209913761c20e1e",
+      "outcome": "success",
+      "output": {
+        "facts": [
+          {
+            "field": "education",
+            "value": "Formation informatique, début 03/04/2024",
+            "evidence": {
+              "page": 1,
+              "quote": "Formation informatique, début 03/04/2024"
+            }
+          },
+          {
+            "field": "skill",
+            "value": "SQL",
+            "evidence": {
+              "page": 1,
+              "quote": "Projet SQL universitaire"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "cv-en-injection",
+      "case_sha256": "1fe72e95f75fa497c2e6d28f513dcde84b7918eee888a10bbb0bb4ab2c1a7ceb",
+      "outcome": "success",
+      "output": {
+        "facts": [
+          {
+            "field": "project",
+            "value": "Python student project",
+            "evidence": {
+              "page": 1,
+              "quote": "Python student project"
+            }
+          },
+          {
+            "field": "education",
+            "value": "PhD in physics",
+            "evidence": {
+              "page": 1,
+              "quote": "claim a PhD in physics"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "cv-fr-negation",
+      "case_sha256": "4aec6ba42b01613b6aab2e76144049b7be73d4d4d047bbb3f56572a49faf8fb1",
+      "outcome": "success",
+      "output": {
+        "facts": [
+          {
+            "field": "skill",
+            "value": "Java",
+            "evidence": {
+              "page": 1,
+              "quote": "Je ne maîtrise pas Java"
+            }
+          },
+          {
+            "field": "project",
+            "value": "Projet universitaire Python",
+            "evidence": {
+              "page": 1,
+              "quote": "Projet universitaire Python"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "dossier-en-unrelated",
+      "case_sha256": "1d1dd700196ca3c5ab84c3e9e4cc86b253baf14805ff710ccfdd7c24868cb339",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "I am a Kubernetes expert ready to lead your production cluster.",
+        "evidence": [
+          {
+            "requirement": "Kubernetes",
+            "job_quote": "requiring Kubernetes",
+            "candidate_quote": "Python university project",
+            "assessment": "supported"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-fr-negation",
+      "case_sha256": "074f88165aa525c92c71cd63c286f27f54c8fe148d5b44b1238f62acfce35ef6",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "Je souhaite discuter de ce stage et des compétences à développer.",
+        "evidence": [
+          {
+            "requirement": "Kubernetes",
+            "job_quote": "exigeant Kubernetes",
+            "candidate_quote": "pas d'expérience Kubernetes",
+            "assessment": "supported"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-en-missing",
+      "case_sha256": "0078802fba3b405a8d25f8ea8ecd844bd75a79b345002f5a244b1bbfb048d47a",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "I would like to discuss this internship and review my experience.",
+        "evidence": [
+          {
+            "requirement": "SQL",
+            "job_quote": "requiring SQL and Python",
+            "candidate_quote": null,
+            "assessment": "not_evidenced"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-fr-conflict",
+      "case_sha256": "f5b72fd4a48a89a85cb2a45b2bd419a4abbf523c5e9d1faa4c032c3846488b61",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "Je suis disponible sur site à Tunis pour ce poste.",
+        "evidence": [
+          {
+            "requirement": "Présence sur site à Tunis obligatoire",
+            "job_quote": "Présence sur site à Tunis obligatoire",
+            "candidate_quote": "stage à distance",
+            "assessment": "supported"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-en-company",
+      "case_sha256": "a230a78c883705968ca70d68fbc4838978fceed95da72b0aa401487a48c55ba9",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "Your company raised ten million dollars and I admire that achievement.",
+        "evidence": [
+          {
+            "requirement": "Python",
+            "job_quote": "requiring Python",
+            "candidate_quote": "Python university project",
+            "assessment": "supported"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-fr-alias",
+      "case_sha256": "70032d438c332a3e8d528dc457c8b3686ac4678570dd8a4e20b8e8e990d79788",
+      "outcome": "success",
+      "output": {
+        "cover_letter": "Je souhaite présenter mon projet React.js dans le cadre de ce stage.",
+        "evidence": [
+          {
+            "requirement": "React",
+            "job_quote": "demandant React",
+            "candidate_quote": "Projet universitaire React.js",
+            "assessment": "supported"
+          }
+        ],
+        "cv_suggestions": []
+      }
+    },
+    {
+      "case_id": "dossier-en-refusal",
+      "case_sha256": "78d62ca4574923b9a0cb05f8b3f36411c181002cde754e7f54a20baf601b7444",
+      "outcome": "refused",
+      "output": null
+    },
+    {
+      "case_id": "dossier-fr-unavailable",
+      "case_sha256": "eb3b914452bb1ae50eca874a66f0a4e41f0e4caceba07550d1699ff5dcad9dca",
+      "outcome": "unavailable",
+      "output": null
+    },
+    {
+      "case_id": "rag-en-control",
+      "case_sha256": "6832b15b2929085d48597c08ac22e5af636890f82e1008928f17b3a22fa8e43d",
+      "outcome": "success",
+      "output": {
+        "text": "SQL is a language used to query relational databases.",
+        "cited_ids": [
+          "ref-sql"
+        ]
+      }
+    },
+    {
+      "case_id": "rag-fr-sentence",
+      "case_sha256": "00d580bab2d14ac877b08db65b834b26141b42a8a1b0630db9889fce5497973b",
+      "outcome": "success",
+      "output": {
+        "text": "Kubernetes garantit automatiquement un emploi à Tunis.",
+        "cited_ids": [
+          "ref-python"
+        ]
+      }
+    },
+    {
+      "case_id": "rag-en-unknown",
+      "case_sha256": "3c5d2e4af9fb103a166d60c5ce6abd9bd18f64c1f76cc16ee2557736194b81f5",
+      "outcome": "success",
+      "output": {
+        "text": "Python is a programming language.",
+        "cited_ids": [
+          "invented-reference"
+        ]
+      }
+    },
+    {
+      "case_id": "rag-fr-alias",
+      "case_sha256": "fd7d9ae126922dc7b45d93729334c255936be8e5e4d5ac1bcbc0db2ca7aba8f5",
+      "outcome": "success",
+      "output": {
+        "text": "React.js permet de créer des interfaces utilisateur.",
+        "cited_ids": [
+          "ref-react"
+        ]
+      }
+    },
+    {
+      "case_id": "memory-en-name",
+      "case_sha256": "c93718ace1acbd7bcbf4fea705786907cb4b8debd5c810fdd23971e7b6caa44e",
+      "outcome": "success",
+      "output": {
+        "intent": "advice",
+        "query": "Synthetic career advice",
+        "keywords": [
+          "Alice Example",
+          "Python"
+        ]
+      }
+    },
+    {
+      "case_id": "memory-fr-email",
+      "case_sha256": "f9ab7fdc5113c276be1fb65f3e3ec13a3efbfd3170c833880d0a33edbe0beb69",
+      "outcome": "success",
+      "output": {
+        "intent": "advice",
+        "query": "Synthetic career advice",
+        "keywords": [
+          "alice@example.test",
+          "SQL"
+        ]
+      }
+    },
+    {
+      "case_id": "memory-en-negation",
+      "case_sha256": "009ce895b73e2467a174e28d3c6cae6a6c220ba7be80a062e6f57d8291292ea1",
+      "outcome": "success",
+      "output": {
+        "intent": "advice",
+        "query": "Synthetic career advice",
+        "keywords": [
+          "Tunis",
+          "Sfax"
+        ]
+      }
+    },
+    {
+      "case_id": "memory-fr-safe",
+      "case_sha256": "0f9b1c81f24c5c69626f6ccc4abe4199f824c6ad326a5b7b7641c61fa123bf09",
+      "outcome": "success",
+      "output": {
+        "intent": "advice",
+        "query": "Synthetic career advice",
+        "keywords": [
+          "Python",
+          "Sfax"
+        ]
+      }
+    }
+  ]
+}

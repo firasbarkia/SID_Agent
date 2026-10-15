@@ -36,7 +36,7 @@ class DraftWorker(LeasedWorker):
         self.db = db
         self.gateway = gateway
         self.settings = settings
-        self.store = Store(db, settings.worker_max_attempts)
+        self.store = Store(db, settings.worker_max_attempts, settings=settings)
         self.queue = MongoQueue(db, lease_seconds=settings.worker_lease_seconds)
         self.platform = PlatformReader(db, settings)
 
@@ -133,6 +133,7 @@ class DraftWorker(LeasedWorker):
                     {
                         "dossier_analysis": analysis.model_dump(exclude={"cover_letter"}),
                         "analysis_letter_version": 1,
+                        "analysis_review": {"kind": "model_proposal", "original_version": 1},
                         "source_snapshot": source_snapshot(head, profile),
                     }
                 )

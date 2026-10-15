@@ -14,7 +14,7 @@ from app.ai.errors import (
     ServiceBusy,
 )
 from app.cv.models import Extraction, grounded, review_warnings, source_warnings
-from app.cv.pdf import extract_pdf
+from app.cv.pdf import ParserUnavailable, extract_pdf
 from app.cv.store import CVStore
 from app.db.connection import server_time, transaction
 from app.db.queue import MongoQueue
@@ -39,7 +39,7 @@ Keep output concise to fit the token budget; omit details instead of truncating 
 class CVWorker(LeasedWorker):
     def __init__(self, db, gateway, settings, *, parser=extract_pdf):
         self.db, self.gateway, self.settings = db, gateway, settings
-        self.store = CVStore(db, settings.worker_max_attempts)
+        self.store = CVStore(db, settings.worker_max_attempts, settings=settings)
         self.queue = MongoQueue(db, "sid_cv_tasks", settings.worker_lease_seconds)
         self.platform = PlatformReader(db, settings)
         self.parser = parser
@@ -67,7 +67,13 @@ class CVWorker(LeasedWorker):
                     **ownership(principal),
                 },
             )
-            pages = await self.parser(bytes(file["data"]))
+            try:
+                pages = await self.parser(bytes(file["data"]))
+            except (ParserUnavailable, OSError):
+                # Restrict normalization to the parser boundary. Database/history
+                # errors and unexpected programming failures still propagate.
+                await self._fail(task, "cv_parser_unavailable", retry_after=5)
+                return
             await self._candidate(principal)
             # Recheck deletion before sending CV text outside the service.
             await self.store.get(principal, head["_id"])

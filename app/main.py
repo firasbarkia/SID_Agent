@@ -19,6 +19,7 @@ from app.config import Settings
 from app.db.connection import ensure_indexes, mongo_connection
 from app.db.store import Store
 from app.domain import DomainError
+from app.http_limits import BodyLimits
 from app.identity import UserIdVerifier
 from app.knowledge.embedding import LocalEmbedder
 from app.knowledge.qdrant import QdrantIndex, qdrant_client
@@ -48,7 +49,7 @@ def create_app(
         ):
             application.state.knowledge_search = None
             application.state.store = (
-                Store(db, config.worker_max_attempts) if db is not None else None
+                Store(db, config.worker_max_attempts, settings=config) if db is not None else None
             )
             application.state.platform = PlatformReader(db, config) if db is not None else None
             breakers = None
@@ -83,6 +84,7 @@ def create_app(
 
     application = FastAPI(title="SID Agent API", version="0.6.0", lifespan=lifespan)
     application.state.settings = config
+    application.add_middleware(BodyLimits, settings=config)
 
     async def resolve_identity(request):
         if application.state.platform is None:

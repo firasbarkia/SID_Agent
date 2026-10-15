@@ -4,6 +4,7 @@ from uuid import uuid4
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
+from app.config import Settings
 from app.cv.models import (
     conflicts,
     evaluate,
@@ -11,6 +12,7 @@ from app.cv.models import (
     review_warnings,
     source_warnings,
 )
+from app.db.admission import reserve
 from app.db.connection import server_time, transaction
 from app.db.store import Store, emit, ownership, require_document
 from app.domain import DomainError, ProfileCreate
@@ -45,9 +47,10 @@ def view(head):
 
 
 class CVStore:
-    def __init__(self, db, max_attempts=3):
+    def __init__(self, db, max_attempts=3, *, settings=None):
         self.db = db
         self.max_attempts = max_attempts
+        self.settings = settings if settings is not None else Settings(_env_file=None)
 
     async def get(self, principal, import_id, session=None):
         head = await require_document(
@@ -85,6 +88,7 @@ class CVStore:
             old = await self.db.sid_cv_imports.find_one(query, session=session)
             if old is not None:
                 return same(old)
+            await reserve(self.db, principal, self.settings, session, byte_count=len(data))
             await self.db.sid_cv_imports.insert_one(head, session=session)
             await self.db.sid_cv_files.insert_one(
                 {"_id": head["_id"], **ownership(principal), "data": data}, session=session

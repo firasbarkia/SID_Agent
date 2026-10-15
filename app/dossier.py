@@ -27,6 +27,12 @@ class Dossier(Input):
     cv_suggestions: list[CVSuggestion] = Field(max_length=8)
 
 
+class EvidenceEdit(Input):
+    expected_version: int = Field(ge=1, strict=True)
+    evidence: list[EvidenceRow] = Field(min_length=1, max_length=12)
+    reason: str = Field(min_length=5, max_length=400)
+
+
 def quoted(quote, source):
     return bool(
         re.search(
@@ -38,9 +44,8 @@ def quoted(quote, source):
     )
 
 
-def validate_dossier(text, candidate, job):
-    dossier = Dossier.model_validate_json(text)
-    for row in dossier.evidence:
+def validate_evidence(rows, candidate, job):
+    for row in rows:
         if not quoted(row.job_quote, job) or not quoted(row.requirement, row.job_quote):
             raise ValueError("Requirement must be quoted from the supplied job")
         if row.assessment == "supported":
@@ -48,6 +53,11 @@ def validate_dossier(text, candidate, job):
                 raise ValueError("Supported requirement needs candidate evidence")
         elif row.candidate_quote is not None:
             raise ValueError("A missing requirement cannot claim candidate evidence")
+
+
+def validate_dossier(text, candidate, job):
+    dossier = Dossier.model_validate_json(text)
+    validate_evidence(dossier.evidence, candidate, job)
     for suggestion in dossier.cv_suggestions:
         if not quoted(suggestion.candidate_quote, candidate):
             raise ValueError("CV suggestions need candidate evidence")

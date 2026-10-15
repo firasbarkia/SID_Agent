@@ -145,6 +145,11 @@ live model quality or account eligibility.
 - [Knowledge-base sources and availability](docs/knowledge-base-sources.md)
 - [Application dossiers, evidence and approval](docs/phase-5.md)
 - [Containers, operational status and CI](docs/operations.md)
+- [Hardening follow-up review, 9 October 2026](docs/review-2026-10-09.md)
+- [Next system improvement plan](docs/improvement-plan-2026-10-09.md)
+- [Offline AI evaluation and evidence corrections](docs/ai-evaluation.md)
+- [Platform integration contract inputs](docs/platform-integration-contract.md)
+- [Phase 6 implementation review and remaining gates](docs/phase-6.md)
 
 Application lifecycle and health routes are in `app/main.py`, draft routes in
 `app/api/drafts.py`, and provider routing in `app/ai/`. Dependencies are declared

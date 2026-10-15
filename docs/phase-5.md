@@ -52,7 +52,11 @@ Edit the letter using `PUT /api/v1/application-drafts/{id}` with
 `expected_version` and `cover_letter`. Editing invalidates existing approval and
 sets `analysis_letter_version` to `null`: source analysis remains available but
 has not been regenerated for the edited letter. To correct source analysis,
-the candidate can edit/accept their profile and request a new dossier.
+the candidate can edit/accept their profile and request a new dossier. Candidates
+can also correct existing evidence assessments using
+`PUT /api/v1/application-drafts/{id}/evidence`; requirements/source quotes stay
+pinned, immutable history records the reason and every edit invalidates approval.
+See the [evaluation and correction contract](ai-evaluation.md).
 
 After review, `POST /api/v1/application-drafts/{id}/approvals` requires
 `expected_version`, `confirmed: true` and `destination_id`. Approval binds the

@@ -1,0 +1,2 @@
+# Source downloads have recorded byte hashes; never convert their line endings.
+data/knowledge_base/**/raw/** -text
