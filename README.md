@@ -23,6 +23,72 @@ Conversation deletion, queue status, a non-root Docker image and integration CI
 provide the [operations baseline](docs/operations.md). Platform login, canonical
 offer binding and submission still require the main backend's contracts.
 
+## Quick Streamlit test workspace
+
+For the prepared simulation, run `uv run --group demo python -m scripts.simulation start`
+with Docker Desktop running and the local embedding model installed. Open
+http://127.0.0.1:8501 and select **Simulation** to run the behavior scenarios or
+try prompts yourself. This launcher forces simulated AI and prepares references
+automatically. See [simulation setup, scenarios and stop commands](docs/simulation.md).
+The manual demo commands below also support optional live provider evaluation.
+
+The local console exercises previews, profiles, PDF CV imports/corrections,
+letters/dossiers, evidence edits, approvals, conversations, reference search,
+history and operational status. It bypasses login with three synthetic identities
+in a separate `sid_demo` database. Only the explicit `app.demo` entry point enables
+this behavior; `app.main` retains its existing authentication requirements.
+The API accepts localhost peers/hosts/origins only and uses dedicated demo platform
+collections. Use the loopback-bound command below, without a reverse proxy.
+
+Install the optional interface dependencies and start the existing local services:
+
+```powershell
+uv sync --group demo
+docker compose -p sid-phase2 -f compose.mongodb.yml up -d --wait
+docker compose -p sid-phase3 -f compose.qdrant.yml up -d
+uv run python -m app.knowledge.cli download-model
+uv run python -m app.demo
+```
+
+In a second terminal, start the console:
+
+```powershell
+uv run --group demo python -m streamlit run streamlit_app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true --browser.gatherUsageStats false
+```
+
+Open http://127.0.0.1:8501. The demo API runs on port 8001 and starts draft and CV
+workers automatically. Its default MongoDB/Qdrant ports match the compose files.
+In **Reference search**, click **Prepare demo reference index** once to import a
+small balanced reference subset and build a separate `sid_test_*` vector index.
+In **CV import**, download and re-upload the supplied sample PDF. Refresh pending
+CV imports or drafts to read worker results. Change test identity to exercise
+candidate isolation and recruiter conversations. Demo records survive restarts.
+
+**Simulated AI is the default:** no Groq/Gemini network calls or provider keys are
+needed. PDFs, persistence, queues, local embeddings and Qdrant remain real. Simulated
+CV extraction recognizes `Field: value` lines (as in the sample PDF); other CVs can
+be corrected manually. These deterministic responses test workflows, not AI quality.
+
+For actual provider responses, configure keys and positive account RPM/TPM/RPD
+limits in `.env`, stop the demo API, and restart it with:
+
+```powershell
+$env:SID_DEMO_LIVE_AI='1'
+uv run python -m app.demo
+```
+
+Live mode retains the configured account scope and quotas, sends entered source
+text to the configured providers, and is visibly marked in the console. Remove the
+variable to return to simulated mode. Candidate offer search uses synthetic fixtures;
+real private matching, recruiter matching and submission remain disabled.
+Approval still records consent only. All confirmation/version/ownership checks
+remain active. Optional UI regression checks run with `uv run --group demo python
+-m pytest tests/test_demo.py -q`; MongoDB checks require `SID_TEST_MONGODB_URI`.
+
+With the simulated demo running, exercise all three facade contracts with
+`uv run python -m examples.agent_consumer`. Export versioned OpenAPI and the
+proposed profile-sync schema with `uv run python -m scripts.export_agent_contract`.
+
 ## Setup
 
 ```powershell
