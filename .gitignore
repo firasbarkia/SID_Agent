@@ -8,3 +8,6 @@ __pycache__/
 !.env.example
 .models/
 .artifacts/
+# Client requirement documents stay local: this repository is public.
+# See docs/requirements.md for the expected files and the requirement index.
+/specs/

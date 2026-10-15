@@ -33,9 +33,9 @@ contract test suite and synthetic integration example demonstrate those flows.
 
 Reviewed sources:
 
-- [Functional specification](../Cahier%20des%20Charges%20-%20Plateforme%20Emploi%20%26%20Marketplace.pdf), pages 1-3, especially sections 4 and 5.
-- [Backend API specification](../APIs%20Backend.pdf), pages 1-2, especially Python endpoints and internal parsed-data synchronization.
-- The attached pipeline image: context analysis, advice RAG, role-specific vector matching, prompt builders, LLM, keyword memory and response/top five.
+- [Functional specification](requirements.md), pages 1-3, especially sections 4 and 5.
+- [Backend API specification](requirements.md), pages 1-2, especially Python endpoints and internal parsed-data synchronization.
+- The [pipeline diagram](requirements.md): context analysis, advice RAG, role-specific vector matching, prompt builders, LLM, keyword memory and response/top five.
 - Current code, generated OpenAPI and offline tests. Earlier delivery reports inform the audit but do not replace current verification.
 
 The PDFs are requirements evidence, not authorization to submit applications,

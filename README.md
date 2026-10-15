@@ -190,8 +190,8 @@ integration work. Submission and platform `Application` write-back belong to pha
 
 ```powershell
 uv run python -m pytest -q
-uv run ruff check app tests
-uv run ruff format --check app tests
+uv run ruff check app tests scripts examples streamlit_app.py
+uv run ruff format --check app tests scripts examples streamlit_app.py
 ```
 
 These commands run offline tests; MongoDB integration tests are skipped without
@@ -209,6 +209,7 @@ live model quality or account eligibility.
 
 ## Plans and reference data
 
+- [Requirement sources and index](docs/requirements.md) - where the JCI specification PDFs live locally and which docs track each requirement.
 - [AI scope audit and API delivery roadmap, 12 October 2026](docs/ai-scope-and-api-roadmap-2026-10-12.md) - current priorities against the supplied PDFs and pipeline.
 - [Agent v1 facade, synthetic offer search and backend consumer](docs/agent-api.md) - A/B delivery and pending integration gates.
 - [Implementation phases and test gates](docs/implementation-phases.md)

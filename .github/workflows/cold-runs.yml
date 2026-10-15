@@ -1,0 +1,117 @@
+name: Cold-run stability
+# Repeats the offline suite from a cold bytecode cache to catch timing-sensitive
+# tests. One unidentified failure appeared only on a first run in a fresh Windows
+# environment (15 October 2026). Failing test IDs go to the job summary.
+# Not a required check: it reports flakiness without blocking merges.
+on:
+  push:
+    branches: [firas, main, master]
+    paths:
+      - 'app/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.github/workflows/cold-runs.yml'
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.github/workflows/cold-runs.yml'
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Cold runs per operating system
+        required: false
+        default: '3'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cold-runs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cold-runs:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    env:
+      RUNS: ${{ inputs.runs || '3' }}
+      # MongoDB/Qdrant tests skip here (Windows runners cannot host the Linux
+      # containers); the flaky failure occurred without them. The model is used.
+      SID_TEST_EMBEDDING_DIRECTORY: .models/multilingual-minilm
+      EMBEDDING_MODEL_DIRECTORY: .models/multilingual-minilm
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.11.18
+      - run: uv sync --locked
+      - name: Download checksum-verified embedding model
+        run: uv run --no-sync python -m app.knowledge.cli download-model
+      - name: Repeated cold test runs
+        run: |
+          mkdir -p .artifacts/cold-runs
+          failed=0
+          for run in $(seq 1 "$RUNS"); do
+            log=".artifacts/cold-runs/run-$run.log"
+            # Run 1 is the first run after a fresh install. Each run also gets an
+            # empty bytecode cache, so every import is compiled again.
+            if PYTHONDONTWRITEBYTECODE= PYTHONPYCACHEPREFIX="$RUNNER_TEMP/pycache-$run" \
+                uv run --no-sync python -m pytest \
+                -q -p no:cacheprovider -rfE --tb=short \
+                --junitxml=".artifacts/cold-runs/run-$run.xml" > "$log" 2>&1; then
+              echo "Run $run: $(tail -n 1 "$log")"
+            else
+              failed=1
+              echo "::error::Cold run $run failed: $(tail -n 1 "$log")"
+              cat "$log"
+            fi
+          done
+          exit $failed
+      - name: Summarize runs
+        if: always()
+        run: |
+          uv run --no-sync python - "${{ matrix.os }}" <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import glob
+          import sys
+          import xml.etree.ElementTree as ET
+
+          print(f"## Cold runs on {sys.argv[1]}\n")
+          print("| Run | Tests | Failures | Errors | Skipped | Seconds |")
+          print("| ---: | ---: | ---: | ---: | ---: | ---: |")
+          failures = []
+          paths = sorted(glob.glob(".artifacts/cold-runs/run-*.xml"), key=lambda p: int(p.rsplit("-", 1)[1][:-4]))
+          for path in paths:
+              run = path.rsplit("-", 1)[1][:-4]
+              suite = ET.parse(path).getroot().find("testsuite")
+              print(f"| {run} | {suite.get('tests')} | {suite.get('failures')} | {suite.get('errors')} "
+                    f"| {suite.get('skipped')} | {float(suite.get('time')):.1f} |")
+              for case in suite.iter("testcase"):
+                  for kind in ("failure", "error"):
+                      node = case.find(kind)
+                      if node is not None:
+                          message = (node.get("message") or "").splitlines()[:1]
+                          failures.append((run, f"{case.get('classname')}::{case.get('name')}", kind,
+                                           (message[0] if message else "")[:160].replace("|", "\\|")))
+          if not paths:
+              print("\nNo JUnit reports were produced; see the step log.")
+          elif failures:
+              print("\n### Failing tests\n\n| Run | Test | Kind | Message |\n| ---: | --- | --- | --- |")
+              for run, test, kind, message in failures:
+                  print(f"| {run} | `{test}` | {kind} | {message} |")
+          else:
+              print("\nAll runs passed.")
+          EOF

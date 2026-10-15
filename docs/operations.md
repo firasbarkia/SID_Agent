@@ -147,8 +147,8 @@ $env:SID_TEST_MONGODB_URI='mongodb://127.0.0.1:27018/?replicaSet=rs0&directConne
 $env:SID_TEST_QDRANT_URL='http://127.0.0.1:6335'
 $env:SID_TEST_EMBEDDING_DIRECTORY='.models/multilingual-minilm'
 uv run python -m pytest -q
-uv run ruff check app tests
-uv run ruff format --check app tests
+uv run ruff check app tests scripts examples streamlit_app.py
+uv run ruff format --check app tests scripts examples streamlit_app.py
 ```
 
 Before a live pilot: integrate platform identity/UI, verify actual model access and
