@@ -13,10 +13,12 @@ exact-version confirmation and a deterministic profile completeness score. See
 The supplied conversation pipeline now has private history, context routing,
 reference-based advice and keyword memory. Matching remains disabled pending
 visibility rules. See [pipeline review and API contract](docs/pipeline-alignment.md).
-The [Agent v1 facade](docs/agent-api.md) now exposes typed `/agent/parse-cv`,
-`/agent/generate-pack` and `/agent/chat` contracts. The explicit local demo can
-search synthetic offers; real private matching and canonical offer resolution
-remain disabled pending verified platform contracts.
+The [Agent v2 facade](docs/agent-api.md) implements the AI pipeline of §5 on the
+platform's own data: candidate offer search, recruiter sourcing from a query or a
+job posting, a transparent compatibility score, an explained top five, anonymized
+selection, application scoring and the profile evaluator. Every endpoint and its
+inputs are in the [API reference](docs/api-reference.md). Platform login and
+profile sync remain the main backend's integration steps.
 Application dossiers add quoted evidence, CV suggestions and source-bound approval
 using candidate-supplied job/company text. See [Phase 5](docs/phase-5.md).
 Conversation deletion, queue status, a non-root Docker image and integration CI
@@ -79,13 +81,13 @@ uv run python -m app.demo
 
 Live mode retains the configured account scope and quotas, sends entered source
 text to the configured providers, and is visibly marked in the console. Remove the
-variable to return to simulated mode. Candidate offer search uses synthetic fixtures;
-real private matching, recruiter matching and submission remain disabled.
+variable to return to simulated mode. Matching runs on the demo's synthetic Sfax
+platform data (`data/contracts/platform-seed-v1.json`); submission stays disabled.
 Approval still records consent only. All confirmation/version/ownership checks
 remain active. Optional UI regression checks run with `uv run --group demo python
 -m pytest tests/test_demo.py -q`; MongoDB checks require `SID_TEST_MONGODB_URI`.
 
-With the simulated demo running, exercise all three facade contracts with
+With the simulated demo running, exercise the facade with
 `uv run python -m examples.agent_consumer`. Export versioned OpenAPI and the
 proposed profile-sync schema with `uv run python -m scripts.export_agent_contract`.
 
@@ -209,9 +211,11 @@ live model quality or account eligibility.
 
 ## Plans and reference data
 
+- [API reference: every endpoint, its inputs and errors](docs/api-reference.md)
+- [AI matching pipeline design](docs/superpowers/specs/2026-10-15-ai-matching-pipeline-design.md) and [implementation plan](docs/superpowers/plans/2026-10-15-ai-matching-pipeline.md)
 - [Requirement sources and index](docs/requirements.md) - where the JCI specification PDFs live locally and which docs track each requirement.
 - [AI scope audit and API delivery roadmap, 12 October 2026](docs/ai-scope-and-api-roadmap-2026-10-12.md) - current priorities against the supplied PDFs and pipeline.
-- [Agent v1 facade, synthetic offer search and backend consumer](docs/agent-api.md) - A/B delivery and pending integration gates.
+- [Agent v2 handoff: pipeline, rubric, anonymization and changes from v1](docs/agent-api.md)
 - [Implementation phases and test gates](docs/implementation-phases.md)
 - [Phase 2 MongoDB integration and setup](docs/phase-2.md)
 - [MVP architecture and functional plan](docs/plan-mvp-ia.md)

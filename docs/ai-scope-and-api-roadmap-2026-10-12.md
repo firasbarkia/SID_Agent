@@ -309,3 +309,21 @@ checks passed; the rebuilt non-root read-only container passed facade/liveness
 smoke checks. Details and the intermediate fixture-timeout rerun are recorded in
 [the handoff verification section](agent-api.md). All generation was mocked;
 live-provider and main-platform acceptance remain pending.
+
+## Matching delivery, 15 October 2026
+
+The remaining AI features of §5 now run on the platform's own data model; see the
+[agent-v2 handoff](agent-api.md), the [API reference](api-reference.md) and the
+[design spec](superpowers/specs/2026-10-15-ai-matching-pipeline-design.md).
+
+- B (candidate search): real offers from `job_offers`, versioned Qdrant indexes kept
+  current by `python -m app.matching.worker`, freshness re-checks, follow-up filters.
+- C (recruiter): sourcing by chat, by own offer or by job description; the
+  deterministic `compat-v1` rubric; explained top five; anonymized selection with
+  company-scoped pseudonyms; `/agent/score-application` for received applications.
+- D (partial): packs bind real offer versions and approval rechecks them; the
+  profile evaluator adds grounded strengths, advice and market gaps.
+
+Still open: the platform JWT verifier and staging accounts, accepted-profile sync to
+Node.js, fair rotation and the new-profile boost (§4C), and live-provider quality
+evaluation with human labels.

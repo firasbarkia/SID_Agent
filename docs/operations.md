@@ -1,6 +1,6 @@
 # Running and verifying the backend
 
-The API, draft worker, CV worker and reference index worker run separately.
+The API, draft worker, CV worker, reference index worker and match sync worker run separately.
 MongoDB must be a replica set; Qdrant holds rebuildable public reference vectors.
 Use the Phase 2/3 documents for database and index setup. The database Compose
 files are loopback-only development services, not production database deployments.
@@ -28,7 +28,20 @@ Override the command for workers; disable the image's API-only healthcheck:
 ```powershell
 docker run --rm --no-healthcheck --env-file .env sid-agent:local python -m app.worker
 docker run --rm --no-healthcheck --env-file .env sid-agent:local python -m app.cv.worker
+docker run --rm --no-healthcheck --env-file .env sid-agent:local python -m app.matching.worker
 ```
+
+The match sync worker reads the platform's `job_offers`, `company_profiles`,
+`candidate_profiles` and `users` collections read-only, embeds changed records with
+the local model and keeps the `sid_match_*` Qdrant collections current. It needs the
+same model mount, MongoDB and Qdrant settings as the API. A lease in
+`sid_match_state` lets only one copy write at a time; extra copies wait. Tune
+`MATCH_SYNC_SECONDS` (default 30), `MATCH_POOL_SIZE` (vector candidates re-checked per
+search, default 30) and `MATCH_MAX_CONCURRENT_QUERIES` (default 2).
+`GET /api/v1/matching/status` reports readiness, record counts and the last sync.
+Until the first sync completes, matching requests answer 503
+`matching_index_not_ready`. The image ships the reviewed skill alias table in
+`data/matching/`.
 
 The index worker uses `python -m app.knowledge.cli worker` and needs its model
 mount, MongoDB and Qdrant configuration. Processes sharing provider keys must use

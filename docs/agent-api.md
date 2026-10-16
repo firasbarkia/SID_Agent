@@ -1,188 +1,124 @@
-# Agent API v1: A/B contract handoff
+# Agent API v2: AI pipeline handoff
 
-Delivered 12 October 2026. This increment implements A's independent contract
-work and B's synthetic candidate-search slice. It does not connect real login,
-resolve real canonical offers, synchronize platform profiles, enable recruiter
-matching or establish live AI quality. The unresolved platform contracts remain
-in [the input register](platform-integration-contract.md).
+Delivered 15 October 2026. This increment implements the AI features of §5 of the
+functional specification along the AI pipeline diagram, on the platform's own data
+model. It replaces the synthetic offer fixtures of agent-v1. Platform login (the JWT
+verifier) and staging accounts remain the main backend's integration step.
 
-## Delivered endpoints
+Full inputs, outputs and error codes: [API reference](api-reference.md). Design:
+[matching pipeline spec](superpowers/specs/2026-10-15-ai-matching-pipeline-design.md).
 
-| Endpoint | Input | Output / supporting workflow |
-| --- | --- | --- |
-| `POST /agent/parse-cv?language=fr` | Raw `application/pdf`, candidate identity, service key, idempotency key. | 202 `ParseReceipt`: import ID, current status/version, polling URL, review flag, `sync_status: not_integrated`, `submitted: false`. Reuses the private CV upload workflow. |
-| `POST /agent/generate-pack` | Accepted SID profile ID/version, offer ID/version, language; candidate identity and both keys. | 202 `PackReceipt`: draft/task IDs, polling/draft URLs, pinned synthetic offer/company versions and snapshot hash. The default app returns 503 `canonical_offers_not_integrated`. Explicit synthetic injection resolves fixture offers and queues the existing dossier worker. |
-| `POST /agent/chat` | Owned conversation ID, expected revision, message; verified candidate/recruiter identity and both keys. | Typed `ChatReceipt`: conversation ID/revision, status, text, intent, references or offer matches, filters, memory and model/index provenance. Reuses conversation leases/transactions. |
-| `GET /agent/capabilities` | Service key. | Reports configured identity/database/advice, synthetic-or-disabled offer search, pending synchronization and disabled real matching/submission. This is configuration information, not a quality/readiness certificate. |
+## What the pipeline does
 
-The facade uses `contract_version: agent-v1`. Successful queue requests include a
-`Location` header matching `poll_url`. Replay may return the same ID with its
-current processing state; 202 alone does not mean a fresh job was created.
-
-Create conversations explicitly with `POST /api/v1/conversations`, optionally
-pinning an owned accepted profile ID/version. Then use `/agent/chat` for turns.
-This avoids creating duplicate conversations when a first-turn response is lost.
-Node.js conversation/message ID mapping is still a pending contract.
-
-CV correction and exact-version acceptance continue through
-`PUT /api/v1/cv-imports/{id}` and `POST /api/v1/cv-imports/{id}/accept`. Profile
-acceptance creates a SID profile; it does not publish/synchronize the canonical
-platform profile. Pack letter/evidence edits and explicit approvals remain in the
-existing `/api/v1/application-drafts/...` workflow. Approval is consent only.
-
-Typed polling schemas now describe CV import results (facts/page evidence/
-completeness), task status and the core draft result (letter/evidence/source
-snapshot). Existing draft metadata remains available for backward compatibility.
-CV and pack workers still run separately from the production API.
-
-## Authentication and errors
-
-The three POST facade operations require `X-Service-Key` plus a user verified by
-`create_app(verify_user_id=...)`. The principal's role/account state is reloaded
-from platform records. A service credential never substitutes for user identity.
-The proposed OpenAPI transport is a bearer token passed to the verifier; the
-facade does not invent or locally decode platform JWTs. The actual verifier,
-issuer/audience/revocation rules and ID fields must come from the main backend.
-
-OpenAPI describes service key and user token together, not as alternative ways
-to authorize a user operation. The localhost demo explicitly uses its synthetic
-`X-Demo-User` identity adapter; that exception is not enabled by `app.main`.
-Request bodies cannot select a role, switch search mode or supply authoritative
-job/company text to `/agent/generate-pack`.
-
-`Idempotency-Key` is required for each POST, 8-128 characters from letters,
-digits, `.`, `_` or `-`. Scope is the existing owned workflow; reuse with changed
-content returns 409. Use a new key for each new logical action.
-
-Domain failures use `{"detail":{"code":"..."}}`. Input validation uses FastAPI's
-`{"detail":[...]}` shape; both are described in facade schemas. Typical failures:
-
-| HTTP | Examples / caller action |
+| Diagram stage | Implementation |
 | --- | --- |
-| 401 / 403 | Invalid service/token, wrong role; refresh identity or correct access. |
-| 404 | Wrong ownership or inaccessible offer; do not assume existence. |
-| 409 | Changed key payload, stale profile/offer/revision, busy conversation, changed search generation; refresh/review current state. |
-| 413 / 415 / 422 | Size/content-type/invalid PDF, rejected schema or blocked generation; correct input. |
-| 503 | Identity/database/offer integration missing, provider/retrieval unavailable or capacity exhausted. Configuration gaps need setup; transient failures can retry the same logical request/key. |
+| Prompt → context agent | Classifies advice, matching or clarify; extracts city, contract and skills; keeps them across follow-ups |
+| Advice → RAG → prompt builder → LLM | Reference search (ESCO, ROME, O*NET, GeoNames) with cited answers |
+| Matching → user type → target | Candidates search **offers**; recruiters search **candidates** |
+| Vector search (profile + keywords + prompt) | Query vector = 0.60 prompt + 0.25 profile or company context + 0.15 conversation keywords, searched in versioned Qdrant indexes built with the local multilingual model |
+| Prompt builder → LLM | The top five with their computed criteria; the model may only quote returned records and repeat computed percentages |
+| Keyword memory → response + top 5 | Saved in one transaction with the turn; replays revalidate every record |
 
-Raw PDF uploads retain the existing 5 MiB cap, parser isolation and body timeout/
-admission controls. Chat retains the 90-second total pipeline deadline and
-120-second lease. A provider charge cannot be undone if a request fails before
-commit; retries of uncommitted work may call the model again.
+| §5 feature | Endpoint |
+| --- | --- |
+| 5.1 Profile autofill and validation | `/agent/parse-cv`, then CV correction and acceptance under `/api/v1/cv-imports` |
+| 5.1 Tailored pack (cross-analysis, letter, CV optimization) | `/agent/generate-pack` on a platform offer |
+| 5.1 Human validation before sending | Draft edits, evidence corrections and approvals; `submitted` is always false |
+| 5.1 Profile evaluator | `/agent/evaluate-profile` |
+| 5.1 Conversational offer search | `/agent/chat` as a candidate |
+| 5.2 Sourcing from a query or a job posting | `/agent/chat` as a recruiter, `/agent/source-candidates` |
+| 5.2 Semantic matching and percentage | The `compat-v1` rubric on every result |
+| 5.2 Top five with explanations | Every search; explanations validated or replaced by a template |
+| 5.2 Anonymized selection | `anonymized: true`, with `/agent/candidate-refs/resolve` |
+| §4B AI score on received applications | `/agent/score-application` |
 
-## Synthetic offer search
+## Data and freshness
 
-`app.main` defaults to `synthetic_offer_search=None`, so both private matching
-branches remain unavailable. Only explicit `SyntheticOfferSearch` injection is
-currently supported. `app.demo` injects the checked-in synthetic corpus; no request
-body or environment flag can switch the production app to a real private index.
+The service reads the platform's UML collections read-only (`job_offers`,
+`company_profiles`, `candidate_profiles`, `users`); see the field table in the API
+reference.
+- **Searchable offers:** open offers from verified companies.
+- **Discoverable candidates:** active candidates with a validated profile (`parsedSkills`).
+- **Versions:** the UML has no version field, so a record's version is the SHA-256 of its projected fields.
 
-Candidate matching uses this in-memory, generation-bound fixture index. The
-corpus includes public/closed/private offers, multiple locations/contracts and
-reviewed fixture aliases. Explicit location, contract and required-skill filters
-run before ranking. Returned records are checked for current OPEN/PUBLIC status
-and exact source version before explanation and again before committing/replaying
-a turn. Replacement/deletion rebuilds the index and changes its fingerprint.
+`python -m app.matching.worker` keeps the indexes current: every 30 seconds by
+default it re-embeds only changed records and removes closed, deleted or ineligible
+ones. Every search re-reads its hits from MongoDB and drops any whose version
+changed, so closed offers and edited profiles never reach a prompt or a result.
 
-The 128-dimensional deterministic token-hash encoder combines normalized query,
-accepted profile and keyword vectors with weights 0.60/0.25/0.15. Profile/memory
-enrich ranking; they never relax hard filters or create qualifications. A shared
-skill term is also required so hash collisions alone cannot make a match. Return
-at most five actual corpus IDs, ordered by ranking and stable ID for ties.
+## Compatibility rubric `compat-v1`
 
-Results expose `source: synthetic`, `score_type: synthetic_cosine_similarity` and
-`is_compatibility_percentage: false`. This encoder is a reproducible contract
-fixture, not a measured semantic model or an AI compatibility percentage. Real
-versioned Qdrant candidate/job indexes and semantic evaluation remain future work.
+Each requirement of the offer (or each skill a recruiter asks for) is matched against
+the candidate's skills and experience lines:
 
-The context schema now includes typed filters. The simulated demo router preserves
-filters across follow-up turns, supports the fixture locations/skills/contracts,
-and clarifies alternative locations or negation instead of pretending to interpret
-them. Its small vocabulary is not general natural-language quality evidence.
-Live routing still uses the existing provider gateway/schema and requires evaluation.
+| Level | Points | When |
+| --- | ---: | --- |
+| demonstrated | 1.0 | An experience or project line names it (or an equivalent) |
+| listed | 0.8 | A listed skill is the same or an equivalent |
+| related | 0.4 | Embedding similarity ≥ 0.50 |
+| missing | 0 | None of the above |
 
-The second LLM step explains only retrieved IDs and must quote every returned
-offer's description. Invented IDs, duplicate IDs and unsupported quotes are
-rejected through existing gateway validation/fallback. These checks establish
-text occurrence; overall semantic/factual explanation quality is still unmeasured.
-No-results responses skip explanation generation. Recruiter requests still return
-`matching_unavailable` with target `candidates`, even in the demo.
+The percentage is the mean of the points. Equivalences come from the reviewed alias
+table `data/matching/skill-aliases-v1.json` (ReactJS ≈ React, and React counts toward
+"Développement Frontend"). Thresholds were calibrated on the local model on 15
+October 2026: unrelated short terms reached 0.42, while short technical synonyms were
+often below 0.5, so the reviewed table carries technical synonyms. The percentage
+describes coverage of stated requirements, never a hiring probability.
 
-Matching statuses are `matches_found`, `no_matches` or `matching_unavailable`;
-ambiguous requests can return `clarification_required`. Advice keeps its existing
-`answered` / `insufficient_knowledge` outcomes. Successful turns save response,
-revision and replacement memory together. Replays make no new model call, but a
-changed fixture generation returns 409 instead of resurfacing stale matches.
-Private GET history remains a historical record rather than a current search.
+Candidates' offer results combine relevance and compatibility (0.6 / 0.4). Recruiter
+results are ordered by compatibility, then relevance.
 
-## Contract artifacts and consumer example
+## Anonymized selection
 
-Generate OpenAPI and the proposed accepted-profile synchronization schema:
+With `anonymized: true` a recruiter search ignores the city filter, ranks on skills
+and experience only, and returns pseudonyms (`C-` + 10 hex). A pseudonym is stable
+within one company and unlinkable across companies. Names, phone numbers, emails and
+CV links are removed from candidate text before it is stored for search, so they
+never reach prompts or results in either mode. `/agent/candidate-refs/resolve`
+returns the profile ID only to the issuing company.
+
+## Explanations
+
+The model receives only returned records. Its answer is rejected, and a deterministic
+French or English template is used instead (`explanation_source: "template"`), when:
+- it names an unknown ID,
+- it misses a result,
+- a quote does not appear in the record's text,
+- it states a percentage that is not the computed one,
+- no provider is available.
+
+Ranking and scores never depend on the model.
+
+## Changes from agent-v1
+
+- `contract_version` is `agent-v2`; `offer_version` is a 64-character content hash.
+- Search results are `OfferMatch` or `CandidateMatch` objects with `relevance`,
+  `compatibility`, `explanation` and a binding; `search_mode` is `platform`.
+- Packs bind `platform_offer` sources; approval rechecks the offer version.
+- New: `/agent/source-candidates`, `/agent/score-application`,
+  `/agent/evaluate-profile`, `/agent/candidate-refs/resolve`,
+  `GET /api/v1/matching/status`; `anonymized` on chat turns.
+- Removed: the synthetic offer corpus and `search_generation`.
+
+## Contract artifacts and examples
 
 ```powershell
 uv run python -m scripts.export_agent_contract
 ```
 
-Outputs: `.artifacts/agent-contracts/agent-v1.openapi.json` and
-`profile-sync-v1.schema.json`. Export starts no services and makes no AI calls.
-CI exports the same schemas after its regression checks.
+The export writes `.artifacts/agent-contracts/agent-v2.openapi.json` and
+`profile-sync-v1.schema.json`. `data/contracts/requests-v2.json` has one validated
+example per request, and `data/contracts/platform-seed-v1.json` is the demo's
+synthetic Sfax dataset in the platform's shape.
 
-`data/contracts/offers-v1.json` is the seven-offer synthetic corpus.
-`data/contracts/requests-v1.json` supplies pack/chat/profile-sync examples.
-The proposed sync envelope names the canonical candidate and expected platform
-version, accepted SID profile/version, structured facts, source hash, explicit
-confirmation and optional embedding reference (model/dimensions/index/source
-version). Delivery headers/idempotency/error semantics must be agreed with Node.js;
-no sender or platform PATCH is implemented in A/B.
+With the simulated demo running, run `uv run python -m examples.agent_consumer`. It
+uploads a CV, accepts it, searches Sfax PFE offers, replays the turn and queues a pack
+for the top offer. The simulation checks cover 17 scenarios, including recruiter
+sourcing, anonymization, scoring and profile evaluation.
 
-Run the localhost demo as documented in the README, in simulated mode. Then:
+## Still with the main platform
 
-```powershell
-uv run python -m examples.agent_consumer
-```
-
-The consumer uploads a generated synthetic PDF, polls/correctly accepts the review
-version, creates a pinned conversation, searches Sfax PFE Python offers, verifies
-an idempotent turn replay and queues/polls a pack through the real workers. It
-refuses remote origins and live demo AI mode. It uses only synthetic data and
-does not approve/send the pack. Repeated runs leave new synthetic demo records;
-regression tests run the same consumer in disposable MongoDB databases.
-
-## Verification and remaining gates
-
-The final full suite passed **282 tests**, with **no skips** and one existing
-upstream TestClient deprecation warning, in 196.36 seconds. MongoDB, Qdrant and the
-downloaded embedding model were enabled; all generation responses were mocked.
-Ruff lint/formatting and whitespace checks passed. The new contract/search checks
-exercise facade security,
-OpenAPI, workers, source binding, hard filters, aliases, profile enrichment,
-follow-up filters, no results, ambiguity, bounded ranking, changes/deletions,
-cross-user isolation, replay and invalid evidence. The consumer example is also
-exercised against the demo's actual CV/draft workers.
-
-```powershell
-$env:SID_TEST_MONGODB_URI='mongodb://127.0.0.1:27018/?replicaSet=rs0&directConnection=true'
-$env:SID_TEST_QDRANT_URL='http://127.0.0.1:6335'
-$env:SID_TEST_EMBEDDING_DIRECTORY='.models/multilingual-minilm'
-uv run python -m pytest -q --tb=short --junitxml=.artifacts/agent-contracts/pytest-final.xml
-uv run ruff check app tests streamlit_app.py examples/agent_consumer.py scripts/export_agent_contract.py
-uv run ruff format --check app tests streamlit_app.py examples/agent_consumer.py scripts/export_agent_contract.py
-```
-
-The rebuilt `sid-agent:ab-2026-10-12` image passed liveness, schema/authentication
-and default-capability checks as UID 10001 on a read-only filesystem. Its default
-user facade rejects requests without an integrated verifier. The temporary smoke
-container was removed. Remote CI was not run during this task.
-
-An intermediate concurrent build/test run had four MongoDB fixture-setup timeouts
-(277 passed, 4 setup errors). Each affected check passed separately, and the final
-282-test run passed without a concurrent build. Test timeout settings were not
-relaxed. The clean final JUnit report is in `.artifacts/agent-contracts/`.
-
-A's external contract decisions remain open: real authentication/IDs/memberships,
-offer visibility and versions, accepted-profile sync, conversation mapping,
-adapted-CV output and application-score transport. B's real private indexes and
-live-data access stay disabled. C's recruiter sourcing/compatibility/fair exposure,
-D's canonical synchronization/pack handoff, and E's staging/operational gates
-remain follow-up work. Live evaluation was not run because agreed provider budget,
-data handling and human-scored acceptance inputs are not yet available.
+- **JWT verifier:** login token verification and staging accounts.
+- **Profile sync:** sending accepted profiles to `PATCH /internal/candidate/:id/parsed-data`.
+- **Submission and listings:** application submission, and fair rotation and the new-profile boost in listings (§4C).
+- **Live AI quality:** live-provider evaluation with human labels.

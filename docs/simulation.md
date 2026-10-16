@@ -24,12 +24,18 @@ still required when using `app.main`.
 
 ## Test the intended behavior
 
-On **Simulation**, click **Run pipeline checks**. This runs the actual HTTP
-consumer through all three `/agent/*` endpoints. It creates a fresh sample CV,
-automatically accepts that synthetic CV for the test, and generates a draft
-pack. Application approval and submission are never performed by the checks.
-The report includes expected outcomes, record IDs and request/response traces.
-Download it from the page, or run the same checks from a terminal:
+The demo seeds a synthetic Sfax dataset in the platform's shape into its `demo_*`
+collections at startup: 26 offers from 10 companies (including a closed offer and an
+unverified company) and 40 candidates (including an inactive account and an
+unvalidated profile). The match sync worker indexes it before the API serves its
+first search, then keeps it current every 30 seconds.
+
+On **Simulation**, click **Run pipeline checks**. This runs the actual HTTP consumer
+and the scenarios below through the `/agent` endpoints. It creates a fresh sample CV,
+automatically accepts that synthetic CV for the test, and generates a draft pack.
+Application approval and submission are never performed by the checks. The report
+includes expected outcomes, record IDs and request/response traces. Download it from
+the page, or run the same checks from a terminal:
 
 ```powershell
 uv run --group demo python -m scripts.simulation check
@@ -40,45 +46,49 @@ failure. A failed prerequisite stops dependent checks and leaves its trace.
 
 | Scenario | Expected behavior |
 | --- | --- |
-| Sample PDF | Real upload/extraction worker reaches review; exact-version acceptance creates profile |
-| Python PFE in Sfax | Only `fixture-python-pfe`, maximum five results, synthetic ranking/evidence |
-| Retry same chat request/key | Same response; no duplicate turn |
-| “Tunis instead” | Change city; retain Python + PFE; return `fixture-tunis-pfe` |
-| Python PFE in Sousse | `no_matches`; no invented opportunity |
-| Sfax or Tunis | `clarification_required` |
-| Advice on Python skills | Advice branch retrieves local references and returns citations |
-| Stale conversation revision | HTTP 409 |
-| Second candidate reading first candidate's history | HTTP 404 |
-| Recruiter searching candidates | `matching_unavailable`; private discovery disabled |
-| Pack with private/closed offer or stale version | HTTP 404 or 409 before queueing |
-| Pack with accepted profile + eligible offer | Real worker; source versions pinned; human approval required |
-| Integration capabilities | Real private matching/submission disabled; profile sync `not_integrated` |
+| CV import and review | Real PDF worker reaches review before the test accepts it |
+| Candidate offer search | Up to five open Sfax PFE offers, each with a compatibility score |
+| Idempotent retry | Same key and payload return the same saved turn |
+| Pack generation | Worker finishes on a platform offer; approval required; nothing sent |
+| Profile evaluation | Completeness, strengths quoting the profile, market-based advice |
+| Follow-up memory | "Tunis instead" changes the city and keeps Python and PFE |
+| No invented matches | Sousse has no PFE offers, so `no_matches` with no results |
+| Ambiguous request | "Sfax or Tunis" requires clarification |
+| Advice and RAG | Advice retrieves references and cites at least one |
+| Stale conversation | A stale revision gets HTTP 409 |
+| Candidate isolation | Candidate two cannot read candidate one's conversation |
+| Recruiter sourcing | Candidates ranked by compatibility, with "Matching %" explanations |
+| Anonymized sourcing | Pseudonyms only: no names, contacts or cities |
+| Job posting sourcing | A recruiter's own offer gives an explained top five on its skills |
+| Application scoring | Repeat calls return the same score and template justification |
+| Offer eligibility and versions | Closed or unverified offers 404; stale versions 409 |
+| Integration gates | Matching on platform data; submission and profile sync stay off |
 
 For manual exploration, select an identity and click **Start synthetic session**.
-This accepts a sample Python/SQL profile for candidates and creates a conversation.
-Choose a scenario, edit its prompt if desired and send it through `/agent/chat`.
-Try the Sfax search followed by the location-change scenario in the same session.
-The page shows routing, response status, saved memory, results and full JSON.
-**Conversation** shows history; **CV import** lets you review/correct a PDF yourself;
-**Applications** shows generated packs and their evidence/approval controls.
+Candidates get an accepted Python/SQL profile and a conversation; choose a scenario,
+edit the prompt if you like and send it through `/agent/chat`. Recruiters can tick
+**Anonymized selection** before sending. **Candidate sourcing** (recruiter) ranks
+candidates for one of the company's offers or a pasted job description, and scores
+an application. **Profile workspace** has **Evaluate with AI**. **Applications**
+generates packs for platform offers. **Operations** shows the matching index state.
 
 ## What this proves
 
-PDF parsing, MongoDB transactions/queues, workers, ownership checks, version
-guards, API serialization, local multilingual reference embeddings and Qdrant
-retrieval all execute. Seven synthetic offers exercise the candidate search
-adapter, including public, closed and private examples.
+PDF parsing, MongoDB transactions and queues, workers, ownership checks, version
+guards, local multilingual embeddings, Qdrant retrieval for references, offers and
+candidates, the compatibility rubric, anonymization and freshness re-checks all
+execute for real.
 
-Context decisions, CV extraction and generated prose are deterministic fixtures.
-The scripted router understands the listed prompts and a limited set of skills,
-cities and follow-ups. This does not evaluate free-form language quality,
-provider latency, real matching quality or production identity integration.
-Synthetic offer ranking uses the fixture token-vector adapter, not the neural
-reference encoder. Similarity is not a compatibility percentage.
+Context decisions, CV extraction and generated prose are deterministic fixtures in
+simulated mode. The scripted router understands a limited set of skills, cities and
+follow-ups, so this does not evaluate free-form language quality, provider latency
+or production identity integration. The demo data is synthetic, so rankings show
+the mechanism working, not measured matching quality. Compatibility is coverage of
+an offer's stated requirements, not a hiring probability.
 
-Recruiter discovery, real private matching, profile sync and application
-submission remain gated. Live evaluation is a separate activity when provider
-and authorized data inputs are available; this launcher cannot enable it.
+Profile sync to the platform and application submission stay with the main backend.
+Live evaluation is a separate activity when provider and authorized data inputs are
+available; this launcher cannot enable it.
 
 ## Lifecycle and troubleshooting
 
