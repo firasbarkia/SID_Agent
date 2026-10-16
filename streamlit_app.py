@@ -3,7 +3,6 @@
 import asyncio
 import json
 import os
-from pathlib import Path
 from urllib.parse import urlsplit
 from uuid import uuid4
 
@@ -21,6 +20,10 @@ SAMPLE_PROFILE = (
     "Project: Python inventory application with a SQL database"
 )
 SAMPLE_JOB = "PFE internship in Sfax requiring Python and SQL for web development."
+COMPATIBILITY_NOTE = (
+    "Compatibility is coverage of the offer's stated requirements (compat-v1), "
+    "not a hiring probability."
+)
 
 st.set_page_config(page_title="SID · Test workspace", page_icon="🧪", layout="wide")
 
@@ -62,6 +65,40 @@ def api(method, path, *, body=None, data=None, new_job=False, quiet=False):
     return result if result is not None else {"ok": True}
 
 
+def result_rows(results):
+    rows = []
+    for row in results:
+        compatibility = row.get("compatibility") or {}
+        if row.get("kind") == "candidate":
+            rows.append(
+                {
+                    "Candidate": row["display_name"],
+                    "Skills": ", ".join(row["skills"][:5]),
+                    "Compatibility %": compatibility.get("percent"),
+                    "Why": row.get("explanation"),
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "Offer": row["title"],
+                    "Company": row["company"]["name"],
+                    "City": (row["company"].get("city") or "").title(),
+                    "Contract": row["contract"],
+                    "Compatibility %": compatibility.get("percent"),
+                    "Relevance": round(row["relevance"], 3),
+                    "Why": row.get("explanation"),
+                }
+            )
+    return rows
+
+
+def platform_offers():
+    """Open, verified offers from the demo's platform data (own offers for recruiters)."""
+    offers = api("GET", "/demo/offers", quiet=True)
+    return offers if isinstance(offers, list) else []
+
+
 def inspect(label, value):
     with st.expander(label):
         st.json(value)
@@ -93,11 +130,13 @@ def choose(label, items, key):
 def simulation():
     st.title("AI pipeline simulation")
     st.write(
-        "Test the integration APIs with synthetic users and offers, then inspect each response."
+        "Test the integration APIs with synthetic users and the seeded Sfax platform data, "
+        "then inspect each response."
     )
     st.caption(
-        "Context routing → advice / offer search → response + memory → pack for human review. "
-        "Provider responses are scripted; MongoDB, PDF workers and reference retrieval are real."
+        "Context routing → advice / offer or candidate search → response + memory → pack for "
+        "human review. Provider responses are scripted; MongoDB, PDF workers, vector search "
+        "and compatibility scoring are real."
     )
     if status["ai_mode"] != "simulated":
         st.info("Start with python -m scripts.simulation start to use the simulation scenarios.")
@@ -105,7 +144,7 @@ def simulation():
     st.subheader("1. Verify the complete flow")
     st.write(
         "The checks import and accept a sample CV, search offers, change location, test advice, "
-        "generate a pack and verify access restrictions. "
+        "source and score candidates, generate a pack and verify access restrictions. "
         "They use both candidates and the recruiter. "
         "Each run creates new synthetic records and automatically accepts only its sample CV."
     )
@@ -129,7 +168,7 @@ def simulation():
     st.subheader("2. Try the conversation yourself")
     st.write(
         "Start a session for the identity selected in the sidebar. Candidate sessions create "
-        "and accept a synthetic Python/SQL profile. Recruiter searches return matching_unavailable."
+        "and accept a synthetic Python/SQL profile. Recruiters search validated candidates."
     )
     if st.button("Start synthetic session"):
         payload = {"language": language}
@@ -162,31 +201,37 @@ def simulation():
     if not history:
         return
     prompts = {
-        "Find a PFE in Sfax": ("Je cherche un stage PFE Python à Sfax", "fixture-python-pfe"),
+        "Find a PFE in Sfax": (
+            "Je cherche un stage PFE Python à Sfax",
+            "Open Sfax PFE offers requiring Python, with compatibility",
+        ),
         "Change location": (
             "Tunis instead",
-            "After the Sfax search: fixture-tunis-pfe; keep PFE + Python",
+            "After the Sfax search: Tunis PFE offers; Python and PFE stay",
         ),
         "No results": ("Find Python PFE Sousse", "no_matches, empty results"),
         "Clarify locations": ("Find Python PFE in Sfax or Tunis", "clarification_required"),
         "Ask for advice": ("Advice on Python skills for my CV", "answered, with cited references"),
-        "Recruiter search": ("Find Python candidates", "As recruiter: matching_unavailable"),
+        "Recruiter sourcing": (
+            "Find ReactJS frontend candidates in Sfax",
+            "As recruiter: candidates ranked by compatibility",
+        ),
     }
     selected = st.selectbox("Scenario", list(prompts))
     st.caption("Expected: " + prompts[selected][1])
+    recruiter = DEMO_USERS[user] == "RECRUITER"
+    anonymized = recruiter and st.checkbox("Anonymized selection", key=f"sim-anon:{user}")
     with st.form("simulation_prompt"):
         message = st.text_area("Prompt", prompts[selected][0], key=f"sim-prompt:{user}:{selected}")
         if st.form_submit_button("Send through /agent/chat", type="primary"):
-            turn = api(
-                "POST",
-                "/agent/chat",
-                new_job=True,
-                body={
-                    "conversation_id": conversation_id,
-                    "expected_revision": history["revision"],
-                    "message": message,
-                },
-            )
+            body = {
+                "conversation_id": conversation_id,
+                "expected_revision": history["revision"],
+                "message": message,
+            }
+            if anonymized:
+                body["anonymized"] = True
+            turn = api("POST", "/agent/chat", new_job=True, body=body)
             if turn:
                 ws["simulation_turn"] = turn
                 st.rerun()
@@ -197,23 +242,8 @@ def simulation():
         st.write(response["text"])
         st.caption("Saved memory: " + ", ".join(response["keywords"]))
         if response["results"]:
-            st.dataframe(
-                [
-                    {
-                        "ID": row["id"],
-                        "Title": row["title"],
-                        "Location": row["location"],
-                        "Contract": row["contract"],
-                        "Synthetic similarity": row["ranking_score"],
-                    }
-                    for row in response["results"]
-                ],
-                hide_index=True,
-                width="stretch",
-            )
-            st.caption(
-                "Ranking scores are synthetic similarity values, not compatibility percentages."
-            )
+            st.dataframe(result_rows(response["results"]), hide_index=True, width="stretch")
+            st.caption(COMPATIBILITY_NOTE)
         inspect("Full integration response", turn)
     st.caption("Open Conversation in the sidebar for full history; Applications for saved packs.")
 
@@ -258,6 +288,29 @@ def profiles():
             body={"expected_version": profile["version"], "confirmed": True},
         ):
             st.rerun()
+    if profile.get("validated_version") == profile["version"]:
+        if st.button("Evaluate with AI"):
+            result = api(
+                "POST",
+                "/agent/evaluate-profile",
+                body={
+                    "profile_id": profile_id,
+                    "profile_version": profile["version"],
+                    "language": language,
+                },
+            )
+            if result:
+                ws["assessment"] = result
+        assessment = ws.get("assessment")
+        if assessment and assessment.get("profile_id") == profile_id:
+            completeness = assessment["completeness"]["score"]
+            st.write(f"Completeness **{completeness}/100** · {assessment['assessment_source']}")
+            for strength in assessment["strengths"]:
+                st.write(f"Strength: {strength['text']} (“{strength['quote']}”)")
+            for advice in assessment["advice"]:
+                st.write(f"Advice ({advice['basis']}): {advice['text']}")
+            if assessment["market_gaps"]:
+                st.dataframe(assessment["market_gaps"], hide_index=True)
     if profile.get("structured_data"):
         result = api("GET", f"/api/v1/profiles/{profile_id}/evaluation")
         if result:
@@ -407,26 +460,20 @@ def applications():
     st.title("Application review")
     st.caption("Generate a letter or dossier, review evidence, then record approval.")
     accepted = [p for p in workspace["profiles"] if p.get("validated_version") == p["version"]]
-    if accepted:
-        corpus = json.loads(
-            (Path(__file__).parent / "data/contracts/offers-v1.json").read_text("utf-8")
-        )
-        offers = {
-            row["id"]: row
-            for row in corpus["offers"]
-            if row["status"] == "OPEN" and row["visibility"] == "PUBLIC"
-        }
-        with st.expander(
-            "Generate a synthetic offer pack through /agent/generate-pack", expanded=True
-        ):
-            with st.form("synthetic_pack"):
+    offers = {row["id"]: row for row in platform_offers()} if accepted else {}
+    if accepted and offers:
+        with st.expander("Generate a pack for a platform offer", expanded=True):
+            with st.form("platform_pack"):
                 profile_id = st.selectbox("Accepted profile for pack", [p["id"] for p in accepted])
                 offer_id = st.selectbox(
-                    "Synthetic offer",
+                    "Offer",
                     list(offers),
-                    format_func=lambda key: f"{offers[key]['title']} · {offers[key]['location']}",
+                    format_func=lambda key: (
+                        f"{offers[key]['title']} · {offers[key]['company']} · "
+                        f"{(offers[key]['city'] or '').title()}"
+                    ),
                 )
-                if st.form_submit_button("Queue synthetic pack", type="primary"):
+                if st.form_submit_button("Queue pack", type="primary"):
                     profile = next(p for p in accepted if p["id"] == profile_id)
                     result = api(
                         "POST",
@@ -588,8 +635,8 @@ def preview():
 def conversations():
     st.title("Recruitment conversation")
     st.caption(
-        "Advice uses references. Offer search uses synthetic fixtures; "
-        "recruiter matching is unavailable."
+        "Advice uses references. Candidates search platform offers; recruiters search "
+        "validated candidate profiles. " + COMPATIBILITY_NOTE
     )
     with st.expander("Start a conversation", expanded=not workspace["conversations"]):
         options = {"No profile": None}
@@ -625,7 +672,8 @@ def conversations():
         with st.chat_message("assistant"):
             st.write(turn["response"]["text"])
             if turn["response"].get("results"):
-                inspect("Synthetic offer results", turn["response"]["results"])
+                st.dataframe(result_rows(turn["response"]["results"]), hide_index=True)
+                inspect("Search results", turn["response"]["results"])
             if turn["response"].get("references"):
                 inspect("References", turn["response"]["references"])
     message = st.chat_input("Ask about Python skills, a CV, or a career direction")
@@ -647,6 +695,63 @@ def conversations():
         if st.button("Delete conversation history"):
             if api("DELETE", f"/api/v1/conversations/{conversation_id}"):
                 st.rerun()
+
+
+def sourcing():
+    st.title("Candidate sourcing")
+    st.caption(
+        "Rank validated candidates for one of your offers or a pasted job description. "
+        + COMPATIBILITY_NOTE
+    )
+    offers = {row["id"]: row for row in platform_offers()}
+    anonymized = st.checkbox("Anonymized selection (skills and experience only)")
+    with st.form("sourcing"):
+        source = st.radio("Source", ["My offer", "Job description"], horizontal=True)
+        offer_id = None
+        if offers:
+            offer_id = st.selectbox(
+                "My offer",
+                list(offers),
+                format_func=lambda key: f"{offers[key]['title']} · {offers[key]['contract']}",
+            )
+        text = st.text_area(
+            "Job description", "Junior developer with ReactJS, Node.js and MongoDB in Sfax."
+        )
+        if st.form_submit_button("Find candidates", type="primary"):
+            body = {"language": language, "anonymized": anonymized}
+            if source == "My offer" and offer_id:
+                body["offer_id"] = offer_id
+            else:
+                body["job_description"] = text
+            result = api("POST", "/agent/source-candidates", body=body)
+            if result:
+                ws["sourcing"] = result
+    result = ws.get("sourcing")
+    if result:
+        st.write(result["text"])
+        st.caption("Criteria: " + (", ".join(result["criteria"]) or "none found"))
+        if result["results"]:
+            st.dataframe(result_rows(result["results"]), hide_index=True, width="stretch")
+        inspect("Full sourcing response", result)
+    st.subheader("Score an application")
+    with st.form("score_application"):
+        offer_choice = st.selectbox("Offer to score against", list(offers)) if offers else None
+        candidate = st.text_input("Candidate profile ID", "cand-02")
+        if st.form_submit_button("Score") and offer_choice:
+            scored = api(
+                "POST",
+                "/agent/score-application",
+                body={
+                    "offer_id": offer_choice,
+                    "candidate_profile_id": candidate,
+                    "language": language,
+                },
+            )
+            if scored:
+                ws["score"] = scored
+    if ws.get("score"):
+        st.write(ws["score"]["result"]["explanation"])
+        inspect("Score", ws["score"])
 
 
 def knowledge():
@@ -703,8 +808,12 @@ def operations():
     readiness = api("GET", "/health/ready", quiet=True)
     if readiness:
         inspect("Readiness", readiness)
+    matching = api("GET", "/api/v1/matching/status", quiet=True)
+    if matching:
+        inspect("Matching indexes", matching)
     st.info(
-        "Synthetic offer search is enabled. Real private matching and submission remain disabled."
+        "Matching runs on the demo's seeded platform data. Profile sync and application "
+        "submission stay with the platform."
     )
     st.link_button("Open API documentation", base + "/docs")
 
@@ -727,6 +836,8 @@ with st.sidebar:
         pages.update(
             {"Profile workspace": profiles, "CV import": cv_imports, "Applications": applications}
         )
+    if DEMO_USERS[user] == "RECRUITER":
+        pages["Candidate sourcing"] = sourcing
     pages.update(
         {"Conversation": conversations, "Reference search": knowledge, "Operations": operations}
     )

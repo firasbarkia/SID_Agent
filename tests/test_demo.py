@@ -197,6 +197,17 @@ def test_console_selects_new_facade_pack_and_preserves_manual_selection(monkeypa
                 "cv_imports": [],
                 "conversations": [],
             }
+        elif url.endswith("/demo/offers"):
+            data = [
+                {
+                    "id": "off-demo-python-pfe",
+                    "version": "a" * 64,
+                    "title": "PFE développement web Python",
+                    "company": "Demo software company",
+                    "city": "sfax",
+                    "contract": "PFE",
+                }
+            ]
         elif url.endswith("/agent/generate-pack"):
             drafts.insert(0, {"id": "new-pack", "version": 1, "status": "queued"})
             data = {"draft_id": "new-pack", "task_id": "pack-task"}
@@ -211,12 +222,47 @@ def test_console_selects_new_facade_pack_and_preserves_manual_selection(monkeypa
         Path(__file__).resolve().parents[1] / "streamlit_app.py", default_timeout=15
     ).run()
     app.sidebar.radio[0].set_value("Applications").run()
-    next(button for button in app.button if button.label == "Queue synthetic pack").click().run()
+    next(button for button in app.button if button.label == "Queue pack").click().run()
     assert not app.exception
     selected = next(box for box in app.selectbox if box.label == "Drafts")
     assert selected.value == "new-pack"
     selected.set_value("old-draft").run()
     assert next(box for box in app.selectbox if box.label == "Drafts").value == "old-draft"
     payload = next(body for method, url, body in calls if url.endswith("/agent/generate-pack"))
-    assert payload["offer_id"] == "fixture-python-pfe" and payload["offer_version"] == 1
+    assert payload["offer_id"] == "off-demo-python-pfe" and payload["offer_version"] == "a" * 64
     assert "job_description" not in payload
+
+
+def test_recruiter_sourcing_page_renders(monkeypatch):
+    pytest.importorskip("streamlit")
+    from streamlit.testing.v1 import AppTest
+
+    def request(method, url, **kwargs):
+        if url.endswith("/demo/status"):
+            data = {"demo": True, "ai_mode": "simulated"}
+        elif url.endswith("/demo/workspace"):
+            data = {"profiles": [], "drafts": [], "cv_imports": [], "conversations": []}
+        elif url.endswith("/demo/offers"):
+            data = []
+        else:
+            data = {"status": "ready"}
+        return httpx.Response(200, json=data)
+
+    monkeypatch.setattr(httpx, "request", request)
+    app = AppTest.from_file(
+        Path(__file__).resolve().parents[1] / "streamlit_app.py", default_timeout=15
+    ).run()
+    app.sidebar.selectbox[0].set_value("demo-recruiter").run()
+    app.sidebar.radio[0].set_value("Candidate sourcing").run()
+    assert not app.exception
+
+
+@pytest.mark.mongodb
+async def test_demo_offers_are_scoped_to_role(settings, mongo_db, monkeypatch):
+    async with demo_api(settings, mongo_db, monkeypatch) as client:
+        everything = (await client.get("/demo/offers")).json()
+        assert everything and all(len(row["version"]) == 64 for row in everything)
+        assert "off-demo-closed" not in {row["id"] for row in everything}
+        client.headers["X-Demo-User"] = "demo-recruiter"
+        own = (await client.get("/demo/offers")).json()
+        assert own and {row["company_id"] for row in own} == {"demo-company"}
