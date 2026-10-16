@@ -116,7 +116,10 @@ class ConversationStore:
 
     async def begin(self, principal, conversation_id, payload, key):
         head = await self.get(principal, conversation_id)
-        request_hash = hashlib.sha256(payload.model_dump_json().encode()).hexdigest()
+        # Defaults are excluded so new optional fields keep existing replay hashes valid.
+        request_hash = hashlib.sha256(
+            payload.model_dump_json(exclude_defaults=True).encode()
+        ).hexdigest()
         old = await self.db.sid_conversation_turns.find_one(
             {
                 "conversation_id": conversation_id,

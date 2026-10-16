@@ -1,6 +1,0 @@
-{
-  "synthetic": true,
-  "generate_pack": {"profile_id":"replace-with-accepted-sid-profile-id","profile_version":1,"offer_id":"fixture-python-pfe","offer_version":1,"language":"fr"},
-  "chat": {"conversation_id":"replace-with-owned-conversation-id","expected_revision":0,"message":"Je cherche un stage PFE Python à Sfax"},
-  "accepted_profile_sync": {"contract_version":"profile-sync-v1","candidate_id":"fixture-candidate","expected_platform_version":1,"profile_id":"fixture-profile","accepted_profile_version":1,"facts":[{"field":"skill","value":"Python"}],"source_sha256":"0000000000000000000000000000000000000000000000000000000000000000","confirmed":true}
-}

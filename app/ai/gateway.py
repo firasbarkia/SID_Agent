@@ -17,6 +17,15 @@ from app.config import Settings
 logger = logging.getLogger(__name__)
 
 
+def provenance(generation: Generation) -> dict:
+    """Public record of which provider and model produced an output."""
+    return {
+        "provider": generation.provider,
+        "model": generation.model,
+        "fallback_used": generation.fallback_used,
+    }
+
+
 class AIGateway:
     def __init__(self, providers: list[Provider], settings: Settings, *, breakers=None) -> None:
         self.providers = providers

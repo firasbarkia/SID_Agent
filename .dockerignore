@@ -1,6 +1,8 @@
 **
 !app/
 !app/**
+!data/matching/
+!data/matching/**
 !pyproject.toml
 !uv.lock
 !README.md

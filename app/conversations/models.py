@@ -23,6 +23,8 @@ class ConversationCreate(Input):
 class TurnRequest(Input):
     expected_revision: int = Field(ge=0, strict=True)
     message: str = Field(min_length=2, max_length=2000)
+    # Recruiters only: rank on skills and experience, show pseudonyms (§5.2).
+    anonymized: bool = False
 
 
 class ContextDecision(Input):

@@ -38,3 +38,17 @@ async def operations_status(request: Request, store: Database):
         "matching_enabled": False,
         "submission_enabled": False,
     }
+
+
+matching_router = APIRouter(
+    prefix="/api/v1/matching", tags=["Operations"], dependencies=[Depends(require_service_key)]
+)
+
+
+@matching_router.get("/status")
+async def matching_status(request: Request):
+    """Index readiness and sync state; record contents are never returned."""
+    engine = getattr(request.app.state, "match_engine", None)
+    if engine is None:
+        return {"configured": False}
+    return {"configured": True, **await engine.index.status()}

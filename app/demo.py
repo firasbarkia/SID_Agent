@@ -24,7 +24,11 @@ from app.knowledge.normalize import normalize
 from app.knowledge.store import KnowledgeStore
 from app.knowledge.worker import IndexWorker
 from app.main import create_app
-from app.matching.synthetic import SyntheticOfferSearch, fixture_filters
+from app.matching.aliases import normalize_term
+from app.matching.catalog import CITIES
+from app.matching.models import OfferFilters
+from app.matching.seed import seed_platform
+from app.matching.worker import MatchSyncWorker
 from app.worker import DraftWorker
 
 DEMO_SERVICE_KEY = "sid-local-demo-only"
@@ -33,6 +37,13 @@ DEMO_USERS = {
     "demo-candidate-two": "CANDIDATE",
     "demo-recruiter": "RECRUITER",
 }
+# Skills the simulated router recognizes. Live routing uses the provider gateway.
+DEMO_SKILLS = [
+    "Python", "SQL", "ReactJS", "React", "Frontend", "Java", "Node.js", "MongoDB",
+    "Flutter", "Docker", "Angular", "TypeScript", "Django", "Power BI", "Figma", "Kotlin",
+    "PHP", "Laravel", "Machine learning", "Excel", "Accounting", "Digital marketing",
+    "Embedded systems", "C++", "Kubernetes", "Git",
+]  # fmt: skip
 LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 ROOT = Path(__file__).resolve().parents[1]
 logger = logging.getLogger(__name__)
@@ -101,6 +112,32 @@ def demo_settings(source=None, *, live=False):
     return Settings(_env_file=None, **{**source.model_dump(), **changes})
 
 
+def fixture_filters(message, previous=(), last_filters=None):
+    """Deterministic router aid for the simulated demo; live routing uses its schema."""
+    folded = f" {normalize_term(message)} "
+
+    def has(term):
+        return f" {normalize_term(term)} " in folded
+
+    last = OfferFilters.model_validate(last_filters or {})
+    cities = [city for city in CITIES if has(city)]
+    remembered = [p for p in previous if normalize_term(p) in CITIES]
+    if cities:
+        location = max(cities, key=lambda city: folded.rfind(f" {city} ")).title()
+    else:
+        location = remembered[0].title() if remembered else last.location
+    if has("pfe"):
+        contract = "PFE"
+    elif has("internship") or has("stage"):
+        contract = "INTERNSHIP"
+    elif has("employment") or has("emploi") or has("job"):
+        contract = "EMPLOYMENT"
+    else:
+        contract = last.contract
+    skills = [skill for skill in DEMO_SKILLS if has(skill)]
+    return OfferFilters(location=location, contract=contract, skills=skills or last.skills)
+
+
 def simulated_output(system, data):
     """Small deterministic fixtures for exercising workflows, not quality evaluation."""
     title = data.get("schema", {}).get("title")
@@ -143,19 +180,55 @@ def simulated_output(system, data):
             }
         )
     if title == "MatchAnswer":
+        french = data["language"] == "fr"
+        evidence = []
+        for match in data["matches"]:
+            percent = match["compatibility_percent"]
+            if percent is None:
+                reason = "Correspond à la recherche." if french else "Matches the search."
+            elif french:
+                reason = f"Matching {percent} % : couvre les exigences principales."
+            else:
+                reason = f"Matching {percent}%: covers the main requirements."
+            quote = match["text"].splitlines()[0][:150]
+            evidence.append({"id": match["id"], "quote": quote, "reason": reason})
         return json.dumps(
             {
                 "text": (
-                    "Résultats synthétiques pour tester l'intégration."
-                    if data["language"] == "fr"
-                    else "Synthetic results for integration testing."
+                    "Résultats simulés pour tester le parcours de matching."
+                    if french
+                    else "Simulated explanations for testing the matching workflow."
                 ),
-                "evidence": [
-                    {"id": offer["id"], "quote": offer["description"][:300]}
-                    for offer in data["matches"]
-                ],
+                "evidence": evidence,
             }
         )
+    if title == "AssessmentAnswer":
+        french = data["language"] == "fr"
+        values = [
+            line.partition(":")[2].strip()
+            for line in data["profile"].splitlines()
+            if line.partition(":")[2].strip()
+        ]
+        strengths = [
+            {"text": f"Point fort : {value}" if french else f"Strength: {value}", "quote": value}
+            for value in values[:2]
+        ] or [
+            {
+                "text": "Profil fourni" if french else "Profile provided",
+                "quote": data["profile"][:80],
+            }
+        ]
+        advice = [{"text": item, "basis": "missing_field"} for item in data["missing_fields"][:2]]
+        for gap in data["market_gaps"][:2]:
+            text = (
+                f"Montrez un projet avec {gap['requirement']}."
+                if french
+                else f"Show a project using {gap['requirement']}."
+            )
+            advice.append({"text": text, "basis": "market_gap"})
+        if not advice:
+            advice = [{"text": "Describe one project with results.", "basis": "wording"}]
+        return json.dumps({"strengths": strengths, "advice": advice[:6]})
     if title == "Answer":
         ref = data["references"][0]
         return json.dumps(
@@ -224,26 +297,6 @@ def simulated_response(request):
     )
 
 
-async def seed_users(db):
-    for user_id, role in DEMO_USERS.items():
-        await db.demo_users.update_one(
-            {"id": user_id},
-            {"$setOnInsert": {"id": user_id, "role": role, "isActive": True}},
-            upsert=True,
-        )
-    await db.demo_companies.update_one(
-        {"id": "demo-company"},
-        {
-            "$setOnInsert": {
-                "id": "demo-company",
-                "userId": "demo-recruiter",
-                "companyName": "Demo software company",
-            }
-        },
-        upsert=True,
-    )
-
-
 async def run_worker(worker):
     while True:
         try:
@@ -252,6 +305,15 @@ async def run_worker(worker):
         except Exception:
             logger.exception("Demo worker error; retrying")
             await asyncio.sleep(2)
+
+
+async def run_match_sync(worker, seconds):
+    while True:
+        await asyncio.sleep(seconds)
+        try:
+            await worker.run_once()
+        except Exception:
+            logger.exception("Demo match sync error; retrying")
 
 
 def create_demo_app(settings=None, *, live=None, knowledge_embedder=None):
@@ -265,7 +327,6 @@ def create_demo_app(settings=None, *, live=None, knowledge_embedder=None):
         verify_user_id=verify_demo_user,
         transport=None if live else httpx.MockTransport(simulated_response),
         knowledge_embedder=knowledge_embedder,
-        synthetic_offer_search=SyntheticOfferSearch.from_fixture(),
     )
     application.add_middleware(LocalOnly)
     original_lifespan = application.router.lifespan_context
@@ -274,36 +335,69 @@ def create_demo_app(settings=None, *, live=None, knowledge_embedder=None):
     @asynccontextmanager
     async def lifespan(app):
         async with original_lifespan(app):
-            await seed_users(app.state.store.db)
+            db = app.state.store.db
+            await seed_platform(db, config)
             workers = [DraftWorker, CVWorker]
             tasks = [
-                asyncio.create_task(
-                    run_worker(worker(app.state.store.db, app.state.ai_gateway, config))
-                )
+                asyncio.create_task(run_worker(worker(db, app.state.ai_gateway, config)))
                 for worker in workers
             ]
+            engine = app.state.match_engine
+            if engine is not None:
+                sync = MatchSyncWorker(db, engine.index.qdrant, engine.embedder, config)
+                # Index once before serving so the first search finds the seeded data.
+                try:
+                    await sync.run_once()
+                except Exception:
+                    logger.exception("Initial demo match sync failed; retrying in background")
+                tasks.append(asyncio.create_task(run_match_sync(sync, config.match_sync_seconds)))
             try:
                 yield
             finally:
                 for task in tasks:
                     task.cancel()
                 await asyncio.gather(*tasks, return_exceptions=True)
+                if engine is not None:
+                    await sync.release()
 
     application.router.lifespan_context = lifespan
 
     @application.get("/demo/status", tags=["Local demo"])
     async def demo_status():
+        engine = application.state.match_engine
         return {
             "demo": True,
             "auth": "localhost synthetic identities",
             "ai_mode": "live" if live else "simulated",
             "database": config.mongodb_database,
             "users": DEMO_USERS,
-            "workers": ["draft", "cv"],
+            "workers": ["draft", "cv", "match-sync"] if engine else ["draft", "cv"],
             "knowledge_configured": application.state.knowledge_search is not None,
-            "offer_search": "synthetic",
-            "real_private_matching_enabled": False,
+            "matching": "platform" if engine else "disabled",
+            "matching_index": await engine.index.status() if engine else None,
+            "platform_data": "demo seed (synthetic people and companies)",
         }
+
+    @application.get("/demo/offers", tags=["Local demo"])
+    async def demo_offers(request: Request):
+        """Open, verified offers for console forms; recruiters see their own company's."""
+        principal = await get_principal(request)
+        offers, _ = await application.state.catalog.eligible_offers()
+        if principal.role == "RECRUITER":
+            offers = [offer for offer in offers if offer.company_id == principal.company_id]
+        return [
+            {
+                "id": offer.id,
+                "version": offer.version,
+                "title": offer.title,
+                "company": offer.company.name,
+                "company_id": offer.company_id,
+                "city": offer.company.city,
+                "contract": offer.contract,
+                "requirements": offer.requirements,
+            }
+            for offer in sorted(offers, key=lambda offer: offer.id)
+        ]
 
     @application.get("/demo/workspace", tags=["Local demo"])
     async def workspace(request: Request):

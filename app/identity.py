@@ -43,3 +43,12 @@ async def candidate(principal: Annotated[Principal, Depends(get_principal)]) -> 
 
 
 Candidate = Annotated[Principal, Depends(candidate)]
+
+
+async def recruiter(principal: Annotated[Principal, Depends(get_principal)]) -> Principal:
+    if principal.role != "RECRUITER" or not principal.company_id:
+        raise HTTPException(403, detail={"code": "recruiter_access_required"})
+    return principal
+
+
+Recruiter = Annotated[Principal, Depends(recruiter)]

@@ -9,11 +9,33 @@ import httpx
 from app.demo import DEMO_SERVICE_KEY
 from examples.agent_consumer import run
 
+# Scenario names and expected behavior, in the order the checks run.
+SCENARIOS = [
+    ("CV import and review", "Real PDF worker reaches review before the test accepts it"),
+    ("Candidate offer search", "Up to five open Sfax PFE offers, ranked with compatibility"),
+    ("Idempotent retry", "Same key and payload return the same saved turn"),
+    ("Pack generation", "Worker finishes on a platform offer; approval required; not sent"),
+    ("Profile evaluation", "Completeness, strengths quoting the profile, market-based advice"),
+    ("Follow-up memory", "City becomes Tunis; Python and PFE stay active"),
+    ("No invented matches", "Sousse has no PFE offers, so no_matches with no results"),
+    ("Ambiguous request", "Conflicting cities require clarification"),
+    ("Advice and RAG", "Advice branch retrieves references and cites at least one"),
+    ("Stale conversation", "A stale revision is rejected with HTTP 409"),
+    ("Candidate isolation", "Candidate two cannot read candidate one's conversation"),
+    ("Recruiter sourcing", "Candidates ranked by compatibility with Matching % explanations"),
+    ("Anonymized sourcing", "Pseudonyms only: no names, contacts or cities"),
+    ("Job posting sourcing", "A recruiter's own offer gives an explained top five on its skills"),
+    ("Application scoring", "Repeat calls give the same score and template justification"),
+    ("Offer eligibility and versions", "Closed/unverified offers 404; stale versions 409"),
+    ("Integration gates", "Matching on platform data; submission and profile sync stay off"),
+]
+EXPECTED = dict(SCENARIOS)
+
 
 async def run_checks(base_url, *, transport=None):
     report = {
         "started_at": datetime.now(UTC).isoformat(),
-        "mode": "synthetic",
+        "mode": "simulated",
         "passed": False,
         "checks": [],
         "records": {},
@@ -40,16 +62,16 @@ async def run_checks(base_url, *, transport=None):
             }
         )
 
-    def check(scenario, passed, expected):
+    def check(scenario, passed):
         report["checks"].append(
             {
                 "scenario": scenario,
                 "status": "passed" if passed else "failed",
-                "expected": expected,
+                "expected": EXPECTED[scenario],
             }
         )
         if not passed:
-            raise RuntimeError(f"{scenario}: expected {expected}")
+            raise RuntimeError(f"{scenario}: expected {EXPECTED[scenario]}")
 
     try:
         # Reuse the actual consumer flow: PDF -> review -> accept -> chat -> pack.
@@ -60,13 +82,19 @@ async def run_checks(base_url, *, transport=None):
             name: result[name]
             for name in ("profile_id", "conversation_id", "import_id", "draft_id")
         }
-        for name, expected in (
-            ("CV import and review", "Real PDF worker reaches review before synthetic acceptance"),
-            ("Candidate offer search", "Only fixture-python-pfe for Python PFE in Sfax"),
-            ("Idempotent retry", "Same key and payload return the same saved turn"),
-            ("Pack generation", "Worker finishes; human approval required; submitted=false"),
-        ):
-            check(name, True, expected)
+        found = result["turn"]["response"]
+        check("CV import and review", True)
+        check(
+            "Candidate offer search",
+            found["status"] == "matches_found"
+            and 0 < len(found["results"]) <= 5
+            and all(
+                r["contract"] == "PFE" and r["company"]["city"] == "sfax" for r in found["results"]
+            )
+            and all(r["compatibility"] is not None for r in found["results"]),
+        )
+        check("Idempotent retry", True)
+        check("Pack generation", result["pack"]["sources"]["kind"] == "platform_offer")
 
         async with httpx.AsyncClient(
             base_url=base_url,
@@ -90,90 +118,124 @@ async def run_checks(base_url, *, transport=None):
                 return response.json()
 
             conversation = result["conversation_id"]
+            evaluation = await post(
+                "/agent/evaluate-profile",
+                {"profile_id": result["profile_id"], "profile_version": 1, "language": "en"},
+            )
+            check(
+                "Profile evaluation",
+                bool(evaluation["strengths"])
+                and evaluation["completeness"]["score"] > 0
+                and all(
+                    a["basis"] in {"missing_field", "market_gap", "wording"}
+                    for a in evaluation["advice"]
+                ),
+            )
 
-            async def chat(message, revision):
-                return await post(
-                    "/agent/chat",
-                    {
-                        "conversation_id": conversation,
-                        "expected_revision": revision,
-                        "message": message,
-                    },
-                )
+            async def chat(
+                message, revision, *, target=conversation, user="demo-candidate", **more
+            ):
+                body = {
+                    "conversation_id": target,
+                    "expected_revision": revision,
+                    "message": message,
+                    **more,
+                }
+                return (await post("/agent/chat", body, user=user))["response"]
 
-            changed = (await chat("Tunis instead", 1))["response"]
+            changed = await chat("Tunis instead", 1)
             check(
                 "Follow-up memory",
-                [r["id"] for r in changed["results"]] == ["fixture-tunis-pfe"]
-                and changed["filters"]
-                == {"location": "Tunis", "contract": "PFE", "skills": ["Python"]},
-                "Location becomes Tunis; Python and PFE remain active",
+                changed["filters"] == {"location": "Tunis", "contract": "PFE", "skills": ["Python"]}
+                and changed["results"]
+                and {r["company"]["city"] for r in changed["results"]} == {"tunis"},
             )
-            empty = (await chat("Sousse instead", 2))["response"]
-            check(
-                "No invented matches",
-                empty["status"] == "no_matches" and not empty["results"],
-                "Sousse returns no_matches with an empty result list",
-            )
-            ambiguous = (await chat("Find Python PFE in Sfax or Tunis", 3))["response"]
+            empty = await chat("Sousse instead", 2)
+            check("No invented matches", empty["status"] == "no_matches" and not empty["results"])
+            ambiguous = await chat("Find Python PFE in Sfax or Tunis", 3)
             check(
                 "Ambiguous request",
                 ambiguous["status"] == "clarification_required" and not ambiguous["results"],
-                "Conflicting locations require clarification",
             )
-            advice = (await chat("Advice on Python skills for my CV", 4))["response"]
+            advice = await chat("Advice on Python skills for my CV", 4)
             check(
                 "Advice and RAG",
                 advice["status"] == "answered"
                 and advice["intent"] == "advice"
                 and any(r["cited"] for r in advice["references"]),
-                "Advice branch retrieves local references and cites at least one",
             )
             stale = await post(
                 "/agent/chat",
-                {
-                    "conversation_id": conversation,
-                    "expected_revision": 0,
-                    "message": "Find Python PFE Sfax",
-                },
+                {"conversation_id": conversation, "expected_revision": 0, "message": "Python"},
                 expected=409,
             )
-            check(
-                "Stale conversation",
-                stale["detail"]["code"] == "stale_conversation_revision",
-                "A stale revision is rejected with HTTP 409",
-            )
+            check("Stale conversation", stale["detail"]["code"] == "stale_conversation_revision")
             denied = await client.get(
                 f"/api/v1/conversations/{conversation}",
                 headers={"X-Demo-User": "demo-candidate-two"},
             )
-            check(
-                "Candidate isolation",
-                denied.status_code == 404,
-                "Candidate two cannot read candidate one's conversation",
-            )
+            check("Candidate isolation", denied.status_code == 404)
             recruiter = await post(
                 "/api/v1/conversations", {"language": "en"}, user="demo-recruiter", expected=201
             )
-            gated = await post(
-                "/agent/chat",
-                {
-                    "conversation_id": recruiter["id"],
-                    "expected_revision": 0,
-                    "message": "Find Python candidates",
-                },
+            sourced = await chat(
+                "Find ReactJS frontend candidates in Sfax",
+                0,
+                target=recruiter["id"],
+                user="demo-recruiter",
+            )
+            percents = [r["compatibility"]["percent"] for r in sourced["results"]]
+            check(
+                "Recruiter sourcing",
+                sourced["status"] == "matches_found"
+                and sourced["target"] == "candidates"
+                and percents == sorted(percents, reverse=True)
+                and all("%" in r["explanation"] for r in sourced["results"]),
+            )
+            hidden = await chat(
+                "Find ReactJS frontend candidates in Sfax",
+                1,
+                target=recruiter["id"],
+                user="demo-recruiter",
+                anonymized=True,
+            )
+            check(
+                "Anonymized sourcing",
+                hidden["anonymized"]
+                and hidden["results"]
+                and all(
+                    r["candidate_ref"].startswith("C-")
+                    and r["candidate_id"] is None
+                    and r["city"] is None
+                    and r["display_name"] == r["candidate_ref"]
+                    for r in hidden["results"]
+                ),
+            )
+            posting = await post(
+                "/agent/source-candidates",
+                {"offer_id": "off-demo-react-pfe", "language": "en"},
                 user="demo-recruiter",
             )
             check(
-                "Recruiter gate",
-                gated["response"]["status"] == "matching_unavailable"
-                and not gated["response"]["results"],
-                "Private candidate discovery stays disabled",
+                "Job posting sourcing",
+                posting["criteria"] == ["ReactJS", "TypeScript", "REST API", "Git"]
+                and posting["offer"]["offer_id"] == "off-demo-react-pfe"
+                and bool(posting["results"]),
             )
+            application = {"offer_id": "off-demo-react-pfe", "candidate_profile_id": "cand-02"}
+            scores = [
+                await post("/agent/score-application", application, user="demo-recruiter")
+                for _ in range(2)
+            ]
+            check(
+                "Application scoring",
+                scores[0] == scores[1] and scores[0]["result"]["explanation_source"] == "template",
+            )
+            current = result["pack"]["sources"]["offer_version"]
             for offer, version, code in (
-                ("fixture-private", 1, 404),
-                ("fixture-closed", 2, 404),
-                ("fixture-python-pfe", 99, 409),
+                ("off-demo-closed", current, 404),
+                ("off-pending-react-pfe", current, 404),
+                (result["pack"]["sources"]["offer_id"], "0" * 64, 409),
             ):
                 await post(
                     "/agent/generate-pack",
@@ -186,20 +248,16 @@ async def run_checks(base_url, *, transport=None):
                     },
                     expected=code,
                 )
-            check(
-                "Offer eligibility and versions",
-                True,
-                "Private/closed offers return 404; stale offer versions return 409",
-            )
+            check("Offer eligibility and versions", True)
             response = await client.get("/agent/capabilities")
             response.raise_for_status()
             capabilities = response.json()
             check(
                 "Integration gates",
-                capabilities["real_private_matching_enabled"] is False
+                capabilities["offer_search"] == "platform"
+                and capabilities["matching_index_ready"] is True
                 and capabilities["submission_enabled"] is False
                 and capabilities["profile_sync"] == "not_integrated",
-                "Real matching, submission and profile sync are not enabled",
             )
         report["passed"] = True
     except (

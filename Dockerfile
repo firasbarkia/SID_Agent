@@ -11,6 +11,8 @@ WORKDIR /srv/sid
 RUN groupadd --gid 10001 sid && useradd --uid 10001 --gid sid --no-create-home sid
 COPY --from=build /srv/sid/.venv /srv/sid/.venv
 COPY app ./app
+# Reviewed skill equivalences used by the compatibility rubric.
+COPY data/matching ./data/matching
 USER 10001:10001
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \

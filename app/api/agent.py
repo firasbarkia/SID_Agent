@@ -1,10 +1,12 @@
 """Typed facade. Existing domain workflows retain ownership, leases and review gates."""
 
+from contextlib import suppress
 from typing import Literal
 from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, Request, Response, Security
 from fastapi.security import HTTPBearer
+from pymongo.errors import PyMongoError
 
 from app.api.conversations import User, respond
 from app.api.cv import upload_cv
@@ -14,16 +16,28 @@ from app.contracts.models import (
     AgentCapabilities,
     AgentError,
     AgentValidationError,
+    ApplicationScore,
+    CandidateRefRequest,
+    CandidateRefResolution,
     ChatReceipt,
     ChatRequest,
+    EvaluateProfileRequest,
     GeneratePackRequest,
     PackReceipt,
     ParseReceipt,
-    SyntheticPackDraft,
+    PlatformPackDraft,
+    ProfileAssessment,
+    ScoreApplicationRequest,
+    SourceCandidatesRequest,
+    SourcingReceipt,
 )
 from app.conversations.models import TurnRequest
 from app.domain import DomainError
-from app.identity import Candidate
+from app.identity import Candidate, Recruiter
+from app.matching.engine import MatchEngine, resolve_platform_offer
+from app.matching.evaluator import assess
+from app.matching.explain import explain, no_matches_text
+from app.matching.models import OfferFilters
 
 # Extraction documents the proposed transport. get_principal performs actual
 # verification via the platform callback; this dependency never validates a JWT.
@@ -46,10 +60,11 @@ def document_facade_security(application):
 
     def openapi():
         schema = original()
-        # FastAPI merges optional extraction dependencies as alternatives. These
-        # three operations actually require both service and verified user identity.
-        for path in ("/agent/parse-cv", "/agent/generate-pack", "/agent/chat"):
-            schema["paths"][path]["post"]["security"] = security
+        # FastAPI merges optional extraction dependencies as alternatives. Every
+        # facade POST actually requires both service and verified user identity.
+        for path, item in schema["paths"].items():
+            if path.startswith("/agent/") and "post" in item:
+                item["post"]["security"] = security
         schema["paths"]["/agent/capabilities"]["get"]["security"] = [{"APIKeyHeader": []}]
         return schema
 
@@ -88,6 +103,14 @@ async def parse_cv(
     )
 
 
+def pack_job_text(offer, language):
+    job = f"{offer.title}\n\n{offer.description}"
+    if offer.requirements:
+        label = "Compétences requises : " if language == "fr" else "Required skills: "
+        job += f"\n\n{label}{', '.join(offer.requirements)}"
+    return job[:8000]
+
+
 @router.post(
     "/generate-pack",
     status_code=202,
@@ -102,17 +125,26 @@ async def generate_pack(
     store: Database,
     idempotency_key: IdempotencyKey,
 ):
-    catalog = request.app.state.synthetic_offer_search
+    catalog = getattr(request.app.state, "catalog", None)
     if catalog is None:
-        raise DomainError(503, "canonical_offers_not_integrated")
-    offer = catalog.resolve(principal, payload.offer_id, payload.offer_version)
-    binding = catalog.binding(offer)
-    draft = SyntheticPackDraft(
+        raise DomainError(503, "platform_data_unavailable")
+    # Job and company text are loaded server-side from the exact offer version.
+    offer = await resolve_platform_offer(
+        catalog, principal, payload.offer_id, payload.offer_version
+    )
+    binding = MatchEngine.binding(offer)
+    job = pack_job_text(offer, payload.language)
+    company = offer.company
+    city = (company.city or "").title()
+    context = ". ".join(
+        part for part in (company.name, company.sector, company.description, city) if part
+    )
+    draft = PlatformPackDraft(
         profile_id=payload.profile_id,
         profile_version=payload.profile_version,
         language=payload.language,
-        job_description=offer.description,
-        company_context=offer.company_context,
+        job_description=job,
+        company_context=context[:4000],
         offer_snapshot=binding,
     )
     receipt = await store.request_draft(principal, draft, idempotency_key, dossier=True)
@@ -136,7 +168,11 @@ async def chat(
 ):
     turn = await respond(
         payload.conversation_id,
-        TurnRequest(expected_revision=payload.expected_revision, message=payload.message),
+        TurnRequest(
+            expected_revision=payload.expected_revision,
+            message=payload.message,
+            anonymized=payload.anonymized,
+        ),
         principal,
         store,
         request,
@@ -147,12 +183,135 @@ async def chat(
 
 @router.get("/capabilities", response_model=AgentCapabilities)
 async def capabilities(request: Request):
+    state = request.app.state
+    engine = getattr(state, "match_engine", None)
+    ready = False
+    if engine is not None:
+        with suppress(PyMongoError):
+            ready = all(kind["ready"] for kind in (await engine.index.status()).values())
+    enabled = "platform" if engine is not None else "disabled"
     return AgentCapabilities(
-        identity_integrated=request.app.state.identity_resolver is not None,
-        database_configured=request.app.state.store is not None,
-        advice_configured=request.app.state.knowledge_search is not None,
-        offer_search="synthetic" if request.app.state.synthetic_offer_search else "disabled",
+        identity_integrated=state.identity_resolver is not None,
+        database_configured=state.store is not None,
+        advice_configured=state.knowledge_search is not None,
+        offer_search=enabled,
+        candidate_sourcing=enabled,
+        application_scoring=enabled,
+        profile_evaluator=enabled,
         pack_offer_resolution=(
-            "synthetic" if request.app.state.synthetic_offer_search else "not_integrated"
+            "platform" if getattr(state, "catalog", None) is not None else "not_integrated"
         ),
+        matching_index_ready=ready,
+        anonymization=engine is not None and engine.anonymizer is not None,
     )
+
+
+def engine_of(request):
+    engine = getattr(request.app.state, "match_engine", None)
+    if engine is None:
+        raise DomainError(503, "matching_unavailable")
+    return engine
+
+
+@router.post(
+    "/source-candidates", response_model=SourcingReceipt, openapi_extra={"security": security}
+)
+async def source_candidates(
+    payload: SourceCandidatesRequest, principal: Recruiter, request: Request
+):
+    engine = engine_of(request)
+    offer = None
+    if payload.offer_id is not None:
+        offer = await engine.recruiter_offer(principal, payload.offer_id)
+        query = f"{offer.title}. {', '.join(offer.requirements)}"
+        criteria, context = offer.requirements, offer.description
+    else:
+        # Criteria come from reviewed skill names only, never from model inference.
+        query = payload.job_description
+        criteria, context = engine.rubric.aliases.extract(query), ""
+    found = await engine.search_candidates(
+        principal,
+        query,
+        criteria=criteria,
+        context=context,
+        keywords=[],
+        filters=OfferFilters(),
+        anonymized=payload.anonymized,
+    )
+    receipt = {
+        "offer": engine.binding(offer) if offer else None,
+        "criteria": found.criteria,
+        "anonymized": payload.anonymized,
+        "stale_dropped": found.stale_dropped,
+    }
+    if not found.results:
+        return SourcingReceipt(
+            **receipt,
+            status="no_matches",
+            text=no_matches_text("candidates", payload.language),
+            results=[],
+            explanation_source=None,
+            generation=None,
+        )
+    explained = await explain(
+        request.app.state.ai_gateway,
+        found.results,
+        {
+            "role": principal.role,
+            "language": payload.language,
+            "message": query[:2000],
+            "requirements": found.criteria,
+        },
+        payload.language,
+        "candidates",
+    )
+    return SourcingReceipt(
+        **receipt,
+        status="matches_found",
+        text=explained["text"],
+        results=explained["results"],
+        explanation_source=explained["explanation_source"],
+        generation=explained["generation"],
+    )
+
+
+@router.post(
+    "/score-application", response_model=ApplicationScore, openapi_extra={"security": security}
+)
+async def score_application(
+    payload: ScoreApplicationRequest, principal: Recruiter, request: Request
+):
+    binding, result = await engine_of(request).score(
+        principal, payload.offer_id, payload.candidate_profile_id, language=payload.language
+    )
+    return ApplicationScore(offer=binding, result=result)
+
+
+@router.post(
+    "/candidate-refs/resolve",
+    response_model=CandidateRefResolution,
+    openapi_extra={"security": security},
+)
+async def resolve_candidate_ref(
+    payload: CandidateRefRequest, principal: Recruiter, request: Request
+):
+    candidate_id = await engine_of(request).resolve_candidate_ref(principal, payload.candidate_ref)
+    return CandidateRefResolution(
+        candidate_ref=payload.candidate_ref, candidate_profile_id=candidate_id
+    )
+
+
+@router.post(
+    "/evaluate-profile", response_model=ProfileAssessment, openapi_extra={"security": security}
+)
+async def evaluate_profile(
+    payload: EvaluateProfileRequest, principal: Candidate, store: Database, request: Request
+):
+    result = await assess(
+        store.db,
+        request.app.state.ai_gateway,
+        getattr(request.app.state, "match_engine", None),
+        principal,
+        payload,
+    )
+    return ProfileAssessment(**result)

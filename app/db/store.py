@@ -10,6 +10,7 @@ from app.db.admission import reserve
 from app.db.connection import server_time, transaction
 from app.domain import DomainError
 from app.dossier import validate_evidence
+from app.matching.catalog import PlatformCatalog
 
 
 def ownership(principal):
@@ -453,6 +454,12 @@ class Store:
             await self._guard_profile(
                 principal, head["profile_id"], head["profile_version"], session
             )
+            snapshot = head.get("offer_snapshot") or {}
+            if snapshot.get("kind") == "platform_offer":
+                # Consent must bind an offer that is still open at the version the pack used.
+                current = await PlatformCatalog(self.db, self.settings).offer(snapshot["offer_id"])
+                if current is None or current.version != snapshot["offer_version"]:
+                    raise DomainError(409, "offer_changed_since_generation")
             if head.get("approval_id"):
                 prior = await self.db.sid_approvals.find_one(
                     {"_id": head["approval_id"]}, session=session

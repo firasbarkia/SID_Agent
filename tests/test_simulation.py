@@ -6,9 +6,10 @@ from contextlib import asynccontextmanager
 import httpx
 import psutil
 import pytest
+from matching_support import WordEmbedder
 
 from app.demo import create_demo_app, demo_settings
-from examples.simulation_checks import run_checks
+from examples.simulation_checks import SCENARIOS, run_checks
 from scripts.simulation import saved_process, simulation_settings
 
 
@@ -52,7 +53,9 @@ async def test_checks_refuse_live_mode_before_writing_any_data():
 
 
 @pytest.mark.mongodb
-async def test_all_simulation_scenarios_with_real_workers(settings, mongo_db, monkeypatch):
+async def test_all_simulation_scenarios_with_real_workers(
+    settings, mongo_db, monkeypatch, qdrant_http
+):
     from test_conversations import Knowledge
 
     @asynccontextmanager
@@ -60,12 +63,15 @@ async def test_all_simulation_scenarios_with_real_workers(settings, mongo_db, mo
         yield mongo_db
 
     monkeypatch.setattr("app.main.mongo_connection", connection)
-    app = create_demo_app(settings, live=False)
+    config = settings.model_copy(update={"qdrant_url": os.environ["SID_TEST_QDRANT_URL"]})
+    app = create_demo_app(config, live=False, knowledge_embedder=WordEmbedder())
     async with app.router.lifespan_context(app):
-        app.state.knowledge_search = Knowledge()
+        real, app.state.knowledge_search = app.state.knowledge_search, Knowledge()
         report = await run_checks("http://127.0.0.1", transport=httpx.ASGITransport(app=app))
+        # Shutdown closes the real search; the fake only stands in for references.
+        app.state.knowledge_search = real
     assert report["passed"], report["checks"][-1]
-    assert len(report["checks"]) == 13
+    assert [check["scenario"] for check in report["checks"]] == [name for name, _ in SCENARIOS]
     assert {"/agent/chat", "/agent/parse-cv", "/agent/generate-pack"} <= {
         row["path"] for row in report["trace"]
     }

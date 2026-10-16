@@ -15,6 +15,7 @@ from app.api.conversations import router as conversations_router
 from app.api.cv import router as cv_router
 from app.api.drafts import router
 from app.api.knowledge import router as knowledge_router
+from app.api.operations import matching_router
 from app.api.operations import router as operations_router
 from app.api.persistence import router as persistence_router
 from app.config import Settings
@@ -26,7 +27,11 @@ from app.identity import UserIdVerifier
 from app.knowledge.embedding import LocalEmbedder
 from app.knowledge.qdrant import QdrantIndex, qdrant_client
 from app.knowledge.search import KnowledgeSearch
-from app.matching.synthetic import SyntheticOfferSearch
+from app.matching.aliases import AliasTable
+from app.matching.catalog import PlatformCatalog
+from app.matching.engine import MatchEngine
+from app.matching.index import MatchIndex
+from app.matching.rubric import Rubric
 from app.platform import PlatformReader
 
 
@@ -36,13 +41,7 @@ def create_app(
     transport: httpx.AsyncBaseTransport | None = None,
     verify_user_id: UserIdVerifier | None = None,
     knowledge_embedder=None,
-    synthetic_offer_search: SyntheticOfferSearch | None = None,
 ) -> FastAPI:
-    if (
-        synthetic_offer_search is not None
-        and type(synthetic_offer_search) is not SyntheticOfferSearch
-    ):
-        raise TypeError("Only the explicit synthetic offer adapter is supported until integration")
     config = settings if settings is not None else Settings()
 
     @asynccontextmanager
@@ -57,6 +56,8 @@ def create_app(
             ) as client,
         ):
             application.state.knowledge_search = None
+            application.state.match_engine = None
+            application.state.catalog = PlatformCatalog(db, config) if db is not None else None
             application.state.store = (
                 Store(db, config.worker_max_attempts, settings=config) if db is not None else None
             )
@@ -84,6 +85,15 @@ def create_app(
                     application.state.knowledge_search = KnowledgeSearch(
                         db, index, embedder, config.knowledge_max_concurrent_queries
                     )
+                    # Both pipeline branches share the embedder and Qdrant client.
+                    application.state.match_engine = MatchEngine(
+                        db,
+                        application.state.catalog,
+                        MatchIndex(db, index, embedder),
+                        embedder,
+                        Rubric(AliasTable.load(), embedder.fingerprint),
+                        config,
+                    )
                     try:
                         yield
                     finally:
@@ -91,9 +101,8 @@ def create_app(
             else:
                 yield
 
-    application = FastAPI(title="SID Agent API", version="0.7.0", lifespan=lifespan)
+    application = FastAPI(title="SID Agent API", version="0.8.0", lifespan=lifespan)
     application.state.settings = config
-    application.state.synthetic_offer_search = synthetic_offer_search
     application.add_middleware(BodyLimits, settings=config)
 
     async def resolve_identity(request):
@@ -111,6 +120,7 @@ def create_app(
     application.include_router(cv_router)
     application.include_router(conversations_router)
     application.include_router(operations_router)
+    application.include_router(matching_router)
     application.include_router(agent_router)
     document_facade_security(application)
 

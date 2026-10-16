@@ -1,0 +1,60 @@
+{
+  "contract_version": "agent-v2",
+  "note": "Examples for the local demo's seeded data. Replace IDs with your own records.",
+  "generate_pack": {
+    "profile_id": "replace-with-accepted-sid-profile-id",
+    "profile_version": 1,
+    "offer_id": "off-demo-python-pfe",
+    "offer_version": "f7755ad8bb90697fc6addb3360709e852e351808caeb8dbbc337f9b78bd55b65",
+    "language": "fr"
+  },
+  "chat": {
+    "conversation_id": "replace-with-owned-conversation-id",
+    "expected_revision": 0,
+    "message": "Je cherche un stage PFE Python à Sfax"
+  },
+  "chat_recruiter_anonymized": {
+    "conversation_id": "replace-with-recruiter-conversation-id",
+    "expected_revision": 0,
+    "message": "Find ReactJS frontend candidates in Sfax",
+    "anonymized": true
+  },
+  "source_candidates_offer": {
+    "offer_id": "off-demo-react-pfe",
+    "anonymized": false,
+    "language": "en"
+  },
+  "source_candidates_text": {
+    "job_description": "Junior developer with ReactJS, Node.js and MongoDB in Sfax.",
+    "anonymized": true,
+    "language": "fr"
+  },
+  "score_application": {
+    "offer_id": "off-demo-react-pfe",
+    "candidate_profile_id": "cand-02",
+    "language": "fr"
+  },
+  "evaluate_profile": {
+    "profile_id": "replace-with-accepted-sid-profile-id",
+    "profile_version": 1,
+    "language": "en"
+  },
+  "resolve_candidate_ref": {
+    "candidate_ref": "C-0123456789"
+  },
+  "accepted_profile_sync": {
+    "contract_version": "profile-sync-v1",
+    "candidate_id": "fixture-candidate",
+    "expected_platform_version": 1,
+    "profile_id": "fixture-profile",
+    "accepted_profile_version": 1,
+    "facts": [
+      {
+        "field": "skill",
+        "value": "Python"
+      }
+    ],
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "confirmed": true
+  }
+}

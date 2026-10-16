@@ -1,4 +1,4 @@
-"""Local Node-consumer equivalent using synthetic data and the existing demo workers."""
+"""Local Node-consumer equivalent: demo identities, seeded platform data, real workers."""
 
 import argparse
 import asyncio
@@ -101,14 +101,16 @@ async def run(base_url, *, transport=None, event_hooks=None, verbose=True):
         )
         replay.raise_for_status()
         assert replay.json() == turn.json()
-        assert [row["id"] for row in turn.json()["response"]["results"]] == ["fixture-python-pfe"]
+        results = turn.json()["response"]["results"]
+        assert results and all(row["contract"] == "PFE" for row in results)
+        top = results[0]
         pack = await client.post(
             "/agent/generate-pack",
             json={
                 "profile_id": profile_id,
                 "profile_version": 1,
-                "offer_id": "fixture-python-pfe",
-                "offer_version": 1,
+                "offer_id": top["id"],
+                "offer_version": top["version"],
                 "language": "fr",
             },
             headers={"Idempotency-Key": prefix + "-pack"},
@@ -121,10 +123,8 @@ async def run(base_url, *, transport=None, event_hooks=None, verbose=True):
         assert receipt["sync_status"] == "not_integrated"
         assert not turn.json()["submitted"] and not pack.json()["submitted"]
         if verbose:
-            print(
-                "PASS: synthetic CV review/acceptance, offer search/replay and pack worker handoff."
-            )
-            print("Profile sync, real private matching and submission remain disabled.")
+            print("PASS: CV review/acceptance, platform offer search/replay and pack handoff.")
+            print("Profile sync and application submission remain with the platform.")
         return {
             "profile_id": profile_id,
             "conversation_id": conversation.json()["id"],
