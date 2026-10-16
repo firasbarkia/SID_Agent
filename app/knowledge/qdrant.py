@@ -20,8 +20,8 @@ class QdrantIndex:
         self.fingerprint = fingerprint
 
     def path(self, collection):
-        if not re.fullmatch(r"sid_(?:kb|test)_[a-z0-9_]+", collection):
-            raise ValueError("Only SID-owned reference/test collections are allowed")
+        if not re.fullmatch(r"sid_(?:kb|test|match)_[a-z0-9_]+", collection):
+            raise ValueError("Only SID-owned reference/test/match collections are allowed")
         return f"/collections/{collection}"
 
     async def call(self, method, path, **kwargs):
@@ -29,7 +29,7 @@ class QdrantIndex:
         response.raise_for_status()
         return response.json()["result"]
 
-    async def create(self, collection):
+    async def create(self, collection, fields=("record_id", "kind", "source")):
         # New generation only: never overwrite/recreate an existing collection.
         await self.call(
             "PUT",
@@ -39,7 +39,7 @@ class QdrantIndex:
                 "metadata": {"sid_fingerprint": self.fingerprint},
             },
         )
-        for field in ("record_id", "kind", "source"):
+        for field in fields:
             await self.call(
                 "PUT",
                 self.path(collection) + "/index?wait=true",
@@ -80,9 +80,9 @@ class QdrantIndex:
             },
         )
 
-    async def query(self, collection, vector, *, limit, source=None, kind=None):
+    async def query(self, collection, vector, *, limit, source=None, kind=None, must=()):
         validate_vector(vector, self.dimensions)
-        must = []
+        must = list(must)
         for key, value in (("source", source), ("kind", kind)):
             if value:
                 must.append({"key": key, "match": {"value": value}})
@@ -120,6 +120,19 @@ class QdrantIndex:
                     "points": ids,
                 },
             )
+
+    async def delete_where(self, collection, must, must_not=()):
+        selection = {"must": list(must)}
+        if must_not:
+            selection["must_not"] = list(must_not)
+        await self.call(
+            "POST",
+            self.path(collection) + "/points/delete?wait=true",
+            json={"filter": selection},
+        )
+
+    async def drop(self, collection):
+        await self.call("DELETE", self.path(collection))
 
     async def count(self, collection):
         return (

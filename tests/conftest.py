@@ -1,6 +1,7 @@
 import os
 from uuid import uuid4
 
+import httpx
 import pytest
 from pymongo import AsyncMongoClient
 from pymongo.read_concern import ReadConcern
@@ -91,3 +92,19 @@ async def mongo_db():
         finally:
             assert name.startswith("sid_test_") and len(name) == len("sid_test_") + 32
             await client.drop_database(name)
+
+
+@pytest.fixture
+async def qdrant_http():
+    url = os.environ.get("SID_TEST_QDRANT_URL")
+    if not url:
+        pytest.skip("Set SID_TEST_QDRANT_URL to opt into Qdrant integration tests")
+    async with httpx.AsyncClient(base_url=url, timeout=20) as client:
+        before = {
+            c["name"] for c in (await client.get("/collections")).json()["result"]["collections"]
+        }
+        yield client
+        after = (await client.get("/collections")).json()["result"]["collections"]
+        for name in {c["name"] for c in after} - before:
+            if name.startswith("sid_match_"):
+                await client.delete(f"/collections/{name}")

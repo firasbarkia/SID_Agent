@@ -82,6 +82,10 @@ async def ensure_indexes(db):
             ([("state", 1), ("available_at", 1), ("lease_until", 1)], {}),
             ([("generation", 1), ("record_id", 1), ("version", 1)], {"unique": True}),
         ],
+        "sid_match_records": [([("kind", 1), ("collection", 1)], {})],
+        "sid_match_state": [],
+        "sid_candidate_refs": [([("company_id", 1), ("candidate_id", 1)], {"unique": True})],
+        "sid_profile_assessments": [([("owner_id", 1), ("profile_id", 1)], {})],
     }
     for name in ("sid_tasks", "sid_outbox", "sid_index_jobs", "sid_cv_tasks"):
         specs[name].extend(

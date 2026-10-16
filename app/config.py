@@ -49,6 +49,9 @@ class Settings(BaseSettings):
     embedding_threads: int = Field(default=2, ge=1, le=32)
     indexing_batch_size: int = Field(default=16, ge=1, le=64)
     knowledge_max_concurrent_queries: int = Field(default=2, ge=1, le=32)
+    match_sync_seconds: float = Field(default=30, ge=1, le=3600)
+    match_pool_size: int = Field(default=30, ge=5, le=100)
+    match_max_concurrent_queries: int = Field(default=2, ge=1, le=32)
 
     @field_validator(
         "sid_service_api_key",

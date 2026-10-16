@@ -1,0 +1,416 @@
+{
+  "version": "skill-aliases-v1",
+  "note": "Reviewed equivalences only. A candidate skill covers a requirement when both share a group, or when the requirement is implied by the skill. Embeddings handle everything else.",
+  "groups": {
+    "javascript": [
+      "JavaScript",
+      "JS",
+      "ECMAScript",
+      "ES6"
+    ],
+    "typescript": [
+      "TypeScript",
+      "TS"
+    ],
+    "react": [
+      "React",
+      "ReactJS",
+      "React.js",
+      "React JS"
+    ],
+    "angular": [
+      "Angular",
+      "AngularJS",
+      "Angular.js"
+    ],
+    "vue": [
+      "Vue",
+      "Vue.js",
+      "VueJS"
+    ],
+    "nodejs": [
+      "Node.js",
+      "NodeJS",
+      "Node"
+    ],
+    "express": [
+      "Express",
+      "Express.js",
+      "ExpressJS"
+    ],
+    "python": [
+      "Python",
+      "Python 3",
+      "Python3"
+    ],
+    "django": [
+      "Django"
+    ],
+    "flask": [
+      "Flask"
+    ],
+    "fastapi": [
+      "FastAPI"
+    ],
+    "java": [
+      "Java"
+    ],
+    "spring": [
+      "Spring",
+      "Spring Boot",
+      "SpringBoot"
+    ],
+    "php": [
+      "PHP"
+    ],
+    "laravel": [
+      "Laravel"
+    ],
+    "symfony": [
+      "Symfony"
+    ],
+    "csharp": [
+      "C#",
+      "CSharp",
+      "C Sharp"
+    ],
+    "dotnet": [
+      ".NET",
+      "dotnet",
+      "ASP.NET",
+      "ASP.NET Core"
+    ],
+    "cpp": [
+      "C++",
+      "CPP"
+    ],
+    "sql": [
+      "SQL",
+      "Bases de données SQL",
+      "SQL databases"
+    ],
+    "mysql": [
+      "MySQL"
+    ],
+    "postgresql": [
+      "PostgreSQL",
+      "Postgres"
+    ],
+    "mongodb": [
+      "MongoDB",
+      "Mongo"
+    ],
+    "html": [
+      "HTML",
+      "HTML5"
+    ],
+    "css": [
+      "CSS",
+      "CSS3",
+      "Tailwind",
+      "Bootstrap"
+    ],
+    "git": [
+      "Git",
+      "GitHub",
+      "GitLab"
+    ],
+    "docker": [
+      "Docker",
+      "Conteneurisation",
+      "Containerization"
+    ],
+    "kubernetes": [
+      "Kubernetes",
+      "K8s"
+    ],
+    "linux": [
+      "Linux",
+      "Unix"
+    ],
+    "flutter": [
+      "Flutter"
+    ],
+    "dart": [
+      "Dart"
+    ],
+    "android": [
+      "Android"
+    ],
+    "kotlin": [
+      "Kotlin"
+    ],
+    "swift": [
+      "Swift",
+      "iOS"
+    ],
+    "machine learning": [
+      "Machine learning",
+      "ML",
+      "Apprentissage automatique"
+    ],
+    "data analysis": [
+      "Data analysis",
+      "Analyse de données",
+      "Data analytics",
+      "Analyse des données"
+    ],
+    "power bi": [
+      "Power BI",
+      "PowerBI"
+    ],
+    "excel": [
+      "Excel",
+      "Microsoft Excel"
+    ],
+    "frontend": [
+      "Frontend",
+      "Front-end",
+      "Front end",
+      "Développement frontend",
+      "Développement front-end",
+      "Développement web frontend",
+      "Frontend development",
+      "Front-end development",
+      "Intégration web"
+    ],
+    "backend": [
+      "Backend",
+      "Back-end",
+      "Développement backend",
+      "Développement back-end",
+      "Backend development"
+    ],
+    "web development": [
+      "Web development",
+      "Développement web",
+      "Développement d'applications web"
+    ],
+    "mobile development": [
+      "Mobile development",
+      "Développement mobile",
+      "Applications mobiles"
+    ],
+    "devops": [
+      "DevOps",
+      "CI/CD"
+    ],
+    "rest api": [
+      "REST",
+      "REST API",
+      "API REST",
+      "RESTful",
+      "API"
+    ],
+    "embedded systems": [
+      "Embedded systems",
+      "Systèmes embarqués",
+      "Embarqué"
+    ],
+    "ui ux design": [
+      "UI/UX",
+      "UX/UI",
+      "UI design",
+      "UX design",
+      "Design UI/UX"
+    ],
+    "figma": [
+      "Figma"
+    ],
+    "digital marketing": [
+      "Digital marketing",
+      "Marketing digital"
+    ],
+    "accounting": [
+      "Accounting",
+      "Comptabilité"
+    ],
+    "agile": [
+      "Agile",
+      "Scrum"
+    ],
+    "english": [
+      "English",
+      "Anglais"
+    ],
+    "french": [
+      "French",
+      "Français"
+    ],
+    "nextjs": [
+      "Next.js",
+      "NextJS"
+    ],
+    "react native": [
+      "React Native"
+    ],
+    "arduino": [
+      "Arduino"
+    ],
+    "pandas": [
+      "Pandas"
+    ],
+    "opencv": [
+      "OpenCV"
+    ],
+    "computer vision": [
+      "Computer vision",
+      "Vision par ordinateur",
+      "Vision industrielle"
+    ],
+    "mqtt": [
+      "MQTT"
+    ],
+    "iot": [
+      "IoT",
+      "Internet des objets",
+      "Internet of Things"
+    ],
+    "firebase": [
+      "Firebase"
+    ],
+    "deep learning": [
+      "Deep learning",
+      "Apprentissage profond"
+    ],
+    "user research": [
+      "User research",
+      "Tests utilisateurs",
+      "Recherche utilisateur"
+    ],
+    "social media": [
+      "Social media",
+      "Réseaux sociaux"
+    ],
+    "erp": [
+      "ERP"
+    ]
+  },
+  "implies": {
+    "react": [
+      "frontend",
+      "javascript"
+    ],
+    "angular": [
+      "frontend",
+      "typescript"
+    ],
+    "vue": [
+      "frontend",
+      "javascript"
+    ],
+    "typescript": [
+      "javascript"
+    ],
+    "html": [
+      "frontend"
+    ],
+    "css": [
+      "frontend"
+    ],
+    "nodejs": [
+      "backend",
+      "javascript"
+    ],
+    "express": [
+      "nodejs"
+    ],
+    "django": [
+      "python",
+      "backend"
+    ],
+    "flask": [
+      "python",
+      "backend"
+    ],
+    "fastapi": [
+      "python",
+      "backend",
+      "rest api"
+    ],
+    "spring": [
+      "java",
+      "backend"
+    ],
+    "laravel": [
+      "php",
+      "backend"
+    ],
+    "symfony": [
+      "php",
+      "backend"
+    ],
+    "dotnet": [
+      "backend"
+    ],
+    "mysql": [
+      "sql"
+    ],
+    "postgresql": [
+      "sql"
+    ],
+    "frontend": [
+      "web development"
+    ],
+    "backend": [
+      "web development"
+    ],
+    "flutter": [
+      "dart",
+      "mobile development"
+    ],
+    "android": [
+      "mobile development"
+    ],
+    "kotlin": [
+      "android"
+    ],
+    "swift": [
+      "mobile development"
+    ],
+    "kubernetes": [
+      "devops"
+    ],
+    "docker": [
+      "devops"
+    ],
+    "power bi": [
+      "data analysis"
+    ],
+    "figma": [
+      "ui ux design"
+    ],
+    "nextjs": [
+      "react"
+    ],
+    "react native": [
+      "mobile development",
+      "javascript"
+    ],
+    "arduino": [
+      "embedded systems"
+    ],
+    "pandas": [
+      "python",
+      "data analysis"
+    ],
+    "opencv": [
+      "computer vision"
+    ],
+    "mqtt": [
+      "iot"
+    ],
+    "firebase": [
+      "backend"
+    ],
+    "deep learning": [
+      "machine learning"
+    ],
+    "user research": [
+      "ui ux design"
+    ],
+    "social media": [
+      "digital marketing"
+    ]
+  }
+}

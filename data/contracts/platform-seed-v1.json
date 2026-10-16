@@ -1,0 +1,1668 @@
+{
+ "version": "platform-seed-v1",
+ "note": "Synthetic people, companies and offers in the platform UML shape. Emails use example.test; phone numbers are not real. Demo collections only.",
+ "users": [
+  {
+   "id": "demo-candidate",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "demo.candidate@example.test"
+  },
+  {
+   "id": "demo-candidate-two",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "demo.candidate.two@example.test"
+  },
+  {
+   "id": "demo-recruiter",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "demo.recruiter@example.test"
+  },
+  {
+   "id": "rec-atlas",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-atlas@example.test"
+  },
+  {
+   "id": "rec-olivia",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-olivia@example.test"
+  },
+  {
+   "id": "rec-medina",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-medina@example.test"
+  },
+  {
+   "id": "rec-sfaxnet",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-sfaxnet@example.test"
+  },
+  {
+   "id": "rec-carthage",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-carthage@example.test"
+  },
+  {
+   "id": "rec-sahel",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-sahel@example.test"
+  },
+  {
+   "id": "rec-kerkennah",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-kerkennah@example.test"
+  },
+  {
+   "id": "rec-thyna",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-thyna@example.test"
+  },
+  {
+   "id": "rec-pending",
+   "role": "RECRUITER",
+   "isActive": true,
+   "email": "rec-pending@example.test"
+  },
+  {
+   "id": "user-cand-01",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "amine.karray@example.test"
+  },
+  {
+   "id": "user-cand-02",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "amira.masmoudi@example.test"
+  },
+  {
+   "id": "user-cand-03",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "youssef.ellouze@example.test"
+  },
+  {
+   "id": "user-cand-04",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "sarra.frikha@example.test"
+  },
+  {
+   "id": "user-cand-05",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "mehdi.kammoun@example.test"
+  },
+  {
+   "id": "user-cand-06",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "ines.abid@example.test"
+  },
+  {
+   "id": "user-cand-07",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "rania.chaabane@example.test"
+  },
+  {
+   "id": "user-cand-08",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "omar.jaziri@example.test"
+  },
+  {
+   "id": "user-cand-09",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "nour.trabelsi@example.test"
+  },
+  {
+   "id": "user-cand-10",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "lina.hadjtaieb@example.test"
+  },
+  {
+   "id": "user-cand-11",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "hamza.bouaziz@example.test"
+  },
+  {
+   "id": "user-cand-12",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "khalil.gargouri@example.test"
+  },
+  {
+   "id": "user-cand-13",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "yasmine.benamor@example.test"
+  },
+  {
+   "id": "user-cand-14",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "walid.mejri@example.test"
+  },
+  {
+   "id": "user-cand-15",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "salma.ayadi@example.test"
+  },
+  {
+   "id": "user-cand-16",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "mariem.zouari@example.test"
+  },
+  {
+   "id": "user-cand-17",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "fatma.damak@example.test"
+  },
+  {
+   "id": "user-cand-18",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "aziz.sellami@example.test"
+  },
+  {
+   "id": "user-cand-19",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "eya.boujelbene@example.test"
+  },
+  {
+   "id": "user-cand-20",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "bilel.feki@example.test"
+  },
+  {
+   "id": "user-cand-21",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "asma.charfi@example.test"
+  },
+  {
+   "id": "user-cand-22",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "ghassen.baklouti@example.test"
+  },
+  {
+   "id": "user-cand-23",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "hela.dhieb@example.test"
+  },
+  {
+   "id": "user-cand-24",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "seif.hammami@example.test"
+  },
+  {
+   "id": "user-cand-25",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "wiem.rekik@example.test"
+  },
+  {
+   "id": "user-cand-26",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "anis.kallel@example.test"
+  },
+  {
+   "id": "user-cand-27",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "hiba.mallek@example.test"
+  },
+  {
+   "id": "user-cand-28",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "rim.smaoui@example.test"
+  },
+  {
+   "id": "user-cand-29",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "ahmed.turki@example.test"
+  },
+  {
+   "id": "user-cand-30",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "mouna.chakroun@example.test"
+  },
+  {
+   "id": "user-cand-31",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "oussama.ghorbel@example.test"
+  },
+  {
+   "id": "user-cand-32",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "nadia.kchaou@example.test"
+  },
+  {
+   "id": "user-cand-33",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "fares.zghal@example.test"
+  },
+  {
+   "id": "user-cand-34",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "dorra.mseddi@example.test"
+  },
+  {
+   "id": "user-cand-35",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "skander.belhadj@example.test"
+  },
+  {
+   "id": "user-cand-36",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "mariem.ammar@example.test"
+  },
+  {
+   "id": "user-cand-37",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "tarek.elleuch@example.test"
+  },
+  {
+   "id": "user-cand-38",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "imen.hentati@example.test"
+  },
+  {
+   "id": "user-cand-39",
+   "role": "CANDIDATE",
+   "isActive": false,
+   "email": "karim.inactive@example.test"
+  },
+  {
+   "id": "user-cand-40",
+   "role": "CANDIDATE",
+   "isActive": true,
+   "email": "sonia.pending@example.test"
+  }
+ ],
+ "companies": [
+  {
+   "id": "demo-company",
+   "userId": "demo-recruiter",
+   "companyName": "Demo software company",
+   "sector": "Software",
+   "address": "Avenue Majida Boulila, Sfax",
+   "description": "Synthetic Sfax software company building HR and education products.",
+   "isVerified": true
+  },
+  {
+   "id": "co-atlas",
+   "userId": "rec-atlas",
+   "companyName": "Atlas Web Studio",
+   "sector": "Web agency",
+   "address": "Route de Tunis km 3, Sfax",
+   "description": "Synthetic web agency serving Sfax retailers.",
+   "isVerified": true
+  },
+  {
+   "id": "co-olivia",
+   "userId": "rec-olivia",
+   "companyName": "Olivia Data Labs",
+   "sector": "Data and AI",
+   "address": "Technopole de Sfax, Sfax",
+   "description": "Synthetic data startup working with olive growers.",
+   "isVerified": true
+  },
+  {
+   "id": "co-medina",
+   "userId": "rec-medina",
+   "companyName": "Medina Mobile",
+   "sector": "Mobile apps",
+   "address": "Rue Habib Maazoun, Sfax",
+   "description": "Synthetic mobile studio.",
+   "isVerified": true
+  },
+  {
+   "id": "co-sfaxnet",
+   "userId": "rec-sfaxnet",
+   "companyName": "SfaxNet Systems",
+   "sector": "Industrial IoT",
+   "address": "Zone industrielle Poudrière, Sfax",
+   "description": "Synthetic embedded systems company.",
+   "isVerified": true
+  },
+  {
+   "id": "co-carthage",
+   "userId": "rec-carthage",
+   "companyName": "Carthage Cloud",
+   "sector": "Cloud services",
+   "address": "Les Berges du Lac, Tunis",
+   "description": "Synthetic cloud and DevOps provider.",
+   "isVerified": true
+  },
+  {
+   "id": "co-sahel",
+   "userId": "rec-sahel",
+   "companyName": "Sahel Fintech",
+   "sector": "Fintech",
+   "address": "Avenue Hédi Chaker, Sousse",
+   "description": "Synthetic payments startup.",
+   "isVerified": true
+  },
+  {
+   "id": "co-kerkennah",
+   "userId": "rec-kerkennah",
+   "companyName": "Kerkennah Marketing",
+   "sector": "Digital marketing",
+   "address": "Route de l'Aéroport, Sfax",
+   "description": "Synthetic digital marketing agency.",
+   "isVerified": true
+  },
+  {
+   "id": "co-thyna",
+   "userId": "rec-thyna",
+   "companyName": "Thyna Accounting",
+   "sector": "Accounting",
+   "address": "Avenue des Martyrs, Sfax",
+   "description": "Synthetic accounting firm.",
+   "isVerified": true
+  },
+  {
+   "id": "co-pending",
+   "userId": "rec-pending",
+   "companyName": "Pending Startup",
+   "sector": "Software",
+   "address": "Sakiet Ezzit, Sfax",
+   "description": "Synthetic company awaiting JCI validation.",
+   "isVerified": false
+  }
+ ],
+ "offers": [
+  {
+   "id": "off-demo-python-pfe",
+   "companyId": "demo-company",
+   "title": "PFE développement web Python",
+   "type": "STAGE_PFE",
+   "description": "Projet de fin d'études à Sfax : concevoir une application web de gestion des stages avec Python et Django, exposer une API REST et stocker les données dans PostgreSQL.",
+   "requiredSkills": [
+    "Python",
+    "Django",
+    "PostgreSQL",
+    "Git"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-demo-react-pfe",
+   "companyId": "demo-company",
+   "title": "PFE frontend ReactJS",
+   "type": "STAGE_PFE",
+   "description": "Développer l'interface d'un tableau de bord RH en ReactJS et TypeScript, consommer une API REST et écrire des tests d'interface.",
+   "requiredSkills": [
+    "ReactJS",
+    "TypeScript",
+    "REST API",
+    "Git"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-demo-fullstack-job",
+   "companyId": "demo-company",
+   "title": "Développeur full stack junior",
+   "type": "EMPLOI",
+   "description": "Poste de développeur full stack junior : Node.js côté serveur, ReactJS côté client, MongoDB et déploiement avec Docker.",
+   "requiredSkills": [
+    "Node.js",
+    "ReactJS",
+    "MongoDB",
+    "Docker"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-demo-closed",
+   "companyId": "demo-company",
+   "title": "Stage d'été support technique",
+   "type": "STAGE_PERIOD",
+   "description": "Stage d'été au support technique interne, assistance aux utilisateurs et documentation.",
+   "requiredSkills": [
+    "Linux",
+    "Communication"
+   ],
+   "status": "CLOSED"
+  },
+  {
+   "id": "off-atlas-web-intern",
+   "companyId": "co-atlas",
+   "title": "Stage d'été intégration web",
+   "type": "STAGE_PERIOD",
+   "description": "Intégrer des maquettes Figma en HTML, CSS et JavaScript pour des sites de commerçants sfaxiens.",
+   "requiredSkills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Figma"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-atlas-angular-pfe",
+   "companyId": "co-atlas",
+   "title": "PFE application Angular",
+   "type": "STAGE_PFE",
+   "description": "Créer une plateforme de réservation en Angular et TypeScript avec un backend Java.",
+   "requiredSkills": [
+    "Angular",
+    "TypeScript",
+    "Java"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-atlas-php-job",
+   "companyId": "co-atlas",
+   "title": "Développeur PHP Laravel",
+   "type": "EMPLOI",
+   "description": "Maintenir et faire évoluer des sites e-commerce en PHP avec Laravel et MySQL.",
+   "requiredSkills": [
+    "PHP",
+    "Laravel",
+    "MySQL",
+    "Git"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-olivia-ml-pfe",
+   "companyId": "co-olivia",
+   "title": "PFE machine learning pour l'oléiculture",
+   "type": "STAGE_PFE",
+   "description": "Prédire le rendement des oliveraies de la région de Sfax à partir de données météo et satellitaires avec Python et des modèles de machine learning.",
+   "requiredSkills": [
+    "Python",
+    "Machine learning",
+    "SQL"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-olivia-bi-intern",
+   "companyId": "co-olivia",
+   "title": "Stage analyste BI",
+   "type": "STAGE_PERIOD",
+   "description": "Construire des tableaux de bord Power BI sur les ventes d'huile d'olive et automatiser les extractions SQL.",
+   "requiredSkills": [
+    "Power BI",
+    "SQL",
+    "Excel"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-olivia-data-job",
+   "companyId": "co-olivia",
+   "title": "Data analyst junior",
+   "type": "EMPLOI",
+   "description": "Analyser des données agricoles avec Python et SQL, produire des rapports Power BI pour les clients.",
+   "requiredSkills": [
+    "Python",
+    "SQL",
+    "Data analysis",
+    "Power BI"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-medina-flutter-pfe",
+   "companyId": "co-medina",
+   "title": "PFE application mobile Flutter",
+   "type": "STAGE_PFE",
+   "description": "Développer une application mobile Flutter pour la découverte de la médina de Sfax, avec une API REST et Firebase.",
+   "requiredSkills": [
+    "Flutter",
+    "Dart",
+    "Firebase",
+    "REST API"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-medina-android-intern",
+   "companyId": "co-medina",
+   "title": "Stage Android Kotlin",
+   "type": "STAGE_PERIOD",
+   "description": "Corriger et améliorer une application Android écrite en Kotlin.",
+   "requiredSkills": [
+    "Kotlin",
+    "Android",
+    "Git"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-medina-ux-pfe",
+   "companyId": "co-medina",
+   "title": "PFE design UI/UX mobile",
+   "type": "STAGE_PFE",
+   "description": "Concevoir les parcours et les maquettes Figma d'une application mobile, puis mener des tests utilisateurs.",
+   "requiredSkills": [
+    "Figma",
+    "UI/UX",
+    "User research"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-sfaxnet-iot-pfe",
+   "companyId": "co-sfaxnet",
+   "title": "PFE IoT industriel",
+   "type": "STAGE_PFE",
+   "description": "Collecter les données de capteurs d'une usine sfaxienne en C embarqué, les publier en MQTT et les analyser en Python.",
+   "requiredSkills": [
+    "C",
+    "Embedded systems",
+    "MQTT",
+    "Python"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-sfaxnet-cpp-job",
+   "companyId": "co-sfaxnet",
+   "title": "Ingénieur logiciel embarqué C++",
+   "type": "EMPLOI",
+   "description": "Développer des firmwares C++ sous Linux embarqué pour des automates industriels.",
+   "requiredSkills": [
+    "C++",
+    "Linux",
+    "Embedded systems"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-sfaxnet-closed",
+   "companyId": "co-sfaxnet",
+   "title": "PFE vision industrielle",
+   "type": "STAGE_PFE",
+   "description": "Détection de défauts par vision par ordinateur sur une ligne de production.",
+   "requiredSkills": [
+    "Python",
+    "OpenCV"
+   ],
+   "status": "CLOSED"
+  },
+  {
+   "id": "off-carthage-devops-pfe",
+   "companyId": "co-carthage",
+   "title": "PFE DevOps Kubernetes",
+   "type": "STAGE_PFE",
+   "description": "Industrialiser le déploiement d'applications avec Docker, Kubernetes et une chaîne CI/CD sur des serveurs Linux.",
+   "requiredSkills": [
+    "Docker",
+    "Kubernetes",
+    "Linux",
+    "CI/CD"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-carthage-python-pfe",
+   "companyId": "co-carthage",
+   "title": "PFE backend Python à Tunis",
+   "type": "STAGE_PFE",
+   "description": "Développer des microservices Python avec FastAPI et PostgreSQL pour une plateforme cloud basée à Tunis.",
+   "requiredSkills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-carthage-java-job",
+   "companyId": "co-carthage",
+   "title": "Développeur Java Spring",
+   "type": "EMPLOI",
+   "description": "Développer des API Java avec Spring Boot et une base SQL pour des clients bancaires.",
+   "requiredSkills": [
+    "Java",
+    "Spring Boot",
+    "SQL"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-sahel-react-intern",
+   "companyId": "co-sahel",
+   "title": "Stage frontend React à Sousse",
+   "type": "STAGE_PERIOD",
+   "description": "Améliorer l'interface de paiement en ReactJS, JavaScript et CSS.",
+   "requiredSkills": [
+    "ReactJS",
+    "JavaScript",
+    "CSS"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-sahel-dotnet-job",
+   "companyId": "co-sahel",
+   "title": "Développeur .NET",
+   "type": "EMPLOI",
+   "description": "Développer des services de paiement en C# et ASP.NET Core avec SQL Server.",
+   "requiredSkills": [
+    "C#",
+    ".NET",
+    "SQL"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-kerk-marketing-intern",
+   "companyId": "co-kerkennah",
+   "title": "Stage marketing digital",
+   "type": "STAGE_PERIOD",
+   "description": "Animer les réseaux sociaux de commerces sfaxiens et suivre les campagnes de marketing digital.",
+   "requiredSkills": [
+    "Digital marketing",
+    "Social media",
+    "Communication"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-kerk-content-pfe",
+   "companyId": "co-kerkennah",
+   "title": "PFE stratégie de contenu",
+   "type": "STAGE_PFE",
+   "description": "Définir une stratégie de contenu bilingue pour des marques locales, en français et en anglais.",
+   "requiredSkills": [
+    "Digital marketing",
+    "Communication",
+    "English",
+    "French"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-thyna-accounting-intern",
+   "companyId": "co-thyna",
+   "title": "Stage comptabilité",
+   "type": "STAGE_PERIOD",
+   "description": "Assister la tenue comptable de PME sfaxiennes et préparer les déclarations avec Excel.",
+   "requiredSkills": [
+    "Accounting",
+    "Excel",
+    "French"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-thyna-erp-pfe",
+   "companyId": "co-thyna",
+   "title": "PFE automatisation comptable",
+   "type": "STAGE_PFE",
+   "description": "Automatiser le rapprochement bancaire avec Python, Excel et une base SQL.",
+   "requiredSkills": [
+    "Python",
+    "Excel",
+    "Accounting",
+    "SQL"
+   ],
+   "status": "OPEN"
+  },
+  {
+   "id": "off-pending-react-pfe",
+   "companyId": "co-pending",
+   "title": "PFE React startup",
+   "type": "STAGE_PFE",
+   "description": "Prototype d'application ReactJS pour une startup en attente de validation.",
+   "requiredSkills": [
+    "ReactJS"
+   ],
+   "status": "OPEN"
+  }
+ ],
+ "candidates": [
+  {
+   "id": "cand-01",
+   "userId": "user-cand-01",
+   "fullName": "Amine Karray",
+   "phone": "+216 00 000 001",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-01.pdf",
+   "parsedSkills": [
+    "Python",
+    "Django",
+    "PostgreSQL",
+    "Git"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet de fin d'année",
+     "description": "Application de réservation de salles avec Django et PostgreSQL"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique, ISIMS Sfax"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-02",
+   "userId": "user-cand-02",
+   "fullName": "Amira Masmoudi",
+   "phone": "+216 00 000 002",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-02.pdf",
+   "parsedSkills": [
+    "ReactJS",
+    "TypeScript",
+    "CSS"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage d'été",
+     "company": "Agence web",
+     "description": "Développement de composants ReactJS pour un site e-commerce"
+    }
+   ],
+   "parsedEducation": [
+    "Master génie logiciel, FSS Sfax"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-03",
+   "userId": "user-cand-03",
+   "fullName": "Youssef Ellouze",
+   "phone": "+216 00 000 003",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-03.pdf",
+   "parsedSkills": [
+    "Node.js",
+    "ReactJS",
+    "MongoDB",
+    "Docker"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet full stack",
+     "description": "Youssef Ellouze a réalisé une messagerie en Node.js et ReactJS, contact youssef.ellouze@example.test"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur informatique, ENIS"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-04",
+   "userId": "user-cand-04",
+   "fullName": "Sarra Frikha",
+   "phone": "+216 00 000 004",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-04.pdf",
+   "parsedSkills": [
+    "Angular",
+    "TypeScript",
+    "Java"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage PFE",
+     "description": "Portail Angular de suivi des commandes"
+    }
+   ],
+   "parsedEducation": [
+    "Licence informatique de gestion"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-05",
+   "userId": "user-cand-05",
+   "fullName": "Mehdi Kammoun",
+   "phone": "+216 00 000 005",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-05.pdf",
+   "parsedSkills": [
+    "PHP",
+    "Laravel",
+    "MySQL"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Freelance",
+     "description": "Sites vitrines en Laravel pour des commerçants"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en technologies de l'information"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-06",
+   "userId": "user-cand-06",
+   "fullName": "Ines Abid",
+   "phone": "+216 00 000 006",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-06.pdf",
+   "parsedSkills": [
+    "Python",
+    "Machine learning",
+    "SQL"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet de recherche",
+     "description": "Classification d'images de feuilles d'olivier avec un modèle de machine learning en Python"
+    }
+   ],
+   "parsedEducation": [
+    "Master science des données, FSS Sfax"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-07",
+   "userId": "user-cand-07",
+   "fullName": "Rania Chaabane",
+   "phone": "+216 00 000 007",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-07.pdf",
+   "parsedSkills": [
+    "Power BI",
+    "Excel",
+    "SQL"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "company": "Distribution",
+     "description": "Tableaux de bord Power BI des ventes"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en gestion"
+   ],
+   "isNewCandidate": true
+  },
+  {
+   "id": "cand-08",
+   "userId": "user-cand-08",
+   "fullName": "Omar Jaziri",
+   "phone": "+216 00 000 008",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-08.pdf",
+   "parsedSkills": [
+    "Flutter",
+    "Dart",
+    "Firebase"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Application mobile",
+     "description": "Application Flutter de covoiturage étudiant"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-09",
+   "userId": "user-cand-09",
+   "fullName": "Nour Trabelsi",
+   "phone": "+216 00 000 009",
+   "city": "Sousse",
+   "rawCvUrl": "https://example.test/cv/cand-09.pdf",
+   "parsedSkills": [
+    "Kotlin",
+    "Android",
+    "Git"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Module Android de paiement en Kotlin"
+    }
+   ],
+   "parsedEducation": [
+    "Licence génie logiciel, ISITCom"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-10",
+   "userId": "user-cand-10",
+   "fullName": "Lina Hadj Taieb",
+   "phone": "+216 00 000 010",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-10.pdf",
+   "parsedSkills": [
+    "Figma",
+    "UI/UX",
+    "HTML"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Refonte UX d'une application de bibliothèque avec tests utilisateurs"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en design numérique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-11",
+   "userId": "user-cand-11",
+   "fullName": "Hamza Bouaziz",
+   "phone": "+216 00 000 011",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-11.pdf",
+   "parsedSkills": [
+    "C",
+    "Embedded systems",
+    "Python"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Station météo connectée en C sur microcontrôleur"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur électrique, ENIS"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-12",
+   "userId": "user-cand-12",
+   "fullName": "Khalil Gargouri",
+   "phone": "+216 00 000 012",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-12.pdf",
+   "parsedSkills": [
+    "C++",
+    "Linux",
+    "Git"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Pilote C++ pour capteur industriel sous Linux"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur informatique industrielle"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-13",
+   "userId": "user-cand-13",
+   "fullName": "Yasmine Ben Amor",
+   "phone": "+216 00 000 013",
+   "city": "Tunis",
+   "rawCvUrl": "https://example.test/cv/cand-13.pdf",
+   "parsedSkills": [
+    "Docker",
+    "Kubernetes",
+    "Linux",
+    "CI/CD"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage DevOps",
+     "description": "Pipeline CI/CD et déploiement Kubernetes"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur réseaux, Sup'Com"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-14",
+   "userId": "user-cand-14",
+   "fullName": "Walid Mejri",
+   "phone": "+216 00 000 014",
+   "city": "Tunis",
+   "rawCvUrl": "https://example.test/cv/cand-14.pdf",
+   "parsedSkills": [
+    "Java",
+    "Spring Boot",
+    "SQL"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "API Spring Boot pour une banque"
+    }
+   ],
+   "parsedEducation": [
+    "Licence informatique, FST"
+   ],
+   "isNewCandidate": true
+  },
+  {
+   "id": "cand-15",
+   "userId": "user-cand-15",
+   "fullName": "Salma Ayadi",
+   "phone": "+216 00 000 015",
+   "city": "Sousse",
+   "rawCvUrl": "https://example.test/cv/cand-15.pdf",
+   "parsedSkills": [
+    "C#",
+    ".NET",
+    "SQL"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Application de gestion de stock en ASP.NET Core"
+    }
+   ],
+   "parsedEducation": [
+    "Licence génie logiciel"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-16",
+   "userId": "user-cand-16",
+   "fullName": "Mariem Zouari",
+   "phone": "+216 00 000 016",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-16.pdf",
+   "parsedSkills": [
+    "Digital marketing",
+    "Communication",
+    "English"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Gestion des réseaux sociaux d'une boutique"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en marketing, IHEC Sfax"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-17",
+   "userId": "user-cand-17",
+   "fullName": "Fatma Damak",
+   "phone": "+216 00 000 017",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-17.pdf",
+   "parsedSkills": [
+    "Accounting",
+    "Excel",
+    "French"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "company": "Cabinet comptable",
+     "description": "Saisie comptable et déclarations fiscales"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en comptabilité, FSEG Sfax"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-18",
+   "userId": "user-cand-18",
+   "fullName": "Aziz Sellami",
+   "phone": "+216 00 000 018",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-18.pdf",
+   "parsedSkills": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Site web d'un club sportif en HTML, CSS et JavaScript"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en multimédia"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-19",
+   "userId": "user-cand-19",
+   "fullName": "Eya Boujelbene",
+   "phone": "+216 00 000 019",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-19.pdf",
+   "parsedSkills": [
+    "Développement frontend",
+    "Vue.js"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Interface Vue.js pour un agenda partagé"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-20",
+   "userId": "user-cand-20",
+   "fullName": "Bilel Feki",
+   "phone": "+216 00 000 020",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-20.pdf",
+   "parsedSkills": [
+    "Python",
+    "FastAPI",
+    "Docker"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Microservice FastAPI conteneurisé avec Docker"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur logiciel, ENIS"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-21",
+   "userId": "user-cand-21",
+   "fullName": "Asma Charfi",
+   "phone": "+216 00 000 021",
+   "city": "Mahdia",
+   "rawCvUrl": "https://example.test/cv/cand-21.pdf",
+   "parsedSkills": [
+    "ReactJS"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Application ReactJS de liste de tâches"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": true
+  },
+  {
+   "id": "cand-22",
+   "userId": "user-cand-22",
+   "fullName": "Ghassen Baklouti",
+   "phone": "+216 00 000 022",
+   "city": "Sousse",
+   "rawCvUrl": "https://example.test/cv/cand-22.pdf",
+   "parsedSkills": [
+    "Python",
+    "Data analysis",
+    "Excel"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Analyse des données de fréquentation d'un musée en Python"
+    }
+   ],
+   "parsedEducation": [
+    "Master statistique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-23",
+   "userId": "user-cand-23",
+   "fullName": "Hela Dhieb",
+   "phone": "+216 00 000 023",
+   "city": "Tunis",
+   "rawCvUrl": "https://example.test/cv/cand-23.pdf",
+   "parsedSkills": [
+    "Machine learning",
+    "Python",
+    "Deep learning"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "PFE",
+     "description": "Détection de fraude par apprentissage automatique"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur data science"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-24",
+   "userId": "user-cand-24",
+   "fullName": "Seif Hammami",
+   "phone": "+216 00 000 024",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-24.pdf",
+   "parsedSkills": [
+    "Node.js",
+    "Express",
+    "MongoDB"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "API REST Express pour une application de livraison"
+    }
+   ],
+   "parsedEducation": [
+    "Licence informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-25",
+   "userId": "user-cand-25",
+   "fullName": "Wiem Rekik",
+   "phone": "+216 00 000 025",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-25.pdf",
+   "parsedSkills": [
+    "Spring Boot",
+    "Angular",
+    "Java"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Application Spring Boot et Angular de gestion RH"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-26",
+   "userId": "user-cand-26",
+   "fullName": "Anis Kallel",
+   "phone": "+216 00 000 026",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-26.pdf",
+   "parsedSkills": [
+    "Flutter",
+    "React Native"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Application mobile multiplateforme de commande de repas"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-27",
+   "userId": "user-cand-27",
+   "fullName": "Hiba Mallek",
+   "phone": "+216 00 000 027",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-27.pdf",
+   "parsedSkills": [
+    "Excel",
+    "Accounting",
+    "ERP"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Paramétrage d'un ERP comptable"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en finance"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-28",
+   "userId": "user-cand-28",
+   "fullName": "Rim Smaoui",
+   "phone": "+216 00 000 028",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-28.pdf",
+   "parsedSkills": [
+    "Communication",
+    "English",
+    "French"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Bénévolat",
+     "description": "Organisation d'événements JCI"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en langues appliquées"
+   ],
+   "isNewCandidate": true
+  },
+  {
+   "id": "cand-29",
+   "userId": "user-cand-29",
+   "fullName": "Ahmed Turki",
+   "phone": "+216 00 000 029",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-29.pdf",
+   "parsedSkills": [
+    "Linux",
+    "Python",
+    "Git"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Scripts Python d'administration système"
+    }
+   ],
+   "parsedEducation": [
+    "Licence réseaux"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-30",
+   "userId": "user-cand-30",
+   "fullName": "Mouna Chakroun",
+   "phone": "+216 00 000 030",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-30.pdf",
+   "parsedSkills": [
+    "HTML",
+    "CSS",
+    "PHP"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Thème WordPress pour une association"
+    }
+   ],
+   "parsedEducation": [
+    "Licence multimédia"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-31",
+   "userId": "user-cand-31",
+   "fullName": "Oussama Ghorbel",
+   "phone": "+216 00 000 031",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-31.pdf",
+   "parsedSkills": [
+    "ReactJS",
+    "Next.js",
+    "Tailwind"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Portfolio en Next.js et ReactJS"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-32",
+   "userId": "user-cand-32",
+   "fullName": "Nadia Kchaou",
+   "phone": "+216 00 000 032",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-32.pdf",
+   "parsedSkills": [
+    "Python",
+    "Django",
+    "ReactJS"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "PFE",
+     "description": "Plateforme Django et ReactJS de gestion des stages"
+    }
+   ],
+   "parsedEducation": [
+    "Ingénieur informatique, ENIS"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-33",
+   "userId": "user-cand-33",
+   "fullName": "Fares Zghal",
+   "phone": "+216 00 000 033",
+   "city": "Gabès",
+   "rawCvUrl": "https://example.test/cv/cand-33.pdf",
+   "parsedSkills": [
+    "C",
+    "Arduino",
+    "Embedded systems"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Système d'irrigation automatique sur Arduino"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en électronique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-34",
+   "userId": "user-cand-34",
+   "fullName": "Dorra Mseddi",
+   "phone": "+216 00 000 034",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-34.pdf",
+   "parsedSkills": [
+    "SQL",
+    "PostgreSQL",
+    "Python"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Optimisation de requêtes PostgreSQL"
+    }
+   ],
+   "parsedEducation": [
+    "Licence informatique de gestion"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-35",
+   "userId": "user-cand-35",
+   "fullName": "Skander Belhadj",
+   "phone": "+216 00 000 035",
+   "city": "Tunis",
+   "rawCvUrl": "https://example.test/cv/cand-35.pdf",
+   "parsedSkills": [
+    "UI/UX",
+    "Figma",
+    "HTML"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Freelance",
+     "description": "Maquettes Figma pour des startups"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en design"
+   ],
+   "isNewCandidate": true
+  },
+  {
+   "id": "cand-36",
+   "userId": "user-cand-36",
+   "fullName": "Mariem Ammar",
+   "phone": "+216 00 000 036",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-36.pdf",
+   "parsedSkills": [
+    "Java",
+    "Android"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Application Android de suivi de budget"
+    }
+   ],
+   "parsedEducation": [
+    "Licence en informatique"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-37",
+   "userId": "user-cand-37",
+   "fullName": "Tarek Elleuch",
+   "phone": "+216 00 000 037",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-37.pdf",
+   "parsedSkills": [
+    "Power BI",
+    "Python",
+    "Data analysis"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Rapports Power BI pour une coopérative oléicole"
+    }
+   ],
+   "parsedEducation": [
+    "Master business intelligence"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-38",
+   "userId": "user-cand-38",
+   "fullName": "Imen Hentati",
+   "phone": "+216 00 000 038",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-38.pdf",
+   "parsedSkills": [
+    "Docker",
+    "CI/CD",
+    "Git"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Stage",
+     "description": "Automatisation des builds avec GitLab CI"
+    }
+   ],
+   "parsedEducation": [
+    "Licence réseaux et systèmes"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-39",
+   "userId": "user-cand-39",
+   "fullName": "Karim Inactive",
+   "phone": "+216 00 000 039",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-39.pdf",
+   "parsedSkills": [
+    "ReactJS",
+    "Node.js"
+   ],
+   "parsedExperiences": [
+    {
+     "title": "Projet",
+     "description": "Compte désactivé"
+    }
+   ],
+   "parsedEducation": [
+    "Licence"
+   ],
+   "isNewCandidate": false
+  },
+  {
+   "id": "cand-40",
+   "userId": "user-cand-40",
+   "fullName": "Sonia Pending",
+   "phone": "+216 00 000 040",
+   "city": "Sfax",
+   "rawCvUrl": "https://example.test/cv/cand-40.pdf",
+   "parsedSkills": [],
+   "parsedExperiences": [],
+   "parsedEducation": [],
+   "isNewCandidate": false
+  }
+ ]
+}
